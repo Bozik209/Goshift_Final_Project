@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Big_Project</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="Day_Sun1">ראשון</string>
+    <string name="Day_Mon2">שני</string>
+    <string name="Day_Tue3">שלישי</string>
+    <string name="Day_Wed4">רביעי</string>
+    <string name="Day_Thu5">חמישי</string>
+    <string name="Day_Fri6">שישי</string>
+    <string name="Day_Sat7">שבת</string>
+
+
+</resources>
