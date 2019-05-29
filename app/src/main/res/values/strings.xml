@@ -24,5 +24,12 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+    <string name="Title_Day">יום</string>
+    <string name="Title_Morning">בוקר</string>
+    <string name="Title_Noon">צהריים</string>
+    <string name="Title_Evening">ערב</string>
+    <string name="Title_Night">לילה</string>
+
+
 
 </resources>
