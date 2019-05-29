@@ -15,5 +15,12 @@
     <string name="Day_Fri6">שישי</string>
     <string name="Day_Sat7">שבת</string>
 
+    <string name="Title_Day">יום</string>
+    <string name="Title_Morning">בוקר</string>
+    <string name="Title_Noon">צהריים</string>
+    <string name="Title_Evening">ערב</string>
+    <string name="Title_Night">לילה</string>
+
+
 
 </resources>
