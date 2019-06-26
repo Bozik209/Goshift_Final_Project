@@ -3,6 +3,7 @@ package com.example.boaz.big_project.ui.login;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.boaz.big_project.MainActivity;
 import com.example.boaz.big_project.R;
 import com.example.boaz.big_project.ui.login.LoginViewModel;
 import com.example.boaz.big_project.ui.login.LoginViewModelFactory;
@@ -157,6 +159,8 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(LoginActivity.this, "signInWithEmail:success", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(i);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, "signInWithEmail:failure", Toast.LENGTH_SHORT).show();
