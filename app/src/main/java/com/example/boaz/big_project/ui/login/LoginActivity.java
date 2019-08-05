@@ -172,8 +172,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onclickRegister(View view) {
-        Fragment fragment = new VehiclesFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
 
 
 
