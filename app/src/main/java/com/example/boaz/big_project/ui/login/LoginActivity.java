@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,7 +23,9 @@ import android.widget.Toast;
 
 import com.example.boaz.big_project.MainActivity;
 import com.example.boaz.big_project.R;
-import com.example.boaz.big_project.RegisterActivity;
+import com.example.boaz.big_project.Register_fragment;
+import com.example.boaz.big_project.ui.login.LoginViewModel;
+import com.example.boaz.big_project.ui.login.LoginViewModelFactory;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -169,7 +172,35 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onclickRegister(View view) {
-        Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-        startActivity(i);
+        Fragment fragment = new VehiclesFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+
+
+
+
+//        Intent i = new Intent(getApplicationContext(), Register_fragment.class);
+//        startActivity(i);
+
+
+//        TextView usernameEditText = (TextView) findViewById(R.id.username);
+//        String user = usernameEditText.getText().toString();
+//
+//        TextView passwordEditText = (TextView) findViewById(R.id.password);
+//        String password = passwordEditText.getText().toString();
+//
+//        mAuth.createUserWithEmailAndPassword(user, password)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Toast.makeText(LoginActivity.this, "Authentication success", Toast.LENGTH_SHORT).show();
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                        } else {
+//                            // If sign in fails, display a message to the user.
+//                            Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
     }
 }
