@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -130,5 +132,51 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
+    public  void ToastCheckBox(String id_CheckBox)
+    {
+        CheckBox ChkBxSuMo = ( CheckBox ) findViewById( R.id.checkBox_SuMo);
+        ChkBxSuMo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if ( isChecked )
+                {
+                    Toast.makeText(MainActivity.this, "@id_CheckBox", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+    public void Send_info(View view) {
+        ToastCheckBox("checkBox_SuMo");
+        ToastCheckBox("checkBox_MoNo");
+//        CheckBox ChkBxSuMo = ( CheckBox ) findViewById( R.id.checkBox_SuMo );
+//        ChkBxSuMo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+//        {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+//            {
+//                if ( isChecked )
+//                {
+//                    Toast.makeText(MainActivity.this, "checkBox_SuMo", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
+//
+//
+//        CheckBox ChkBxMoNo = ( CheckBox ) findViewById( R.id.checkBox_MoNo );
+//        ChkBxMoNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+//        {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+//            {
+//                if ( isChecked )
+//                {
+//                    Toast.makeText(MainActivity.this, "checkBox_MoNo", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
+
+    }
 }
