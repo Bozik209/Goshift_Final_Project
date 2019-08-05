@@ -5,12 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/homebackgrond"><![CDATA[
-    >
-
-
-
-    ]]>
+    android:background="@drawable/homebackgrond">
 
     <EditText
         android:id="@+id/Register_password"
