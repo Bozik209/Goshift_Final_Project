@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_TitleRight"
         app:layout_constraintStart_toEndOf="@+id/ID_Day_Sun1"
         app:layout_constraintTop_toTopOf="@+id/guideline_TopDays"
-        />
+         />
 
     <TextView
         android:id="@+id/ID_Title_Morning"
