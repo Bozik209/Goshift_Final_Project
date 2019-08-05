@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.example.boaz.big_project.MainActivity;
 import com.example.boaz.big_project.R;
-import com.example.boaz.big_project.Register_fragment;
+import com.example.boaz.big_project.RegisterActivity;
 import com.example.boaz.big_project.ui.login.LoginViewModel;
 import com.example.boaz.big_project.ui.login.LoginViewModelFactory;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -172,14 +172,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onclickRegister(View view) {
-        Fragment fragment = new VehiclesFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
-
-
-
-
-//        Intent i = new Intent(getApplicationContext(), Register_fragment.class);
-//        startActivity(i);
+        Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivity(i);
 
 
 //        TextView usernameEditText = (TextView) findViewById(R.id.username);
