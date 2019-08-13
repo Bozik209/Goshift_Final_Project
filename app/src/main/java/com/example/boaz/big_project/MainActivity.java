@@ -14,8 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,6 +27,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -132,51 +137,33 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public  void ToastCheckBox(String id_CheckBox)
-    {
-        CheckBox ChkBxSuMo = ( CheckBox ) findViewById( R.id.checkBox_SuMo);
-        ChkBxSuMo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if ( isChecked )
-                {
-                    Toast.makeText(MainActivity.this, "@id_CheckBox", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
-    public void Send_info(View view) {
-        ToastCheckBox("checkBox_SuMo");
-        ToastCheckBox("checkBox_MoNo");
-//        CheckBox ChkBxSuMo = ( CheckBox ) findViewById( R.id.checkBox_SuMo );
-//        ChkBxSuMo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-//        {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-//            {
-//                if ( isChecked )
-//                {
-//                    Toast.makeText(MainActivity.this, "checkBox_SuMo", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-//
-//
-//        CheckBox ChkBxMoNo = ( CheckBox ) findViewById( R.id.checkBox_MoNo );
-//        ChkBxMoNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-//        {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-//            {
-//                if ( isChecked )
-//                {
-//                    Toast.makeText(MainActivity.this, "checkBox_MoNo", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
 
+    // global array
+    ArrayList<String> array_checkBox_id  = new ArrayList<String>();
+
+    public void CheckBox_func(View view) {
+        //get "id" string
+        int temp=view.getId();
+        String IDname= getResources().getResourceEntryName(temp);
+
+        //checked if CheckBox isChecked and add it to  array
+        boolean checked=((CheckBox) view).isChecked();
+        if (checked)
+        {
+            array_checkBox_id.add(IDname);
+        }
+    }
+
+
+    // send the mark chackbox
+    public void Send_info(View view) {
+        //הוספת כל ה ID לתוך מערך
+        //ואז לרוץ על כל המערך
+        Spinner s = (Spinner) findViewById(R.id.spinner4);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_checkBox_id);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(adapter);
 
     }
 }
