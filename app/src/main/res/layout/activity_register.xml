@@ -115,5 +115,22 @@
         app:layout_constraintVertical_bias="0.855"
         tools:layout_editor_absoluteX="77dp" />
 
+    <CheckBox
+        android:id="@+id/ManagerCheckBoxID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Manager"
+        android:textColor="#ffff"
+        android:onClick="ManagerCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.214"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Register_password" />
+
 
 </android.support.constraint.ConstraintLayout>

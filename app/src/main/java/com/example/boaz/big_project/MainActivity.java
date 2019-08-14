@@ -1,10 +1,12 @@
 package com.example.boaz.big_project;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,21 +24,40 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.boaz.big_project.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Firebase Log out
+        // -----------------------------------------------------------------
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser()==null){
+                    startActivity(new Intent(MainActivity.this ,LoginActivity.class)); } }};
+        // -----------------------------------------------------------------
+
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }
@@ -106,6 +127,11 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.action_logout) {
+            Toast.makeText(MainActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
+            mAuth.signOut();
+            startActivity(new Intent(MainActivity.this ,LoginActivity.class));
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -113,32 +139,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    // Global array
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    public void showdata(View view) {
-        // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("Friday", true);
-        // Add a new document with a generated ID
-        db.collection("Work_shifts")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(MainActivity.this, "DB update", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, "DB failed", Toast.LENGTH_LONG).show();
-
-                    }
-                });
-    }
-
-
-    // global array
     ArrayList<String> array_checkBox_id  = new ArrayList<String>();
 
     public void CheckBox_func(View view) {
@@ -166,4 +168,52 @@ public class MainActivity extends AppCompatActivity
         s.setAdapter(adapter);
 
     }
+
+    //create random number
+    //use for ID_group
+    public void random(View view) {
+        String DATA = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random RANDOM = new Random();
+
+        StringBuilder sb = new StringBuilder(7);
+
+        for (int i = 0; i < 7; i++) {
+            sb.append(DATA.charAt(RANDOM.nextInt(DATA.length())));
+        }
+        String RandomID=sb.toString();
+        Toast.makeText(MainActivity.this, "Random: "+RandomID, Toast.LENGTH_LONG).show();
+
+
+        //create collection named the random number
+        //it will be the id group
+        db.collection(""+sb.toString());
+
+        // Create a new user with a first and last name
+        Map<String, Object> user = new HashMap<>();
+
+        user.put("days", array_checkBox_id);
+
+
+        // date
+        Date currentTime = Calendar.getInstance().getTime();
+        user.put("date", currentTime);
+
+        // Add a new document with a generated ID
+        db.collection(""+sb.toString())
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(MainActivity.this, "DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, "Error adding document"+e, Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
 }
