@@ -11,5 +11,5 @@
         android:layout_height="match_parent"
         android:background="@color/red"
         android:text="@string/hello_blank_fragment" />
-
+ 
 </FrameLayout>
