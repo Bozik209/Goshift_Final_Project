@@ -22,11 +22,37 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee);
+
     }
-
-
-
     
+    public void Fragment_move(View view) {
+        // fregment_container = all the fragment will be on him
+        FragmentManager manager= getSupportFragmentManager();
+        Fragment fragment = manager.findFragmentById(R.id.EM_fragemt_container);
+
+        if(fragment==null) //if it the first time to call the first fragmet
+        {
+            int id = view.getId();
+
+            if (id == R.id.Summary_button) {
+                fragment = new EM_Summary_Fragment();
+                FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
+                transaction.add(R.id.EM_fragemt_container,fragment).commit();
+            }
+            else if (id == R.id.Final_button) {
+                fragment = new EM_Final_Fragment();
+                FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
+                transaction.add(R.id.EM_fragemt_container,fragment).commit();
+            }
+            else if (id == R.id.Scheduling_button) {
+                fragment = new Em_Scheduling_Fragment();
+                FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
+                transaction.add(R.id.EM_fragemt_container,fragment).commit();
+            }
+
+        }
+
+    }
     @Override
     public void EM_Scheduling_FIListener(Uri uri) {
 
@@ -39,21 +65,6 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
 
     @Override
     public void EM_Final_FIListener(Uri uri) {
-
-    }
-
-    public void Fragment_move(View view) {
-        // fregment_container = all the fragment will be on him
-        FragmentManager manager= getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentById(R.id.fragemt_container);
-
-        if(fragment==null) //if it the first time to call the first fragmet
-        {
-            fragment = new Em_Scheduling_Fragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-
-            transaction.add(R.id.fragemt_container,fragment).commit();
-        }
 
     }
 }
