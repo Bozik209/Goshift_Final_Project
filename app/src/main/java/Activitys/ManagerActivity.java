@@ -10,6 +10,8 @@ import android.view.View;
 
 import com.example.boaz.big_project.R;
 
+import Fragments.EM_Final_Fragment;
+import Fragments.EM_Summary_Fragment;
 import Fragments.Em_Scheduling_Fragment;
 import Fragments.MA_EmpList_Fragment;
 import Fragments.MA_Final_Fragment;
@@ -28,6 +30,42 @@ public class ManagerActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager);
     }
+
+
+    public void Fragment_move(View view) {
+        // fregment_container = all the fragment will be on him
+        FragmentManager manager= getSupportFragmentManager();
+        Fragment fragment = manager.findFragmentById(R.id.MA_fragemt_container);
+
+        if(fragment==null) //if it the first time to call the first fragmet
+        {
+            int id = view.getId();
+
+            if (id == R.id.MA_Summary_button) {
+                fragment = new MA_Summary_Fragment();
+                FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
+                transaction.add(R.id.MA_fragemt_container,fragment).commit();
+            }
+            else if (id == R.id.MA_Final_button) {
+                fragment = new MA_Final_Fragment();
+                FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
+                transaction.add(R.id.MA_fragemt_container,fragment).commit();
+            }
+            else if (id == R.id.MA_Scheduling_button) {
+                fragment = new MA_Scheduling_Fragment();
+                FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
+                transaction.add(R.id.MA_fragemt_container,fragment).commit();
+            }
+            else if (id == R.id.MA_EmpList_button) {
+                fragment = new MA_EmpList_Fragment();
+                FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
+                transaction.add(R.id.MA_fragemt_container,fragment).commit();
+            }
+
+        }
+
+    }
+
 
     @Override
     public void MA_EMPLIST_FIListener(Uri uri) {
@@ -49,18 +87,4 @@ public class ManagerActivity extends AppCompatActivity implements
 
     }
 
-    public void Fragment_move(View view) {
-        // fregment_container = all the fragment will be on him
-        FragmentManager manager= getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentById(R.id.ma_fragemt_container);
-
-        if(fragment==null) //if it the first time to call the first fragmet
-        {
-            fragment = new Em_Scheduling_Fragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-
-            transaction.add(R.id.ma_fragemt_container,fragment).commit();
-        }
-
-    }
 }
