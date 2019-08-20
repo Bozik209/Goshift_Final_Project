@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_Employees) {
             Toast.makeText(MainActivity.this, "EmployeeActivity", Toast.LENGTH_SHORT).show();
             mAuth.signOut();
             startActivity(new Intent(MainActivity.this ,EmployeeActivity.class));

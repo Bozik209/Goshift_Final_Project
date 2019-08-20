@@ -44,7 +44,6 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
 
     public void Fragment_move(View view) {
         // fregment_container = all the fragment will be on him
-
         FragmentManager manager= getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragemt_container);
 
@@ -53,7 +52,8 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
             fragment = new Em_Scheduling_Fragment();
             FragmentTransaction transaction = manager.beginTransaction();
 
-            transaction.add(R.id.fragemt_container,fragment,"0").commit();
+            transaction.add(R.id.fragemt_container,fragment).commit();
         }
+
     }
 }
