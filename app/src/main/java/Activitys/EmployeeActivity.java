@@ -24,7 +24,7 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         setContentView(R.layout.activity_employee);
 
     }
-
+    
     public void Fragment_move(View view) {
         // fregment_container = all the fragment will be on him
         FragmentManager manager= getSupportFragmentManager();
@@ -68,4 +68,3 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
 
     }
 }
-
