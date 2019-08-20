@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
+    tools:context="Activitys.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
     <TextView
@@ -19,8 +19,7 @@
         app:layout_constraintBottom_toTopOf="@+id/ID_Title_Morning"
         app:layout_constraintEnd_toStartOf="@+id/guideline_TitleRight"
         app:layout_constraintStart_toEndOf="@+id/ID_Day_Sun1"
-        app:layout_constraintTop_toTopOf="@+id/guideline_TopDays"
-         />
+        app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />
 
     <TextView
         android:id="@+id/ID_Title_Morning"
@@ -500,21 +499,26 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="SEND"
         android:onClick="Send_info"
+        android:text="SEND"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/spinner4"
-        android:layout_width="395dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintTop_toTopOf="@+id/guideline_BottomDays"
-        tools:layout_editor_absoluteX="8dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_BottomDays" />
 
     <Button
         android:id="@+id/button5"
@@ -524,11 +528,27 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Random"
+        android:layout_marginBottom="20dp"
         android:onClick="random"
+        android:text="Random"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="666dp" />
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
 
-
+    <Button
+        android:id="@+id/button_SQLtest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="Test_SQL_func"
+        android:text="SQL"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="@+id/button5"
+        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintStart_toStartOf="@+id/button5" />
 </android.support.constraint.ConstraintLayout>
