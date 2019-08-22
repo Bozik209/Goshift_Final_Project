@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.Register_username);
+        final EditText usernameEditText = findViewById(R.id.Register_Email);
         final EditText passwordEditText = findViewById(R.id.Register_password);
         //final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
@@ -156,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity implements
 
     //---------------------------------------------------------------------------------------------------------------------------------------
     public void Register_func(View view) {
-        TextView usernameEditText = (TextView) findViewById(R.id.Register_username);
+        TextView usernameEditText = (TextView) findViewById(R.id.Register_Email);
         String user = usernameEditText.getText().toString();
 
         TextView passwordEditText = (TextView) findViewById(R.id.Register_password);
