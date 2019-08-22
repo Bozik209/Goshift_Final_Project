@@ -1,15 +1,480 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Fragments.Em_Scheduling_Fragment">
+    tools:context="Fragments.Em_Scheduling_Fragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/blue"
-        android:text="Scheduling" />
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/linearLayoutCompat"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <!--tools:context="Activitys.MainActivity"-->
+        <!--tools:showIn="@layout/app_bar_main">-->
 
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Title_Day"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:text="@string/Title_Day"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ID_Title_Morning"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/guideline_TitleRight"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/ID_Day_Sun1"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Title_Morning"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="4dp"-->
+            <!--android:layout_marginLeft="4dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="@string/Title_Morning"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ID_Title_Noon"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/guideline_TitleRight"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_SuMo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Title_Day" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Title_Noon"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/Title_Noon"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ID_Title_Evening"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/guideline_TitleRight"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_SuNo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Title_Morning" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Title_Evening"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="7dp"-->
+            <!--android:layout_marginLeft="7dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="@string/Title_Evening"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ID_Title_Night"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/guideline_TitleRight"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_SuEv"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Title_Noon" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Title_Night"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="4dp"-->
+            <!--android:layout_marginLeft="4dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="@string/Title_Night"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/guideline_BottomDays"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/guideline_TitleRight"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_SuNi"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Title_Evening" />-->
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/guideline_TopDays"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--app:layout_constraintGuide_begin="16dp" />-->
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/guideline_BottomDays"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--app:layout_constraintGuide_begin="267dp" />-->
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/guideline_TitleRight"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--app:layout_constraintGuide_percent="0.95" />-->
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/guideline_TitleLeft"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--app:layout_constraintGuide_begin="323dp" />-->
+
+        <!--&lt;!&ndash;=====================Sunday======================&ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Day_Sun1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="9dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:text="@string/Day_Sun1"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_SuMo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Title_Day"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/ID_Day_Mon2"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_SuNi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/guideline_BottomDays"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Title_Night"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_MoNi"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_SuEv" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_SuEv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_SuNi"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Title_Evening"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_MoEv"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_SuNo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_SuNo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_SuEv"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Title_Noon"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_MoNo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_SuMo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_SuMo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_SuNo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Title_Morning"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_MoMo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Day_Sun1" />-->
+
+        <!--&lt;!&ndash;====================Monday======================&ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Day_Mon2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:text="@string/Day_Mon2"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_MoMo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Day_Sun1"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/ID_Day_Tue3"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_MoNi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/guideline_BottomDays"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_SuNi"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_TuNi"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_MoEv" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_MoEv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_MoNi"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_SuEv"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_TuEv"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_MoNo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_MoNo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_MoEv"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_SuNo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_TuNo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_MoMo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_MoMo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_MoNo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_SuMo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_TuMo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Day_Mon2" />-->
+
+        <!--&lt;!&ndash;====================Tuesday====================&ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Day_Tue3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:text="@string/Day_Tue3"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_TuMo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Day_Mon2"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/ID_Day_Wed4"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_TuNi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/guideline_BottomDays"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_MoNi"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_WeNi"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_TuEv" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_TuEv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_TuNi"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_MoEv"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_WeEv"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_TuNo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_TuNo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_TuEv"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_MoNo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_WeNo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_TuMo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_TuMo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_TuNo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_MoMo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_WeMo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Day_Tue3" />-->
+
+        <!--&lt;!&ndash;==================Wednesday======================&ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Day_Wed4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:text="@string/Day_Wed4"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_WeMo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Day_Tue3"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/ID_Day_Thu5"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_WeNi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/guideline_BottomDays"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_TuNi"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_ThNi"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_WeEv" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_WeEv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_WeNi"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_TuEv"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_ThEv"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_WeNo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_WeNo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_WeEv"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_TuNo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_ThNo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_WeMo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_WeMo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_WeNo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_TuMo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_ThMo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Day_Wed4" />-->
+
+        <!--&lt;!&ndash;=====================Thursday=====================&ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Day_Thu5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:text="@string/Day_Thu5"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_ThMo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Day_Wed4"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/ID_Day_Fri6"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_ThNi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/guideline_BottomDays"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_WeNi"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_FrNi"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_ThEv" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_ThEv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_ThNi"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_WeEv"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_FrEv"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_ThNo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_ThNo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_ThEv"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_WeNo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_FrNo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_ThMo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_ThMo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_ThNo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_WeMo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_FrMo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Day_Thu5" />-->
+
+        <!--&lt;!&ndash;=====================Friday=====================&ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Day_Fri6"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:text="@string/Day_Fri6"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_FrMo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Day_Thu5"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/ID_Day_Sat7"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_FrNi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/guideline_BottomDays"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_ThNi"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_SatNi"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_FrEv" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_FrEv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_FrNi"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_ThEv"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_SatEv"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_FrNo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_FrNo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_FrEv"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_ThNo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_SatNo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_FrMo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_FrMo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_FrNo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_ThMo"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/checkBox_SatMo"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Day_Fri6" />-->
+
+        <!--&lt;!&ndash;====================Saturday=========================&ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/ID_Day_Sat7"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:text="@string/Day_Sat7"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_SatMo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/ID_Day_Fri6"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_SatNi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/guideline_BottomDays"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_FrNi"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_SatEv" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_SatEv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_SatNi"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_FrEv"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_SatNo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_SatNo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_SatEv"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_FrNo"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/checkBox_SatMo" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox_SatMo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/checkBox_SatNo"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/checkBox_FrMo"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ID_Day_Sat7" />-->
+
+
+
+
+
+
+
+    <!--</android.support.constraint.ConstraintLayout>-->
 </FrameLayout>
+

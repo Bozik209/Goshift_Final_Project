@@ -53,6 +53,10 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         }
 
     }
+    public void CheckBox_func(View v)
+    {
+
+    }
     @Override
     public void EM_Scheduling_FIListener(Uri uri) {
 
