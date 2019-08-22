@@ -243,8 +243,6 @@ public class RegisterActivity extends AppCompatActivity implements
         final CheckBox Manager_checkBox = (CheckBox) findViewById(R.id.checkBox_Ma);
         final CheckBox Employess_checkBox = (CheckBox) findViewById(R.id.checkBox_Em);
 
-        // TODO: chack if radio buttons is better
-        //  chack what is radio buttons
         //Manager_checkBox.setOnCheckedChangeListener();
         Manager_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
