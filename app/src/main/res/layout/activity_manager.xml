@@ -48,11 +48,18 @@
                 android:text="רשימת עובדים" />
 
             <Button
-                android:id="@+id/MA_CopyID_button"
+            android:id="@+id/MA_CopyID_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="Fragment_move"
+            android:text="העתקת ID" />
+
+            <Button
+                android:id="@+id/MA_Logout_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="Fragment_move"
-                android:text="העתקת ID" />
+                android:text="התנתקות" />
         </LinearLayout>
 
     </LinearLayout>
