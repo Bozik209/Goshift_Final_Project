@@ -7,23 +7,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.login.RegisterActivity"
-    android:background="@drawable/homebackgrond">
+    android:background="@drawable/homebackgrond"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
+
 
         <EditText
-            android:id="@+id/Register_username"
+            android:id="@+id/Register_FullName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Name"
-            android:textColorHint="#ffff"/>
+            android:hint="שם מלא"
+            android:textColorHint="#ffff"
+            android:inputType="textEmailAddress"
+            android:textSize="25dp"/>
 
         <EditText
             android:id="@+id/Register_password"
@@ -31,42 +35,43 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Password"
-            android:textColorHint="#ffff"
             android:inputType="textPassword"
+            android:hint="סיסמה"
+            android:textColorHint="#ffff"
             android:imeOptions="actionDone"
             android:selectAllOnFocus="true"
-            />
-
-
+            android:textSize="25dp"/>
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/Register_Email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="E-mail"
+            android:inputType="textPersonName"
+            android:hint="אי מייל"
             android:textColorHint="#ffff"
-            android:inputType="textEmailAddress" />
+            android:textSize="25dp"/>
 
         <CheckBox
             android:id="@+id/checkBox_Em"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="FragmentView"
-            android:text="Employee"
-            android:textColor="#ffff" />
+            android:text="עובד"
+            android:textColor="#ffff"
+            android:textSize="25dp"/>
 
         <CheckBox
             android:id="@+id/checkBox_Ma"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="FragmentView"
-            android:text="Manager"
-            android:textColor="#ffff"/>
+            android:text="מנהל"
+            android:textColor="#ffff"
+            android:textSize="25dp"/>
     </LinearLayout>
 
     <FrameLayout
@@ -78,10 +83,11 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:onClick="Register_func"/>
-
+        android:id="@+id/Register_SubmitButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="הרשמה"
+        android:onClick="Register_func"
+        android:layout_marginBottom="20dp"
+        android:textSize="25dp"/>
 </LinearLayout>
