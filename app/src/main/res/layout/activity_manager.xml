@@ -4,32 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ma_fragemt_container"
+    android:id="@+id/MA_fragemt_container"
     tools:context="Activitys.EmployeeActivity">
+
+    <!-- TODO: find how enter toolbar in all layout-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Final" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Summary" />
+            <Button
+                android:id="@+id/MA_Summary_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment_move"
+                android:text="סיכום" />
 
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/MA_Final_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment_move"
+                android:text="סופי" />
+
+            <Button
+                android:id="@+id/MA_Scheduling_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment_move"
+                android:text="שיבוץ" />
+
+            <Button
+                android:id="@+id/MA_EmpList_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment_move"
+                android:text="רשימת עובדים" />
+
+            <Button
+            android:id="@+id/MA_CopyID_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="Fragment_move"
-            android:text="Scheduling" />
+            android:text="העתקת ID" />
+
+            <Button
+                android:id="@+id/MA_Logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment_move"
+                android:text="התנתקות" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>
