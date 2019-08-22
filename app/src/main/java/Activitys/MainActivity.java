@@ -243,44 +243,49 @@ public class MainActivity extends AppCompatActivity
 
     public void Test_SQL_func(View view) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName("Jane Q. User")
-                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                .build();
-
-        user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "User profile updated.");
-                        }
-                    }
-                });
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + currentFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
 
 
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            String uid = user.getUid();
-
-            Log.i(TAG, "name:" + name);
-            Log.i(TAG, "email:" + email);
-            Log.i(TAG, "photoUrl:" + photoUrl);
-            Log.i(TAG, "emailVerified:" + emailVerified);
-            Log.i(TAG, "uid:" + uid);
-
-        }
 
 
+
+//        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                .setDisplayName("Jane Q. User")
+//                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+//                .build();
+//
+//        user.updateProfile(profileUpdates)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()) {
+//                            Log.d(TAG, "User profile updated.");
+//                        }
+//                    }
+//                });
+//
+//
+//        if (user != null) {
+//            // Name, email address, and profile photo Url
+//            String name = user.getDisplayName();
+//            String email = user.getEmail();
+//            Uri photoUrl = user.getPhotoUrl();
+//            // Check if user's email is verified
+//            boolean emailVerified = user.isEmailVerified();
+//
+//            // The user's ID, unique to the Firebase project. Do NOT use this value to
+//            // authenticate with your backend server, if you have one. Use
+//            // FirebaseUser.getIdToken() instead.
+//            String uid = user.getUid();
+//
+//            Log.i(TAG, "name:" + name);
+//            Log.i(TAG, "email:" + email);
+//            Log.i(TAG, "photoUrl:" + photoUrl);
+//            Log.i(TAG, "emailVerified:" + emailVerified);
+//            Log.i(TAG, "uid:" + uid);
+//
+//        }
     }
 }

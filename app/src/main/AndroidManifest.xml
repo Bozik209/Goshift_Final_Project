@@ -25,10 +25,9 @@
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-    </activity>
+        </activity>
 
     <!-- ________________________________________ -->
         <activity android:name=".ui.login.RegisterActivity" />
@@ -36,7 +35,7 @@
         <!-- ________________________________________ -->
         <activity android:name="Activitys.EmployeeActivity" >
 
-    </activity>
+        </activity>
 
 </application>
 

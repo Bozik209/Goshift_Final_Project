@@ -1,5 +1,7 @@
 package Fragments;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,8 +9,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
+
+import java.util.Random;
+
+import Activitys.MainActivity;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 
 /**
@@ -60,14 +71,15 @@ public class Register_MA_Fragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register__ma_, container, false);
-    }
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        return inflater.inflate(R.layout.fragment_register__ma_, container, false);
+//    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -93,6 +105,8 @@ public class Register_MA_Fragment extends Fragment {
         mListener = null;
     }
 
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -107,4 +121,53 @@ public class Register_MA_Fragment extends Fragment {
         // TODO: Update argument type and name
         void Register_MA_Fragment_InteractionListener(Uri uri);
     }
+
+
+    TextView myTextView;
+    private ImageButton myImageButton;
+    private Register_MA_Fragment_InteractionListener listener;
+    private ClipboardManager myClipboard;
+    private ClipData myClip;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle inState) {
+        View v = inflater.inflate(R.layout.fragment_register__ma_, container, false);
+        myTextView = (TextView)v.findViewById(R.id.Random_textView);
+        showText();
+
+        View b=inflater.inflate(R.layout.fragment_register__ma_, container, false);
+        myImageButton=(ImageButton) v.findViewById(R.id.Random_copy_Button);
+        myImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                myClipboard = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
+
+                String text;
+                text = myTextView.getText().toString();
+
+                myClip = ClipData.newPlainText("text", myTextView.getText().toString());
+                myClipboard.setPrimaryClip(myClip);
+                Toast.makeText(getActivity(), "Text Copied",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return v;
+    }
+
+    public void showText() {
+        String DATA = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random RANDOM = new Random();
+
+        StringBuilder sb = new StringBuilder(7);
+
+        for (int i = 0; i < 7; i++) {
+            sb.append(DATA.charAt(RANDOM.nextInt(DATA.length())));
+        }
+        String RandomID=sb.toString();
+        myTextView.setText(RandomID);
+    }
+
+
+
 }

@@ -33,6 +33,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.auth.User;
 
 import Activitys.MainActivity;
 import Fragments.Register_EM_Fragment;
@@ -173,12 +175,58 @@ public class RegisterActivity extends AppCompatActivity implements
                         } else {
                             // If sign in fails, display a message to the user.
 
-                            Toast.makeText(RegisterActivity.this, "Authentication failed"+ task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Authentication failed" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
+        // TODO: chack how add custom details to user
+        //  https://www.youtube.com/watch?v=7Yc3Pt37coM
+//        mAuth.createUserWithEmailAndPassword(user, password)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//
+//                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                                    .setDisplayName("yak").build();
+//
+//                            user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//                                        Toast.makeText(RegisterActivity.this, "User profile updated.", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                            });
+//                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+//                            startActivity(i);
+//
+//
+//                        } else {
+//                            // If sign in fails, display a message to the user.
+//
+//                            Toast.makeText(RegisterActivity.this, "Authentication failed" + task.getException(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+
     }
 
+
+
+
+//    private void createNewUser(User userFromRegistration) {
+//        String username = "username";
+//        String email = userFromRegistration.getEmail();
+//        String userId = userFromRegistration.getUid();
+//
+//        User user = new User("usernametest", email);
+//
+//        mDatabase.child("users").child(userId).setValue(user);
+//    }
     public void ManagerCheckBox(View view) {
         boolean checked = ((CheckBox) view).isChecked();
 
