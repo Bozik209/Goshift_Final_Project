@@ -29,14 +29,11 @@ import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
 import java.util.HashMap;
@@ -52,8 +49,6 @@ public class RegisterActivity extends AppCompatActivity implements
 
     private FirebaseAuth mAuth;
     private LoginViewModel loginViewModel;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private static final String TAG = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,42 +158,14 @@ public class RegisterActivity extends AppCompatActivity implements
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------
-
     public void Register_func(View view) {
-        // TODO: organize the code
-        String Random_String=null;
-        String group_name_String=null;
-        //Email
-        TextView usernameEditText = (TextView) findViewById(R.id.Register_Email);
-        final String userMail = usernameEditText.getText().toString();
-        //Password
+        TextView userEmailEditText = (TextView) findViewById(R.id.Register_Email);
+        String email = userEmailEditText.getText().toString();
+
         TextView passwordEditText = (TextView) findViewById(R.id.Register_password);
-        final String password = passwordEditText.getText().toString();
-        // FullName
-        TextView nameEditText = (TextView) findViewById(R.id.Register_FullName);
-        final String name = nameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
 
-        //check if is manger
-        final boolean checked=((CheckBox) findViewById(R.id.checkBox_Ma)).isChecked();
-        if (checked) {
-            //Random key group
-            TextView Random_textView = (TextView) findViewById(R.id.Random_textView);
-            Random_String= Random_textView.getText().toString();
-
-            //group name
-            TextView group_name = (TextView) findViewById(R.id.group_name);
-            group_name_String = group_name.getText().toString();
-        }
-
-        if (!checked) {
-            //group name
-            TextView group_name = (TextView) findViewById(R.id.groud_id_EM);
-            group_name_String = group_name.getText().toString();
-        }
-        final String random=Random_String;
-        final String group=group_name_String;
-
-            mAuth.createUserWithEmailAndPassword(userMail, password)
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -209,34 +176,10 @@ public class RegisterActivity extends AppCompatActivity implements
                             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
                             Map<String, Object> userMAP = new HashMap<>();
-                            userMAP.put("name", name);
-                            userMAP.put("mail", userMail);
-                            userMAP.put("password", password);
-                            userMAP.put("isMang", checked);
-
-                            //check if is manger
-                            if (checked) {
-                                userMAP.put("ID_group", random);
-                                userMAP.put("group_name", group);
-                            }
-                            else{
-                                userMAP.put("group_name", group);
-                            }
-
-                            db.collection("User").document(""+currentFirebaseUser.getUid())
-                                    .set(userMAP)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d(TAG, "DocumentSnapshot successfully written!");
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w(TAG, "Error writing document", e);
-                                        }
-                                    });
+                            userMAP.put("name", "bob");
+                            userMAP.put("mail", currentFirebaseUser.getEmail());
+                            userMAP.put("password", 123456);
+                            userMAP.put("isMang", true);
 
 
 
@@ -308,6 +251,22 @@ public class RegisterActivity extends AppCompatActivity implements
 
 
 
+//    private void createNewUser(User userFromRegistration) {
+//        String username = "username";
+//        String email = userFromRegistration.getEmail();
+//        String userId = userFromRegistration.getUid();
+//
+//        User user = new User("usernametest", email);
+//
+//        mDatabase.child("users").child(userId).setValue(user);
+//    }
+    public void ManagerCheckBox(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+
+
+
+
+    }
 
 
     public void FragmentView(View view) {
