@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -242,50 +243,63 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void Test_SQL_func(View view) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "" + currentFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
+
+        // Create a new user with a first, middle, and last name
+        Map<String, Object> user = new HashMap<>();
+        user.put("id", currentFirebaseUser.getUid());
+        user.put("name", "111   bob");
+        user.put("mail", currentFirebaseUser.getEmail());
+        user.put("password", 123456);
+        user.put("isMang", true);
+
+        //  זה יוצר משתמש בתוך USER עם הID שלו
+        db.collection("User").document(""+currentFirebaseUser.getUid())
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+
+        //  זה מעדכן את התוכן
+        db.collection("User").document(""+currentFirebaseUser.getUid())
+                .update(user);
+
+        //  מוציא את המידע
+        DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        Log.d(TAG, "id:       " + document.getString("id"));
+                        Log.d(TAG, "isMang    " + document.getBoolean("isMang"));
+                        Log.d(TAG, "mail      " + document.getString("mail"));
+                        Log.d(TAG, "name      " + document.getString("name"));
+                        Log.d(TAG, "password  " + document.get("password"));
+
+                        Toast.makeText(MainActivity.this, "Hello " + document.getString("name") , Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
 
 
-
-
-
-//        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                .setDisplayName("Jane Q. User")
-//                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-//                .build();
-//
-//        user.updateProfile(profileUpdates)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            Log.d(TAG, "User profile updated.");
-//                        }
-//                    }
-//                });
-//
-//
-//        if (user != null) {
-//            // Name, email address, and profile photo Url
-//            String name = user.getDisplayName();
-//            String email = user.getEmail();
-//            Uri photoUrl = user.getPhotoUrl();
-//            // Check if user's email is verified
-//            boolean emailVerified = user.isEmailVerified();
-//
-//            // The user's ID, unique to the Firebase project. Do NOT use this value to
-//            // authenticate with your backend server, if you have one. Use
-//            // FirebaseUser.getIdToken() instead.
-//            String uid = user.getUid();
-//
-//            Log.i(TAG, "name:" + name);
-//            Log.i(TAG, "email:" + email);
-//            Log.i(TAG, "photoUrl:" + photoUrl);
-//            Log.i(TAG, "emailVerified:" + emailVerified);
-//            Log.i(TAG, "uid:" + uid);
-//
-//        }
     }
 }

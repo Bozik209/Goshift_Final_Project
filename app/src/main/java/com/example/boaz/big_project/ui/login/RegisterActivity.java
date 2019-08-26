@@ -36,6 +36,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.auth.User;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import Activitys.MainActivity;
 import Fragments.Register_EM_Fragment;
 import Fragments.Register_MA_Fragment;
@@ -170,6 +173,16 @@ public class RegisterActivity extends AppCompatActivity implements
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(RegisterActivity.this, "Authentication success", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
+                            Map<String, Object> userMAP = new HashMap<>();
+                            userMAP.put("name", "bob");
+                            userMAP.put("mail", currentFirebaseUser.getEmail());
+                            userMAP.put("password", 123456);
+                            userMAP.put("isMang", true);
+
+
+
                             Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(i);
                         } else {
@@ -179,6 +192,26 @@ public class RegisterActivity extends AppCompatActivity implements
                         }
                     }
                 });
+
+        // TODO: BACKUP of create User
+//        mAuth.createUserWithEmailAndPassword(user, password)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Toast.makeText(RegisterActivity.this, "Authentication success", Toast.LENGTH_SHORT).show();
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//
+//                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+//                            startActivity(i);
+//                        } else {
+//                            // If sign in fails, display a message to the user.
+//
+//                            Toast.makeText(RegisterActivity.this, "Authentication failed" + task.getException(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
 
         // TODO: chack how add custom details to user
         //  https://www.youtube.com/watch?v=7Yc3Pt37coM
