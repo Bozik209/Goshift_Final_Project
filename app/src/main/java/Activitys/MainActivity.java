@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //textView_helloUser = findViewById(R.id.hello_User);
+        textView_helloUser = findViewById(R.id.hello_User);
 
         // Firebase Log out
         // -----------------------------------------------------------------
