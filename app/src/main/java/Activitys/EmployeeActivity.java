@@ -106,38 +106,10 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         //FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
-        // Create a new user with a first, middle, and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("id", currentFirebaseUser.getUid());
-        user.put("name", "111   bob");
-        user.put("mail", currentFirebaseUser.getEmail());
-        user.put("password", 123456);
-        user.put("isMang", true);
-
-        //  זה יוצר משתמש בתוך USER עם הID שלו
-        db.collection("User").document(""+currentFirebaseUser.getUid())
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
-
-        //  זה מעדכן את התוכן
-        db.collection("User").document(""+currentFirebaseUser.getUid())
-                .update(user);
-
-
+        
 
         //  מוציא את המידע
-        DocumentReference docRef = db.collection("User").document("JtajklV549azRioeUO3WrjRUF172");
+        DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
