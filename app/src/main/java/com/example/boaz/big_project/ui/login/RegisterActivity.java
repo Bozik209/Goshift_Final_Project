@@ -159,13 +159,13 @@ public class RegisterActivity extends AppCompatActivity implements
 
     //---------------------------------------------------------------------------------------------------------------------------------------
     public void Register_func(View view) {
-        TextView usernameEditText = (TextView) findViewById(R.id.Register_Email);
-        String user = usernameEditText.getText().toString();
+        TextView userEmailEditText = (TextView) findViewById(R.id.Register_Email);
+        String email = userEmailEditText.getText().toString();
 
         TextView passwordEditText = (TextView) findViewById(R.id.Register_password);
         String password = passwordEditText.getText().toString();
 
-        mAuth.createUserWithEmailAndPassword(user, password)
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

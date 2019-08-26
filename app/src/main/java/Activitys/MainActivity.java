@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
@@ -33,6 +34,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,10 +49,12 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "MainActivity";
+    private TextView textView_helloUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        textView_helloUser = findViewById(R.id.hello_User);
 
         // Firebase Log out
         // -----------------------------------------------------------------
@@ -282,6 +287,13 @@ public class MainActivity extends AppCompatActivity
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
+
+                        //--------------------------------------
+
+                        textView_helloUser.setText("HELLO " + document.getString("name")+"\n"+"isMang "+document.getBoolean("isMang"));
+
+                        //--------------------------------------
+
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         Log.d(TAG, "id:       " + document.getString("id"));
                         Log.d(TAG, "isMang    " + document.getBoolean("isMang"));

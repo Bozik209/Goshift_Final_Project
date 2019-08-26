@@ -34,4 +34,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+
+    <string name="user_name">document.getString("name")</string>
+
+
+
+
+
 </resources>
