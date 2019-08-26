@@ -214,7 +214,7 @@ public class LoginActivity extends AppCompatActivity {
                                             {
                                                 Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
                                                 startActivity(i);
-                                            }
+                                            } 
 
                                             else
                                             {
