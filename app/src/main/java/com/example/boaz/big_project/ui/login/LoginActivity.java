@@ -24,17 +24,25 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Activitys.EmployeeActivity;
 import Activitys.MainActivity;
+import Activitys.ManagerActivity;
+
 import com.example.boaz.big_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static final String TAG = "LoginActivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,18 +126,38 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //keep an android user logged in
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // User is signed in
-            Toast.makeText(LoginActivity.this, "login as "+user.getEmail(), Toast.LENGTH_SHORT).show();
-
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-        } else {
-            // User is signed out
-            Log.d(BATTERY_SERVICE, "onAuthStateChanged:signed_out");
-        }
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user != null) {
+//            // User is signed in
+//            Toast.makeText(LoginActivity.this, "login as "+user.getEmail(), Toast.LENGTH_SHORT).show();
+//
+//            // login if is manager
+//            DocumentReference docRef = db.collection("User").document(""+user.getUid());
+//            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    if (task.isSuccessful()) {
+//                        DocumentSnapshot document = task.getResult();
+//                        if (document.exists()) {
+//                            if(document.getBoolean("isMang"))
+//                            {
+//                                Toast.makeText(LoginActivity.this, "hello  "+document.getString("name"), Toast.LENGTH_SHORT).show();
+//                                Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
+//                                startActivity(i);
+//                            }
+//                        } else {
+//                            Log.d(TAG, "No such document");
+//                        }
+//                    } else {
+//                        Log.d(TAG, "get failed with ", task.getException());
+//                    }
+//                }
+//            });
+//
+//        } else {
+//            // User is signed out
+//            Log.d(BATTERY_SERVICE, "onAuthStateChanged:signed_out");
+//        }
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
@@ -162,21 +190,51 @@ public class LoginActivity extends AppCompatActivity {
         // loading var
         final ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "מחשב פרטים", "רק רגע...");
 
-        //ProgressDialog.show(this, "Loading", "Wait while loading...");
-        //ProgressDialog.show(LoginActivity.this, "מחשב פרטים", "רק רגע...");
         mAuth.signInWithEmailAndPassword(user, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // loading
-                            dialog.show();
+                            dialog.show();  // loading
+
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(LoginActivity.this, "signInWithEmail:success", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(LoginActivity.this, "signInWithEmail:success", Toast.LENGTH_SHORT).show();
+
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(i);
-                        } else {
+                            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
+                            DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
+                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            if(document.getBoolean("isMang"))
+                                            {
+                                                Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
+                                                startActivity(i);
+                                            }
+
+                                            else
+                                            {
+                                                Intent i = new Intent(getApplicationContext(), EmployeeActivity.class);
+                                                startActivity(i);
+                                            }
+                                        }
+                                        else {
+                                            Log.d(TAG, "No such document");
+                                        }
+                                    }
+
+                                    else {
+                                        Log.d(TAG, "get failed with ", task.getException());
+                                    }
+                                }
+                            });
+
+                        }
+                        else {
                             // loading
                             dialog.show();
 
