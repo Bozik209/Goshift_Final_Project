@@ -113,7 +113,7 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         //FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
-        
+
 
         //  מוציא את המידע
         DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());

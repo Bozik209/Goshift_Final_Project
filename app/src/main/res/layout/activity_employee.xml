@@ -33,37 +33,105 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="3.5"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/Summary_button"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Fragment_move"
-                android:text="סיכום" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/Final_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Fragment_move"
-                android:text="סופי" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <Button
-                android:id="@+id/Scheduling_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Fragment_move"
-                android:text="שיבוץ" />
+                    <Button
+                        android:id="@+id/Final_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="סופי"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-            <Button
-                android:id="@+id/EM_Logout_button"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/Summary_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="סיכום"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Fragment_move"
-                android:text="התנתקות" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/EM_logout_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="התנתקות"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/Scheduling_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="שיבוץ"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical"></LinearLayout>
 
     </LinearLayout>
 
