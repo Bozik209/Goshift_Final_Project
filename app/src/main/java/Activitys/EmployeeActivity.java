@@ -9,7 +9,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +50,12 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         textView_helloUser = findViewById(R.id.hello_User);
         Test_SQL_func();
 
+        Spinner spinner = findViewById(R.id.EM_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.number_test, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setGravity(Gravity.CENTER);
 
     }
     
@@ -124,19 +133,7 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
 
-                        //--------------------------------------
-
-                        textView_helloUser.setText("HELLO " + document.getString("name")+"\n"+"isMang "+document.getBoolean("isMang"));
-
-                        //--------------------------------------
-
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        Log.d(TAG, "id:       " + document.getString("id"));
-                        Log.d(TAG, "isMang    " + document.getBoolean("isMang"));
-                        Log.d(TAG, "mail      " + document.getString("mail"));
-                        Log.d(TAG, "name      " + document.getString("name"));
-                        Log.d(TAG, "password  " + document.get("password"));
-
+                        textView_helloUser.setText("שלום " + document.getString("name"));
 
                     } else {
                         Log.d(TAG, "No such document");

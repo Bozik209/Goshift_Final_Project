@@ -126,38 +126,44 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //keep an android user logged in
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user != null) {
-//            // User is signed in
-//            Toast.makeText(LoginActivity.this, "login as "+user.getEmail(), Toast.LENGTH_SHORT).show();
-//
-//            // login if is manager
-//            DocumentReference docRef = db.collection("User").document(""+user.getUid());
-//            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                    if (task.isSuccessful()) {
-//                        DocumentSnapshot document = task.getResult();
-//                        if (document.exists()) {
-//                            if(document.getBoolean("isMang"))
-//                            {
-//                                Toast.makeText(LoginActivity.this, "hello  "+document.getString("name"), Toast.LENGTH_SHORT).show();
-//                                Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
-//                                startActivity(i);
-//                            }
-//                        } else {
-//                            Log.d(TAG, "No such document");
-//                        }
-//                    } else {
-//                        Log.d(TAG, "get failed with ", task.getException());
-//                    }
-//                }
-//            });
-//
-//        } else {
-//            // User is signed out
-//            Log.d(BATTERY_SERVICE, "onAuthStateChanged:signed_out");
-//        }
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            Toast.makeText(LoginActivity.this, "login as "+user.getEmail(), Toast.LENGTH_SHORT).show();
+
+            // login if is manager
+            DocumentReference docRef = db.collection("User").document(""+user.getUid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            if(document.getBoolean("isMang"))
+                            {
+                                Toast.makeText(LoginActivity.this, "hello  "+document.getString("name"), Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
+                                startActivity(i);
+                            }
+                            else
+                            {
+                                Toast.makeText(LoginActivity.this, "hello  "+document.getString("name"), Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getApplicationContext(), EmployeeActivity.class);
+                                startActivity(i);
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+
+        } else {
+            // User is signed out
+            Log.d(BATTERY_SERVICE, "onAuthStateChanged:signed_out");
+        }
     }
 
     private void updateUiWithUser(LoggedInUserView model) {

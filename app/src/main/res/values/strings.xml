@@ -35,7 +35,11 @@
 
 
 
-    <string name="user_name">document.getString("name")</string>
+    <string-array name="number_test">
+        <item>אחד</item>
+        <item>שתיים</item>
+        <item>שלוש</item>
+    </string-array>
 
 
 
