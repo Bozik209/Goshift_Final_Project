@@ -13,6 +13,11 @@
         >
         <!-- ________________________________________ -->
         <activity android:name="Activitys.ManagerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name="Activitys.MainActivity">
@@ -22,11 +27,7 @@
 
     <!-- ________________________________________ -->
         <activity android:name=".ui.login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 

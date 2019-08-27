@@ -10,6 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +29,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import Fragments.EM_Final_Fragment;
@@ -46,10 +52,10 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         setContentView(R.layout.activity_employee);
         textView_helloUser = findViewById(R.id.hello_User);
         Test_SQL_func();
-
-
     }
-    
+
+
+
     public void Fragment_move(View view) {
         // fregment_container = all the fragment will be on him
         FragmentManager manager= getSupportFragmentManager();
@@ -83,10 +89,7 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         }
 
     }
-    public void CheckBox_func(View v)
-    {
 
-    }
     @Override
     public void EM_Scheduling_FIListener(Uri uri) {
 
@@ -107,7 +110,6 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void Test_SQL_func() {
-        Toast.makeText(EmployeeActivity.this, "QQQQQ" , Toast.LENGTH_SHORT).show();
 
 
         //FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
@@ -149,4 +151,5 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
 
 
     }
+
 }

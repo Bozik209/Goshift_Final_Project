@@ -3,12 +3,33 @@ package Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Activitys.MainActivity;
+import Activitys.ManagerActivity;
 
 
 /**
@@ -24,6 +45,8 @@ public class MA_EmpList_Fragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "ManagerActivity";
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -33,6 +56,8 @@ public class MA_EmpList_Fragment extends Fragment {
 
     public MA_EmpList_Fragment() {
         // Required empty public constructor
+
+
     }
 
     /**
@@ -62,11 +87,63 @@ public class MA_EmpList_Fragment extends Fragment {
         }
     }
 
+    // custom func
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ma__emp_list_, container, false);
+        // --------------------------------------------------------------------------------------------------------------------------
+        View returnView = inflater.inflate(R.layout.fragment_ma__emp_list_, container, false);
+        //final TextView txtOne = (TextView) returnView.findViewById(R.id.Em_name_display_textview);
+        // --------------------------------------------------------------------------------------------------------------------------
+
+
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
+//        DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
+//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//                    if (document.exists()) {
+//                        txtOne.setText(""+document.getString("name"));
+//                    } else {
+//                        Log.d(TAG, "No such document");
+//                    }
+//                } else {
+//                    Log.d(TAG, "get failed with ", task.getException());
+//                }
+//            }
+//        });
+
+        // TODO: chack how enter all name to list
+        ListView myListView = (ListView) returnView.findViewById(R.id.List_view1);
+        ArrayList<String> myStringArray1 = new ArrayList<String>();
+
+
+        // רץ על כל הFIREBASE ובודק אותו
+        db.collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.getBoolean("isMang"))
+                            continue;
+                            //txtOne.setText(""+document.getString("name"));
+
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+        return returnView;
+
+
+        //return inflater.inflate(R.layout.fragment_ma__emp_list_, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -107,4 +184,6 @@ public class MA_EmpList_Fragment extends Fragment {
         // TODO: Update argument type and name
         void MA_EMPLIST_FIListener(Uri uri);
     }
+
+
 }

@@ -7,7 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
@@ -34,7 +37,11 @@ public class ManagerActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager);
+
+
     }
+
+
 
 
     public void Fragment_move(View view) {
@@ -60,6 +67,7 @@ public class ManagerActivity extends AppCompatActivity implements
                 fragment = new MA_Scheduling_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.MA_fragemt_container,fragment).commit();
+
             }
             else if (id == R.id.MA_EmpList_button) {
                 fragment = new MA_EmpList_Fragment();
@@ -70,19 +78,12 @@ public class ManagerActivity extends AppCompatActivity implements
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(ManagerActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(ManagerActivity.this , LoginActivity.class));
-//                view.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        FirebaseAuth.getInstance().signOut();
-//                        Toast.makeText(ManagerActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(ManagerActivity.this , LoginActivity.class));
-//                    }
-//                });
             }
 
         }
 
     }
+
 
 
     @Override

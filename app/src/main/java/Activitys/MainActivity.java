@@ -33,6 +33,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
@@ -260,58 +262,75 @@ public class MainActivity extends AppCompatActivity
         user.put("isMang", true);
 
         //  זה יוצר משתמש בתוך USER עם הID שלו
-        db.collection("User").document(""+currentFirebaseUser.getUid())
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
+//        db.collection("User").document(""+currentFirebaseUser.getUid())
+//                .set(user)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Log.d(TAG, "DocumentSnapshot successfully written!");
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w(TAG, "Error writing document", e);
+//                    }
+//                });
 
         //  זה מעדכן את התוכן
-        db.collection("User").document(""+currentFirebaseUser.getUid())
-                .update(user);
+//        db.collection("User").document(""+currentFirebaseUser.getUid())
+//                .update(user);
 
         //  מוציא את המידע
-        DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//        DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
+//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//                    if (document.exists()) {
+//
+//                        //--------------------------------------
+//
+//                        textView_helloUser.setText("HELLO " + document.getString("name")+"\n"+"isMang "+document.getBoolean("isMang"));
+//
+//                        //--------------------------------------
+//
+//                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+//                        Log.d(TAG, "id:       " + document.getString("id"));
+//                        Log.d(TAG, "isMang    " + document.getBoolean("isMang"));
+//                        Log.d(TAG, "mail      " + document.getString("mail"));
+//                        Log.d(TAG, "name      " + document.getString("name"));
+//                        Log.d(TAG, "password  " + document.get("password"));
+//
+//                        Toast.makeText(MainActivity.this, "Hello " + document.getString("name") , Toast.LENGTH_SHORT).show();
+//
+//                    } else {
+//                        Log.d(TAG, "No such document");
+//                    }
+//                } else {
+//                    Log.d(TAG, "get failed with ", task.getException());
+//                }
+//            }
+//        });
+
+        db.collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
+                    List<String> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (!document.getBoolean("isMang"))
+                            list.add(document.getString("name"));
 
-                        //--------------------------------------
-
-                        textView_helloUser.setText("HELLO " + document.getString("name")+"\n"+"isMang "+document.getBoolean("isMang"));
-
-                        //--------------------------------------
-
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        Log.d(TAG, "id:       " + document.getString("id"));
-                        Log.d(TAG, "isMang    " + document.getBoolean("isMang"));
-                        Log.d(TAG, "mail      " + document.getString("mail"));
-                        Log.d(TAG, "name      " + document.getString("name"));
-                        Log.d(TAG, "password  " + document.get("password"));
-
-                        Toast.makeText(MainActivity.this, "Hello " + document.getString("name") , Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Log.d(TAG, "No such document");
+                        //list.add(String.valueOf(document.getBoolean("isMang")));
                     }
+                    Log.d(TAG, "here");
+                    Log.d(TAG, list.toString());
                 } else {
-                    Log.d(TAG, "get failed with ", task.getException());
+                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
             }
         });
-
-
     }
 }
