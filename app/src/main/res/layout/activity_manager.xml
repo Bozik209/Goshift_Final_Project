@@ -5,62 +5,199 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/MA_fragemt_container"
-    tools:context="Activitys.EmployeeActivity">
+    tools:context="Activitys.EmployeeActivity"
+    android:background="@drawable/homebackgrond">
 
     <!-- TODO: find how enter toolbar in all layout-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="5.5"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/MA_Summary_button"
+            <TextView
+                android:id="@+id/MA_hello_User"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="Fragment_move"
-                android:text="סיכום" />
-
-            <Button
-                android:id="@+id/MA_Final_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Fragment_move"
-                android:text="סופי" />
-
-            <Button
-                android:id="@+id/MA_Scheduling_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Fragment_move"
-                android:text="שיבוץ" />
-
-            <Button
-                android:id="@+id/MA_EmpList_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Fragment_move"
-                android:text="רשימת עובדים" />
-
-            <Button
-            android:id="@+id/MA_CopyID_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="Fragment_move"
-            android:text="העתקת ID" />
-
-            <Button
-                android:id="@+id/MA_Logout_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Fragment_move"
-                android:text="התנתקות" />
+                android:gravity="center"
+                android:textSize="30dp" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="6.5"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/MA_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_spinner" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.8"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/MA_Final_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="סופי"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <Button
+                        android:id="@+id/MA_Summary_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="סיכום"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/MA_Scheduling_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="שיבוץ"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <Button
+                        android:id="@+id/MA_EmpList_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="רשימת עובדים"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/MA_CopyID_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="העתקת ID"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <Button
+                        android:id="@+id/MA_Logout_button"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="Fragment_move"
+                        android:text="התנתקות"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:orientation="vertical" />
 
     </LinearLayout>
 

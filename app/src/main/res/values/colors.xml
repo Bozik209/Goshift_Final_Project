@@ -6,6 +6,7 @@
 
     <color name="button_color">#CECECE</color>
 
+    <color name="darkblue">#0A3764</color>
     <color name="blue">#437CB5</color>
     <color name="yellow">#FFD600</color>
     <color name="green">#4EC50C</color>
@@ -13,5 +14,7 @@
     <color name="red">#FF0000</color>
     <color name="pink">#F346C7</color>
     <color name="white">#ffffff</color>
+    <color name="gray">#CECECE</color>
+
 
 </resources>

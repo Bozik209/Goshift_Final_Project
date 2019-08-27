@@ -9,11 +9,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,16 +28,15 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import Fragments.EM_Final_Fragment;
 import Fragments.EM_Summary_Fragment;
 import Fragments.Em_Scheduling_Fragment;
 
-public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling_Fragment.EM_Scheduling_FIListener ,
+public class EmployeeActivity extends AppCompatActivity implements
+        Em_Scheduling_Fragment.EM_Scheduling_FIListener ,
         EM_Summary_Fragment.EM_Summary_FIListener ,
         EM_Final_Fragment.EM_Final_FIListener {
 
@@ -50,12 +48,19 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee);
+
+
         textView_helloUser = findViewById(R.id.hello_User);
         Test_SQL_func();
+        Spinner spinner = findViewById(R.id.EM_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.number_test, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setGravity(Gravity.CENTER);
+
     }
-
-
-
+    
     public void Fragment_move(View view) {
         // fregment_container = all the fragment will be on him
         FragmentManager manager= getSupportFragmentManager();
@@ -65,17 +70,17 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         {
             int id = view.getId();
 
-            if (id == R.id.Summary_button) {
+            if (id == R.id.EM_Summary_button) {
                 fragment = new EM_Summary_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.EM_fragemt_container,fragment).commit();
             }
-            else if (id == R.id.Final_button) {
+            else if (id == R.id.EM_Final_button) {
                 fragment = new EM_Final_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.EM_fragemt_container,fragment).commit();
             }
-            else if (id == R.id.Scheduling_button) {
+            else if (id == R.id.EM_Scheduling_button) {
                 fragment = new Em_Scheduling_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.EM_fragemt_container,fragment).commit();
@@ -89,7 +94,10 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         }
 
     }
+    public void CheckBox_func(View v)
+    {
 
+    }
     @Override
     public void EM_Scheduling_FIListener(Uri uri) {
 
@@ -108,14 +116,9 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
 
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     public void Test_SQL_func() {
-
-
         //FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-
-
 
         //  מוציא את המידע
         DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
@@ -125,21 +128,7 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-
-                        //--------------------------------------
-
-                        textView_helloUser.setText("HELLO " + document.getString("name")+"\n"+"isMang "+document.getBoolean("isMang"));
-
-                        //--------------------------------------
-
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        Log.d(TAG, "id:       " + document.getString("id"));
-                        Log.d(TAG, "isMang    " + document.getBoolean("isMang"));
-                        Log.d(TAG, "mail      " + document.getString("mail"));
-                        Log.d(TAG, "name      " + document.getString("name"));
-                        Log.d(TAG, "password  " + document.get("password"));
-
-
+                        textView_helloUser.setText("שלום " + document.getString("name"));
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -148,8 +137,5 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
                 }
             }
         });
-
-
     }
-
 }

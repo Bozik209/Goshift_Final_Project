@@ -26,7 +26,7 @@
             android:ems="10"
             android:hint="שם מלא"
             android:textColorHint="#ffff"
-            android:inputType="textEmailAddress"
+            android:inputType="textPersonName"
             android:textSize="25dp"/>
 
         <EditText
@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:hint="אי מייל"
             android:textColorHint="#ffff"
             android:textSize="25dp"/>
