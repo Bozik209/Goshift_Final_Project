@@ -1,5 +1,6 @@
 package Activitys;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,8 +8,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
+import com.example.boaz.big_project.ui.login.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import Fragments.EM_Final_Fragment;
 import Fragments.EM_Summary_Fragment;
@@ -24,6 +28,7 @@ public class ManagerActivity extends AppCompatActivity implements
         MA_Scheduling_Fragment.MA_SCHEDULING_FIListener,
         MA_Summary_Fragment.MA_SUMMARY_FIListener
 {
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,19 @@ public class ManagerActivity extends AppCompatActivity implements
                 fragment = new MA_EmpList_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.MA_fragemt_container,fragment).commit();
+            }
+            else if (id == R.id.MA_Logout_button) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(ManagerActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ManagerActivity.this , LoginActivity.class));
+//                view.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        FirebaseAuth.getInstance().signOut();
+//                        Toast.makeText(ManagerActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(ManagerActivity.this , LoginActivity.class));
+//                    }
+//                });
             }
 
         }

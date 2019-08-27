@@ -1,5 +1,6 @@
 package Activitys;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
+import com.example.boaz.big_project.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -71,6 +73,11 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
                 fragment = new Em_Scheduling_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.EM_fragemt_container,fragment).commit();
+            }
+            else if (id == R.id.EM_Logout_button) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(EmployeeActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(EmployeeActivity.this , LoginActivity.class));
             }
 
         }

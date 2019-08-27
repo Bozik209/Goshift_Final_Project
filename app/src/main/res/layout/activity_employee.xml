@@ -56,6 +56,13 @@
                 android:layout_height="wrap_content"
                 android:onClick="Fragment_move"
                 android:text="שיבוץ" />
+
+            <Button
+                android:id="@+id/EM_Logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment_move"
+                android:text="התנתקות" />
         </LinearLayout>
 
     </LinearLayout>
