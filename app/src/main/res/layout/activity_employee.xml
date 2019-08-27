@@ -64,7 +64,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/Final_button"
+                        android:id="@+id/EM_Final_button"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:background="@drawable/rounded_button"
@@ -82,7 +82,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/Summary_button"
+                        android:id="@+id/EM_Summary_button"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:background="@drawable/rounded_button"
@@ -126,7 +126,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/Scheduling_button"
+                        android:id="@+id/EM_Scheduling_button"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:background="@drawable/rounded_button"
@@ -144,7 +144,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical"/>
 
     </LinearLayout>
 

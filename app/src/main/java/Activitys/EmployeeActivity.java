@@ -35,7 +35,8 @@ import Fragments.EM_Final_Fragment;
 import Fragments.EM_Summary_Fragment;
 import Fragments.Em_Scheduling_Fragment;
 
-public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling_Fragment.EM_Scheduling_FIListener ,
+public class EmployeeActivity extends AppCompatActivity implements
+        Em_Scheduling_Fragment.EM_Scheduling_FIListener ,
         EM_Summary_Fragment.EM_Summary_FIListener ,
         EM_Final_Fragment.EM_Final_FIListener {
 
@@ -47,9 +48,10 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee);
+
+
         textView_helloUser = findViewById(R.id.hello_User);
         Test_SQL_func();
-
         Spinner spinner = findViewById(R.id.EM_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.number_test, android.R.layout.simple_spinner_item);
@@ -68,17 +70,17 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
         {
             int id = view.getId();
 
-            if (id == R.id.Summary_button) {
+            if (id == R.id.EM_Summary_button) {
                 fragment = new EM_Summary_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.EM_fragemt_container,fragment).commit();
             }
-            else if (id == R.id.Final_button) {
+            else if (id == R.id.EM_Final_button) {
                 fragment = new EM_Final_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.EM_fragemt_container,fragment).commit();
             }
-            else if (id == R.id.Scheduling_button) {
+            else if (id == R.id.EM_Scheduling_button) {
                 fragment = new Em_Scheduling_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.EM_fragemt_container,fragment).commit();
@@ -114,15 +116,9 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
 
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     public void Test_SQL_func() {
-        Toast.makeText(EmployeeActivity.this, "QQQQQ" , Toast.LENGTH_SHORT).show();
-
-
         //FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-
-
 
         //  מוציא את המידע
         DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
@@ -132,9 +128,7 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-
                         textView_helloUser.setText("שלום " + document.getString("name"));
-
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -143,7 +137,5 @@ public class EmployeeActivity extends AppCompatActivity implements Em_Scheduling
                 }
             }
         });
-
-
     }
 }
