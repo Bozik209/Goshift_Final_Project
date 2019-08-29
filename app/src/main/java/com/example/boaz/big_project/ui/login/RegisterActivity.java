@@ -42,6 +42,7 @@ import com.google.firebase.firestore.auth.User;
 import java.util.HashMap;
 import java.util.Map;
 
+import Activitys.EmployeeActivity;
 import Activitys.MainActivity;
 import Activitys.ManagerActivity;
 import Fragments.POP_UP;
@@ -185,18 +186,6 @@ public class RegisterActivity extends AppCompatActivity implements
 
         if (checked) {
 
-            //POP_UP
-
-            Intent i = new Intent(getApplicationContext(), POP_UP.class);
-            startActivity(i);
-
-
-
-
-
-
-
-
             TextView CompanyName = (TextView) findViewById(R.id.MA_CompanyName);
             group_name_String = CompanyName.getText().toString();
         }
@@ -218,6 +207,7 @@ public class RegisterActivity extends AppCompatActivity implements
                             Toast.makeText(RegisterActivity.this, "Authentication success", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+                            //FirebaseAuth currentCompanyID = FirebaseUser
 
                             Map<String, Object> userMAP = new HashMap<>();
                             Map<String, Object> userCompanyMAP = new HashMap<>();
@@ -228,7 +218,7 @@ public class RegisterActivity extends AppCompatActivity implements
 
                             //check if is manger
                             if (checked) {
-                                userCompanyMAP.put("ID_group", db.collection("Company").document(""+currentFirebaseUser.getUid()));
+                                userCompanyMAP.put("ID_group", db.document(""+currentFirebaseUser.getUid()));
                                 userCompanyMAP.put("group_name", group);
 
                                 db.collection("Company").document(""+currentFirebaseUser.getUid())
@@ -258,8 +248,20 @@ public class RegisterActivity extends AppCompatActivity implements
                                     .collection("UserCompany").add(userCompanyMAP);
 
 
-                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(i);
+                            if (checked) {
+
+                                Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
+                                startActivity(i);
+
+                                Intent x = new Intent(getApplicationContext(), POP_UP.class);
+                                startActivity(x);
+
+                            }
+                            else {
+
+                                Intent i = new Intent(getApplicationContext(), EmployeeActivity.class);
+                                startActivity(i);
+                            }
 
                         }
                         else {
@@ -322,6 +324,8 @@ public class RegisterActivity extends AppCompatActivity implements
 //                        }
 //                    }
 //                });
+
+
 
     }
 

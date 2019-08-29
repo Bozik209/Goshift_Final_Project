@@ -131,18 +131,19 @@ public class ManagerActivity extends AppCompatActivity implements
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public void Test_SQL_func() {
+
         //FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
         //  מוציא את המידע
-        DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
+        DocumentReference docRef = db.collection("Company").document(""+currentFirebaseUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        textView_helloUser.setText("שלום " + document.getString("name"));
+                        textView_helloUser.setText(document.getId());
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -151,5 +152,28 @@ public class ManagerActivity extends AppCompatActivity implements
                 }
             }
         });
+
+
+//    public void Test_SQL_func() {
+//        //FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+//        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+//
+//        //  מוציא את המידע
+//        DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
+//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//                    if (document.exists()) {
+//                        textView_helloUser.setText("שלום " + document.getString("name"));
+//                    } else {
+//                        Log.d(TAG, "No such document");
+//                    }
+//                } else {
+//                    Log.d(TAG, "get failed with ", task.getException());
+//                }
+//            }
+//        });
     }
 }
