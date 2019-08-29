@@ -165,7 +165,7 @@ public class MA_EmpList_Fragment extends Fragment {
     }
 
     @Override
-    public void onDetach() { 
+    public void onDetach() {
         super.onDetach();
         mListener = null;
     }

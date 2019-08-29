@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_em__scheduling_ID"
     tools:context="Fragments.Em_Scheduling_Fragment"
     android:background="@color/white"
     >
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayoutCompat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="Activitys.MainActivity"
+        tools:context="Fragments.Em_Scheduling_Fragment"
         tools:showIn="@layout/app_bar_main">
 
         <TextView
@@ -469,6 +470,17 @@
             app:layout_constraintEnd_toStartOf="@+id/checkBox_FrMo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ID_Day_Sat7" />
+
+        <Button
+            android:id="@+id/TEST_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="TEST"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
