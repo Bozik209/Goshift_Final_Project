@@ -34,14 +34,15 @@
     <!-- ________________________________________ -->
         <activity android:name=".ui.login.RegisterActivity"
             android:label="@string/app_name">
-
         </activity>
 
         <!-- ________________________________________ -->
         <activity android:name="Activitys.EmployeeActivity">
+        </activity>
 
-
-    </activity>
+        <activity android:name="Fragments.POP_UP"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
 
 </application>
 
