@@ -43,6 +43,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Activitys.MainActivity;
+import Activitys.ManagerActivity;
+import Fragments.POP_UP;
 import Fragments.Register_EM_Fragment;
 import Fragments.Register_MA_Fragment;
 
@@ -169,8 +171,8 @@ public class RegisterActivity extends AppCompatActivity implements
         String Random_String=null;
         String group_name_String=null;
         //Email
-        TextView usernameEditText = (TextView) findViewById(R.id.Register_Email);
-        final String userMail = usernameEditText.getText().toString();
+        TextView userMailText = (TextView) findViewById(R.id.Register_Email);
+        final String userMail = userMailText.getText().toString();
         //Password
         TextView passwordEditText = (TextView) findViewById(R.id.Register_password);
         final String password = passwordEditText.getText().toString();
@@ -180,22 +182,31 @@ public class RegisterActivity extends AppCompatActivity implements
 
         //check if is manger
         final boolean checked=((CheckBox) findViewById(R.id.checkBox_Ma)).isChecked();
+
         if (checked) {
-            //Random key group
-            TextView Random_textView = (TextView) findViewById(R.id.Random_textView);
-            Random_String= Random_textView.getText().toString();
 
+            //POP_UP
+
+            Intent i = new Intent(getApplicationContext(), POP_UP.class);
+            startActivity(i);
+
+
+
+
+
+
+
+
+            TextView CompanyName = (TextView) findViewById(R.id.MA_CompanyName);
+            group_name_String = CompanyName.getText().toString();
+        }
+
+        else  {
             //group name
-            TextView group_name = (TextView) findViewById(R.id.group_name);
+            TextView group_name = (TextView) findViewById(R.id.EM_CopiedCompanyID);
             group_name_String = group_name.getText().toString();
         }
 
-        if (!checked) {
-            //group name
-            TextView group_name = (TextView) findViewById(R.id.groud_id_EM);
-            group_name_String = group_name.getText().toString();
-        }
-        final String random=Random_String;
         final String group=group_name_String;
 
         mAuth.createUserWithEmailAndPassword(userMail, password)
@@ -209,6 +220,7 @@ public class RegisterActivity extends AppCompatActivity implements
                             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
                             Map<String, Object> userMAP = new HashMap<>();
+                            Map<String, Object> userCompanyMAP = new HashMap<>();
                             userMAP.put("name", name);
                             userMAP.put("mail", userMail);
                             userMAP.put("password", password);
@@ -216,11 +228,15 @@ public class RegisterActivity extends AppCompatActivity implements
 
                             //check if is manger
                             if (checked) {
-                                userMAP.put("ID_group", random);
-                                userMAP.put("group_name", group);
+                                userCompanyMAP.put("ID_group", db.collection("Company").document(""+currentFirebaseUser.getUid()));
+                                userCompanyMAP.put("group_name", group);
+
+                                db.collection("Company").document(""+currentFirebaseUser.getUid())
+                                        .set(userCompanyMAP);
+
                             }
                             else{
-                                userMAP.put("group_name", group);
+                                userCompanyMAP.put("group_name", group);
                             }
 
                             db.collection("User").document(""+currentFirebaseUser.getUid())
@@ -238,13 +254,17 @@ public class RegisterActivity extends AppCompatActivity implements
                                         }
                                     });
 
+                            db.collection("User").document(""+currentFirebaseUser.getUid())
+                                    .collection("UserCompany").add(userCompanyMAP);
 
 
                             Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(i);
-                        } else {
-                            // If sign in fails, display a message to the user.
 
+                        }
+                        else {
+
+                            // If sign in fails, display a message to the user.
                             Toast.makeText(RegisterActivity.this, "Authentication failed" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/groud_id_EM"
+            android:id="@+id/EM_CopiedCompanyID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"

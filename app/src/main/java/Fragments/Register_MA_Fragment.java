@@ -128,29 +128,29 @@ public class Register_MA_Fragment extends Fragment {
     private Register_MA_Fragment_InteractionListener listener;
     private ClipboardManager myClipboard;
     private ClipData myClip;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle inState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle inState) {
         View v = inflater.inflate(R.layout.fragment_register__ma_, container, false);
-        myTextView = (TextView)v.findViewById(R.id.Random_textView);
-        showText();
-
-        View b=inflater.inflate(R.layout.fragment_register__ma_, container, false);
-        myImageButton=(ImageButton) v.findViewById(R.id.Random_copy_Button);
-        myImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                myClipboard = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
-
-                String text;
-                text = myTextView.getText().toString();
-
-                myClip = ClipData.newPlainText("text", myTextView.getText().toString());
-                myClipboard.setPrimaryClip(myClip);
-                Toast.makeText(getActivity(), "Text Copied",Toast.LENGTH_SHORT).show();
-            }
-        });
+//        myTextView = (TextView)v.findViewById(R.id.MA_RandomFirebaseID);
+//        showText();
+//
+//        View b=inflater.inflate(R.layout.fragment_register__ma_, container, false);
+//        myImageButton=(ImageButton) v.findViewById(R.id.Random_copy_Button);
+//        myImageButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+//                myClipboard = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
+//
+//                String text;
+//                text = myTextView.getText().toString();
+//
+//                myClip = ClipData.newPlainText("text", myTextView.getText().toString());
+//                myClipboard.setPrimaryClip(myClip);
+//                Toast.makeText(getActivity(), "Text Copied",Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         return v;
     }

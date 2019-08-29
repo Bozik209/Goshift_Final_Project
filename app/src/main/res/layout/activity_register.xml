@@ -20,18 +20,19 @@
 
         <EditText
             android:id="@+id/Register_FullName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
             android:hint="שם מלא"
             android:textColorHint="#ffff"
             android:inputType="textPersonName"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:gravity="center"/>
 
         <EditText
             android:id="@+id/Register_password"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
@@ -40,18 +41,20 @@
             android:textColorHint="#ffff"
             android:imeOptions="actionDone"
             android:selectAllOnFocus="true"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:gravity="center"/>
 
         <EditText
             android:id="@+id/Register_Email"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textEmailAddress"
             android:hint="אי מייל"
             android:textColorHint="#ffff"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:gravity="center"/>
 
         <CheckBox
             android:id="@+id/checkBox_Em"
