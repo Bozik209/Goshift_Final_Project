@@ -136,7 +136,7 @@ public class Em_Scheduling_Fragment extends Fragment {
             public void onClick(View v) {
                 for (int i=0; i<array_checkBox_id.size() ; i++)
                 {
-                    Log.d(TAG, "array_checkBox_["+i+"] = "+array_checkBox_id.get(i));
+                    Log.d(TAG, "array_checkBox_["+i+"]  = "+array_checkBox_id.get(i));
                 }
             }
         });
