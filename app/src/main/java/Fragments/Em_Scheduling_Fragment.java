@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,6 +28,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import Activitys.EmployeeActivity;
@@ -84,85 +87,102 @@ public class Em_Scheduling_Fragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-// -----------------------------------------------------------------------------------------------------------------------------------
+/** -----------------------------\/\/\/-------------------------------onCreateView-------------------------------\/\/\/-----------------------------------------*/
+    // TODO: check how save the checkbox and to link to week in the spinner
 
+    /** Global Array */
     ArrayList<String> array_checkBox_id  = new ArrayList<String>();
+    ArrayList<String> array_Week  = new ArrayList<String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View returnView = inflater.inflate(R.layout.fragment_em__scheduling_, container, false);
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        Chack_All_Chackbox(returnView);
+        week_func(returnView);
+        return returnView;
+        //return inflater.inflate(R.layout.fragment_em__scheduling_, container, false);
+    }
 
-        //get "id" string
-        final int temp=returnView.getId();
-        //final String IDname= getResources().getResourceEntryName(temp);
-
-//
-//        final CheckBox checkBox_var= (CheckBox) returnView.findViewById(R.id.checkBox_SuMo);
-//        checkBox_var.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (checkBox_var.isChecked())
-//                    Log.d(TAG, "hereeeeeeeeeeeeeeeeeeeeeeeeeee");
-//            }
-//        });
-
-//            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_em__scheduling_, container, false);
-//
-//            for (int i=0; i < rootView.getChildCount(); i++) {
-//                View v = rootView.getChildAt(i);
-//                if (v instanceof CheckBox) {
-//                    array_checkBox_id.add(Integer.toString( v.getId()));
-//                }
-//            }
-
-        final ViewGroup rootView = (ViewGroup) returnView.findViewById(R.id.linearLayoutCompat).getRootView();
+    /** Chack all the view in fragment if is chackbox and if is clicked */
+    private View Chack_All_Chackbox(View returnView) {
+        final ViewGroup rootView = (ViewGroup) returnView.findViewById(R.id.fragment_em__scheduling_ID).getRootView();
         final int childViewCount = rootView.getChildCount();
 
-        Log.w("boaz",childViewCount+"");
-        for (int i=0; i<childViewCount;i++){
-            View workWithMe = rootView.getChildAt(i);
-
-            Log.d(TAG, "i "+ i);
-            Log.d(TAG, "workWithMe "+ workWithMe);
-            Log.d(TAG, "childViewCount "+ childViewCount);
-            if (workWithMe instanceof CheckBox)
-            {
-                CheckBox checked=(CheckBox) workWithMe ;
-                if (checked.isChecked())
-                    Log.d(TAG, "checked.isChecked() "+ checked.isChecked());
-                array_checkBox_id.add(Integer.toString(temp));
-            }
-        }
-            Log.d(TAG, "rootView.getChildCount() "+ rootView);
-
-            Button button=(Button) returnView.findViewById(R.id.TEST_button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                for (int i=0; i<childViewCount;i++){
-//                    View workWithMe = rootView.getChildAt(i);
-//                    Log.d(TAG, "i "+ i);
-//                    Log.d(TAG, "workWithMe "+ workWithMe);
-//                    Log.d(TAG, "childViewCount "+ childViewCount);
-//                    if (workWithMe instanceof CheckBox)
-//                    {
-//                        CheckBox checked=(CheckBox) workWithMe ;
-//                        if (checked.isChecked())
-//                            Log.d(TAG, "checked.isChecked() "+ checked.isChecked());
-//                            array_checkBox_id.add(Integer.toString(temp));
-//                    }
-//                }
+        //when you click on the button is enter all the ID checkbox that clicked to array_checkBox_id
+        Button button=(Button) returnView.findViewById(R.id.TEST_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i=0; i<childViewCount;i++){
+                    View workWithMe = rootView.getChildAt(i);
+                    if (workWithMe instanceof CheckBox)
+                    {
+                        CheckBox checked=(CheckBox) workWithMe ;
+                        if (checked.isChecked())
+                        {
+                            if (!array_checkBox_id.contains(getResources().getResourceEntryName(checked.getId())))
+                                array_checkBox_id.add(getResources().getResourceEntryName(checked.getId()));
+                        }
+                    }
                 }
-            });
-            Log.d(TAG, "array_checkBox_id "+array_checkBox_id);
+            }
+        });
 
-            return rootView;
-            //return inflater.inflate(R.layout.fragment_em__scheduling_, container, false);
-        }
-// -----------------------------------------------------------------------------------------------------------------------------------
+        Button button_ShowArry=(Button) returnView.findViewById(R.id.ShowArry_button);
+        button_ShowArry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i=0; i<array_checkBox_id.size() ; i++)
+                {
+                    Log.d(TAG, "array_checkBox_["+i+"] = "+array_checkBox_id.get(i));
+                }
+            }
+        });
+        return returnView;
+    }
+
+    /** Get the current week and Enter inside Spinner*/
+    private View week_func(View returnView) {
+        //get the current week
+        final Calendar calender = Calendar.getInstance();
+        Log.d(TAG,"Current Week:" + calender.get(Calendar.WEEK_OF_YEAR));
+
+        //set the spinner in Fragment
+        final Spinner spinner = returnView.findViewById(R.id.Week_spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        // Set all week in array_Week
+        for (int i=0;i<=52;i++)
+            array_Week.add(" שבוע " + i);
+
+        // Enter inside Spinner all week
+        ArrayAdapter<String> adapter = new ArrayAdapter<String> (getActivity(),
+                android.R.layout.simple_spinner_item, array_Week);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setGravity(Gravity.CENTER);
+
+        // setSelection = Jump directly to a specific item in the adapter data
+        spinner.post(new Runnable() {
+            @Override
+            public void run() {
+                spinner.setSelection(calender.get(Calendar.WEEK_OF_YEAR));
+            }
+        });
+        return returnView;
+    }
+
+    /** ----------------------------------^^^--------------------------onCreateView----------------------------------------^^^----------------------------------*/
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

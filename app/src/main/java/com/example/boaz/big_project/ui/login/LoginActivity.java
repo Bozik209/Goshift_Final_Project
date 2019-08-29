@@ -195,7 +195,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // loading var
         final ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "מחשב פרטים", "רק רגע...");
-
         mAuth.signInWithEmailAndPassword(user, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
