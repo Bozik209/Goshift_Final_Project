@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -32,6 +33,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements
     private LoginViewModel loginViewModel;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "RegisterActivity";
+    final boolean IsManger=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,9 +150,18 @@ public class RegisterActivity extends AppCompatActivity implements
             // User is signed in
             Toast.makeText(RegisterActivity.this, "login as "+user.getEmail(), Toast.LENGTH_SHORT).show();
 
-            Intent i = new Intent(RegisterActivity.this, MainActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
+            if (IsManger){
+                Intent i = new Intent(RegisterActivity.this, ManagerActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+            }
+            else {
+                Intent i = new Intent(RegisterActivity.this, EmployeeActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+            }
+
+
         } else {
             // User is signed out
             Log.d(BATTERY_SERVICE, "onAuthStateChanged:signed_out");
@@ -169,11 +181,10 @@ public class RegisterActivity extends AppCompatActivity implements
 
     public void Register_func(View view) {
         // TODO: organize the code
-        String Random_String=null;
         String group_name_String=null;
         //Email
-        TextView userMailText = (TextView) findViewById(R.id.Register_Email);
-        final String userMail = userMailText.getText().toString();
+        TextView emailEditText = (TextView) findViewById(R.id.Register_Email);
+        final String userMail = emailEditText.getText().toString();
         //Password
         TextView passwordEditText = (TextView) findViewById(R.id.Register_password);
         final String password = passwordEditText.getText().toString();
@@ -182,9 +193,9 @@ public class RegisterActivity extends AppCompatActivity implements
         final String name = nameEditText.getText().toString();
 
         //check if is manger
-        final boolean checked=((CheckBox) findViewById(R.id.checkBox_Ma)).isChecked();
+        final boolean IsManger=((CheckBox) findViewById(R.id.checkBox_Ma)).isChecked();
 
-        if (checked) {
+        if (IsManger) {
 
             TextView CompanyName = (TextView) findViewById(R.id.MA_CompanyName);
             group_name_String = CompanyName.getText().toString();
@@ -207,22 +218,20 @@ public class RegisterActivity extends AppCompatActivity implements
                             Toast.makeText(RegisterActivity.this, "Authentication success", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-                            //FirebaseAuth currentCompanyID = FirebaseUser
+                            //FirebaseAuth currentFirebaseCompany = FirebaseAuth.getInstance();
 
                             Map<String, Object> userMAP = new HashMap<>();
                             Map<String, Object> userCompanyMAP = new HashMap<>();
                             userMAP.put("name", name);
                             userMAP.put("mail", userMail);
                             userMAP.put("password", password);
-                            userMAP.put("isMang", checked);
+                            userMAP.put("isMang", IsManger);
 
                             //check if is manger
-                            if (checked) {
-                                userCompanyMAP.put("ID_group", db.document(""+currentFirebaseUser.getUid()));
-                                userCompanyMAP.put("group_name", group);
+                            if (IsManger) {
 
-                                db.collection("Company").document(""+currentFirebaseUser.getUid())
-                                        .set(userCompanyMAP);
+                               // userCompanyMAP.put("ID_group", db.collection("Company").document(""+currentFirebaseUser.getUid()));
+                                userCompanyMAP.put("group_name", group);
 
                             }
                             else{
@@ -234,7 +243,7 @@ public class RegisterActivity extends AppCompatActivity implements
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                            Log.d(TAG, "DocumentSnapshot USER successfully written!");
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -243,18 +252,34 @@ public class RegisterActivity extends AppCompatActivity implements
                                             Log.w(TAG, "Error writing document", e);
                                         }
                                     });
-
                             db.collection("User").document(""+currentFirebaseUser.getUid())
                                     .collection("UserCompany").add(userCompanyMAP);
 
+                            db.collection("Company").document(""+currentFirebaseUser.getUid())
+                                    .set(userCompanyMAP).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot COMPANY successfully written!");
+                                }
+                            })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error writing document", e);
+                                        }
+                                    });
 
-                            if (checked) {
+
+                            if (IsManger) {
+
+//                                Intent x = new Intent(getApplicationContext(), POP_UP.class);
+//                                startActivity(x);
 
                                 Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
                                 startActivity(i);
 
-                                Intent x = new Intent(getApplicationContext(), POP_UP.class);
-                                startActivity(x);
+
+
 
                             }
                             else {
