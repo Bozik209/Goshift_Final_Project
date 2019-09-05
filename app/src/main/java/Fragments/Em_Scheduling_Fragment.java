@@ -20,16 +20,23 @@ import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.local.ReferenceSet;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Activitys.EmployeeActivity;
 
@@ -93,55 +100,88 @@ public class Em_Scheduling_Fragment extends Fragment {
     /** Global Array */
     ArrayList<String> array_checkBox_id  = new ArrayList<String>();
     ArrayList<String> array_Week  = new ArrayList<String>();
+    Map<String, Object> Map_array_checkBox_id=new HashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View returnView = inflater.inflate(R.layout.fragment_em__scheduling_, container, false);
-        Chack_All_Chackbox(returnView);
         week_func(returnView);
+        sendButton(returnView);
         return returnView;
         //return inflater.inflate(R.layout.fragment_em__scheduling_, container, false);
     }
 
-    /** Chack all the view in fragment if is chackbox and if is clicked */
-    private View Chack_All_Chackbox(View returnView) {
+    private View sendButton(View returnView) {
         final ViewGroup rootView = (ViewGroup) returnView.findViewById(R.id.fragment_em__scheduling_ID).getRootView();
         final int childViewCount = rootView.getChildCount();
+        final DocumentReference reference = db.collection("Test").document();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //final DocumentReference docRef = db.collection("User").document(""+user.getUid());
+        final DocumentReference docRef = db
+                .collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
+                .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc");
 
+
+        /** Chack all the view in fragment if is chackbox and if is clicked */
         //when you click on the button is enter all the ID checkbox that clicked to array_checkBox_id
-        Button button=(Button) returnView.findViewById(R.id.TEST_button);
+        Button button=(Button) returnView.findViewById(R.id.send_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getName(docRef);
                 for (int i=0; i<childViewCount;i++){
                     View workWithMe = rootView.getChildAt(i);
                     if (workWithMe instanceof CheckBox)
                     {
                         CheckBox checked=(CheckBox) workWithMe ;
-                        if (checked.isChecked())
-                        {
-                            if (!array_checkBox_id.contains(getResources().getResourceEntryName(checked.getId())))
-                                array_checkBox_id.add(getResources().getResourceEntryName(checked.getId()));
+                        if (checked.isChecked()) {
+                            if (!Map_array_checkBox_id.containsValue(getResources().getResourceEntryName(checked.getId())))
+                            {
+                                Map_array_checkBox_id.put(""+i,getResources().getResourceEntryName(checked.getId()));
+                            }
                         }
+                    }
+                }
+
+                db.collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
+                        .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc")
+                        .set(Map_array_checkBox_id).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot added with ID: " + user.getUid());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document", e);
+                            }
+                        });
+                Map_array_checkBox_id.clear();
+            }
+        });
+
+        return returnView;
+    }
+
+    private void getName(DocumentReference docRef)
+    {
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String name=document.getString("name");
+                        Map_array_checkBox_id.put("User name",name);
                     }
                 }
             }
         });
-
-        Button button_ShowArry=(Button) returnView.findViewById(R.id.ShowArry_button);
-        button_ShowArry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (int i=0; i<array_checkBox_id.size() ; i++)
-                {
-                    Log.d(TAG, "array_checkBox_["+i+"]  = "+array_checkBox_id.get(i));
-                }
-            }
-        });
-        return returnView;
     }
+
 
     /** Get the current week and Enter inside Spinner*/
     private View week_func(View returnView) {
@@ -180,7 +220,6 @@ public class Em_Scheduling_Fragment extends Fragment {
         });
         return returnView;
     }
-
     /** ----------------------------------^^^--------------------------onCreateView----------------------------------------^^^----------------------------------*/
 
     // TODO: Rename method, update argument and hook method into UI event

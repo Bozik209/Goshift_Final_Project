@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        //keep an android user logged in
+        /** keep an android user logged in  */
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // User is signed in

@@ -360,25 +360,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/TEST_button"
+        android:id="@+id/send_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="34dp"
-        android:layout_marginRight="34dp"
-        android:layout_marginBottom="32dp"
-        android:text="TEST"
+        android:layout_marginEnd="104dp"
+        android:layout_marginRight="104dp"
+        android:layout_marginBottom="34dp"
+        android:text="Send"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ShowArry_button" />
-
-    <Button
-        android:id="@+id/ShowArry_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="16dp"
-        android:text="ShowArry_button"
-        app:layout_constraintBottom_toTopOf="@+id/TEST_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_TitleLeft" />
 
     <Spinner

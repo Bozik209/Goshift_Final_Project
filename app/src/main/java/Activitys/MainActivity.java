@@ -325,7 +325,6 @@ public class MainActivity extends AppCompatActivity
 
                         //list.add(String.valueOf(document.getBoolean("isMang")));
                     }
-                    Log.d(TAG, "here");
                     Log.d(TAG, list.toString());
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());

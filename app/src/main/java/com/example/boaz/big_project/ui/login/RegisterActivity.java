@@ -396,7 +396,7 @@ public class RegisterActivity extends AppCompatActivity implements
                 fragment = new Register_MA_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction();
 
-                transaction.add(R.id.Fragment_container,fragment).commit();
+                transaction.add(R.id.Fragment_container,fragment).addToBackStack(null).commit();
             }
             if(Employess_checkBox.isChecked())
             {
