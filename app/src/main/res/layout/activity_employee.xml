@@ -38,13 +38,13 @@
             android:visibility="visible"
             tools:context="Activitys.EmployeeActivity">
 
-            <Spinner
-                android:id="@+id/EM_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible"
-                android:background="@drawable/rounded_spinner"
-                tools:context="Activitys.EmployeeActivity" />
+            <!--<Spinner-->
+                <!--android:id="@+id/EM_spinner"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:visibility="visible"-->
+                <!--android:background="@drawable/rounded_spinner"-->
+                <!--tools:context="Activitys.EmployeeActivity" />-->
         </LinearLayout>
 
         <LinearLayout

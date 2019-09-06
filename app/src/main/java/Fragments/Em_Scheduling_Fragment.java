@@ -2,6 +2,7 @@ package Fragments;
 
 import android.content.Context;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -123,6 +124,34 @@ public class Em_Scheduling_Fragment extends Fragment {
                 .collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
                 .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc");
 
+        /** Remember the Checkbox choice  */
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        for (int i=0; i<childViewCount;i++){
+                            View workWithMe = rootView.getChildAt(i);
+                            if (workWithMe instanceof CheckBox)
+                            {
+                                CheckBox checked=(CheckBox) workWithMe ;
+                                String IDname=getResources().getResourceEntryName(checked.getId());
+                                if (document.getData().values().contains(IDname))
+                                {
+                                    checked.setChecked(true);
+                                }
+
+                            }
+                        }
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
 
         /** Chack all the view in fragment if is chackbox and if is clicked */
         //when you click on the button is enter all the ID checkbox that clicked to array_checkBox_id
@@ -136,6 +165,10 @@ public class Em_Scheduling_Fragment extends Fragment {
                     if (workWithMe instanceof CheckBox)
                     {
                         CheckBox checked=(CheckBox) workWithMe ;
+                        if (Map_array_checkBox_id.containsValue(getResources().getResourceEntryName(checked.getId())))
+                        {
+                            checked.setChecked(true);
+                        }
                         if (checked.isChecked()) {
                             if (!Map_array_checkBox_id.containsValue(getResources().getResourceEntryName(checked.getId())))
                             {
@@ -145,6 +178,7 @@ public class Em_Scheduling_Fragment extends Fragment {
                     }
                 }
 
+                /** Enter data to path **/
                 db.collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
                         .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc")
                         .set(Map_array_checkBox_id).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -159,13 +193,30 @@ public class Em_Scheduling_Fragment extends Fragment {
                                 Log.w(TAG, "Error adding document", e);
                             }
                         });
-                Map_array_checkBox_id.clear();
+                //Map_array_checkBox_id.clear();
             }
         });
 
+        /** Button the clear all selected checkbox **/
+        Button Clear_button=(Button) returnView.findViewById(R.id.Clear_button);
+        Clear_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i=0; i<childViewCount;i++){
+                    View workWithMe = rootView.getChildAt(i);
+                    if (workWithMe instanceof CheckBox)
+                    {
+                        CheckBox checked=(CheckBox) workWithMe ;
+                        checked.setChecked(false);
+                    }
+                }
+                Map_array_checkBox_id.clear();
+            }
+        });
         return returnView;
     }
 
+    /** Get the name of user**/
     private void getName(DocumentReference docRef)
     {
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

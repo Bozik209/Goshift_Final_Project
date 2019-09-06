@@ -54,12 +54,12 @@ public class EmployeeActivity extends AppCompatActivity implements
         textView_helloUser = findViewById(R.id.hello_User);
         Test_SQL_func();
 
-        Spinner spinner = findViewById(R.id.EM_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(EmployeeActivity.this,
-                R.array.number_test, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setGravity(Gravity.CENTER);
+//        Spinner spinner = findViewById(R.id.EM_spinner);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(EmployeeActivity.this,
+//                R.array.number_test, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
+//        spinner.setGravity(Gravity.CENTER);
     }
 
     public void Fragment_move(View view) {
