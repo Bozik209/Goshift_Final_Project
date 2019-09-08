@@ -69,7 +69,7 @@
                         android:layout_height="150dp"
                         android:background="@drawable/rounded_button"
                         android:onClick="Fragment_move"
-                        android:text="סופי"
+                        android:text="לוז סופי"
                         android:textSize="30dp"
                         android:textStyle="bold" />
                 </LinearLayout>
