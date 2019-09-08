@@ -3,8 +3,10 @@ package Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -96,18 +98,25 @@ public class Em_Scheduling_Fragment extends Fragment {
         }
     }
 /** -----------------------------\/\/\/-------------------------------onCreateView-------------------------------\/\/\/-----------------------------------------*/
-    // TODO: check how save the checkbox and to link to week in the spinner
+    // TODO: How remember the choice
 
-    /** Global Array */
-    ArrayList<String> array_checkBox_id  = new ArrayList<String>();
-    ArrayList<String> array_Week  = new ArrayList<String>();
-    Map<String, Object> Map_array_checkBox_id=new HashMap<>();
+    /**
+     * Global Array
+     */
+    ArrayList<String> array_Week = new ArrayList<String>();
+    Map<String, ArrayList> Map_array_checkBox_id = new HashMap<String, ArrayList>();
+
+    public void full_week(Map<String, ArrayList> Map_array_checkBox_id) {
+        for (int i = 0; i <= 52; i++)
+            Map_array_checkBox_id.put("" + i, null);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View returnView = inflater.inflate(R.layout.fragment_em__scheduling_, container, false);
+        full_week(Map_array_checkBox_id);
         week_func(returnView);
         sendButton(returnView);
         return returnView;
@@ -117,116 +126,183 @@ public class Em_Scheduling_Fragment extends Fragment {
     private View sendButton(View returnView) {
         final ViewGroup rootView = (ViewGroup) returnView.findViewById(R.id.fragment_em__scheduling_ID).getRootView();
         final int childViewCount = rootView.getChildCount();
-        final DocumentReference reference = db.collection("Test").document();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        //final DocumentReference docRef = db.collection("User").document(""+user.getUid());
+        final Calendar calender = Calendar.getInstance();
+
+        final Spinner spinner = returnView.findViewById(R.id.Week_spinner);
+//        final DocumentReference docRef = db
+//                .collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
+//                .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc");
+
+        Log.d(TAG, "user.getUid(): "+user.getUid());
+
         final DocumentReference docRef = db
-                .collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
+                .collection("Test").document(""+user.getUid())
                 .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc");
 
+        // TODO: How remember the choice
         /** Remember the Checkbox choice  */
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document != null && document.exists()) {
-                        for (int i=0; i<childViewCount;i++){
-                            View workWithMe = rootView.getChildAt(i);
-                            if (workWithMe instanceof CheckBox)
-                            {
-                                CheckBox checked=(CheckBox) workWithMe ;
-                                String IDname=getResources().getResourceEntryName(checked.getId());
-                                if (document.getData().values().contains(IDname))
-                                {
-                                    checked.setChecked(true);
-                                }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG, "onItemSelected: " + spinner.getSelectedItem());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document != null && document.exists()) {
+                                Log.d(TAG, "spinner.getSelectedItem().toString() " + spinner.getSelectedItem().toString());
 
+                                ArrayList<String> arrayList = (ArrayList<String>) document.get(spinner.getSelectedItem().toString());
+                                //Do what you need to do with your ArrayList
+                                Log.d(TAG, "arrayList s: " + arrayList);
+                                // מאפס את הכול אם עוברים לחודש שלא מילינו בו משמרות
+                                for (int i = 0; i < childViewCount; i++) {
+                                    View workWithMe = rootView.getChildAt(i);
+                                    if (workWithMe instanceof CheckBox) {
+                                        CheckBox checked = (CheckBox) workWithMe;
+                                        checked.setChecked(false);
+                                    }
+                                }
+                                // זה בודק שהמערך לא רק כי אם הוא רק זה קורס
+                                if (arrayList != null) {
+                                    //מאפס את הכול
+                                    for (int i = 0; i < childViewCount; i++) {
+                                        View workWithMe = rootView.getChildAt(i);
+                                        if (workWithMe instanceof CheckBox) {
+                                            CheckBox checked = (CheckBox) workWithMe;
+                                            checked.setChecked(false);
+                                        }
+                                    }
+                                    // רץ על המערך מהבסיס נתונים ומסמן את המשמרות
+                                    for (String s : arrayList) {
+                                        for (int i = 0; i < childViewCount; i++) {
+                                            View workWithMe = rootView.getChildAt(i);
+                                            if (workWithMe instanceof CheckBox) {
+                                                CheckBox checked = (CheckBox) workWithMe;
+                                                String IDname = getResources().getResourceEntryName(checked.getId());
+                                                if (s.equals(IDname))
+                                                    checked.setChecked(true);
+                                            }
+
+                                        }
+                                    }
+                                }
+                            } else {
+                                Log.d(TAG, "No such document");
                             }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
                         }
-                    } else {
-                        Log.d(TAG, "No such document");
                     }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
+
+        final ArrayList checked_getId = new ArrayList();
+
+
         /** Chack all the view in fragment if is chackbox and if is clicked */
         //when you click on the button is enter all the ID checkbox that clicked to array_checkBox_id
-        Button button=(Button) returnView.findViewById(R.id.send_button);
+        Button button = (Button) returnView.findViewById(R.id.send_button);
         button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 getName(docRef);
-                for (int i=0; i<childViewCount;i++){
+                checked_getId.clear();
+                for (int i = 0; i < childViewCount; i++) {
                     View workWithMe = rootView.getChildAt(i);
-                    if (workWithMe instanceof CheckBox)
-                    {
-                        CheckBox checked=(CheckBox) workWithMe ;
-                        if (Map_array_checkBox_id.containsValue(getResources().getResourceEntryName(checked.getId())))
-                        {
-                            checked.setChecked(true);
-                        }
+                    if (workWithMe instanceof CheckBox) {
+                        CheckBox checked = (CheckBox) workWithMe;
                         if (checked.isChecked()) {
-                            if (!Map_array_checkBox_id.containsValue(getResources().getResourceEntryName(checked.getId())))
-                            {
-                                Map_array_checkBox_id.put(""+i,getResources().getResourceEntryName(checked.getId()));
+                            if (!checked_getId.contains(getResources().getResourceEntryName(checked.getId()))) {
+                                checked_getId.add(getResources().getResourceEntryName(checked.getId()));
+
                             }
                         }
                     }
                 }
 
+                /** Enter to the select week the select shift  **/
+                Map_array_checkBox_id.put(spinner.getSelectedItem().toString(), new ArrayList(checked_getId));
+
+
                 /** Enter data to path **/
-                db.collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
+                // מעדכן רק את השבוע הספציפי וככה הוא לא דורס את הכול
+//                db.collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
+//                        .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc")
+                db.collection("Test").document(""+user.getUid())
                         .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc")
-                        .set(Map_array_checkBox_id).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + user.getUid());
-                            }
-                        })
+                        .update(spinner.getSelectedItem().toString(),new ArrayList(checked_getId)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + user.getUid());
+                    }
+                })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.w(TAG, "Error adding document", e);
                             }
                         });
-                //Map_array_checkBox_id.clear();
+
+                // מעדכן רק את השבוע הספציפי אבל דורס גם את הכול
+//                db.collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
+//                        .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc")
+//                        .set(Map_array_checkBox_id).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Log.d(TAG, "DocumentSnapshot added with ID: " + user.getUid());
+//                    }
+//                })
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Log.w(TAG, "Error adding document", e);
+//                            }
+//                        });
             }
         });
 
         /** Button the clear all selected checkbox **/
-        Button Clear_button=(Button) returnView.findViewById(R.id.Clear_button);
+        Button Clear_button = (Button) returnView.findViewById(R.id.Clear_button);
         Clear_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i=0; i<childViewCount;i++){
+                for (int i = 0; i < childViewCount; i++) {
                     View workWithMe = rootView.getChildAt(i);
-                    if (workWithMe instanceof CheckBox)
-                    {
-                        CheckBox checked=(CheckBox) workWithMe ;
+                    if (workWithMe instanceof CheckBox) {
+                        CheckBox checked = (CheckBox) workWithMe;
                         checked.setChecked(false);
                     }
                 }
-                Map_array_checkBox_id.clear();
+                //Map_array_checkBox_id.clear();
+                checked_getId.clear();
             }
         });
         return returnView;
     }
 
-    /** Get the name of user**/
-    private void getName(DocumentReference docRef)
-    {
+    /**
+     * Get the name of user
+     **/
+    private void getName(DocumentReference docRef) {
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        String name=document.getString("name");
-                        Map_array_checkBox_id.put("User name",name);
+                        String name = document.getString("name");
+                        //Map_array_checkBox_id.put("User name",name);
                     }
                 }
             }
@@ -234,29 +310,31 @@ public class Em_Scheduling_Fragment extends Fragment {
     }
 
 
-    /** Get the current week and Enter inside Spinner*/
+    /**
+     * Get the current week and Enter inside Spinner
+     */
     private View week_func(View returnView) {
         //get the current week
         final Calendar calender = Calendar.getInstance();
-        Log.d(TAG,"Current Week:" + calender.get(Calendar.WEEK_OF_YEAR));
 
         //set the spinner in Fragment
         final Spinner spinner = returnView.findViewById(R.id.Week_spinner);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            public void onItemSelected(AdapterView<?> parent, View view,
+//                                       int position, long id) {
+//                Log.d(TAG,"spinner.getSelectedItem() "+spinner.getSelectedItem());
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
 
         // Set all week in array_Week
-        for (int i=0;i<=52;i++)
-            array_Week.add(" שבוע " + i);
+        for (int i = 0; i <= 52; i++)
+            array_Week.add("" + i);
 
         // Enter inside Spinner all week
-        ArrayAdapter<String> adapter = new ArrayAdapter<String> (getActivity(),
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, array_Week);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -269,9 +347,14 @@ public class Em_Scheduling_Fragment extends Fragment {
                 spinner.setSelection(calender.get(Calendar.WEEK_OF_YEAR));
             }
         });
+
+
         return returnView;
     }
-    /** ----------------------------------^^^--------------------------onCreateView----------------------------------------^^^----------------------------------*/
+
+    /**
+     * ----------------------------------^^^--------------------------onCreateView----------------------------------------^^^----------------------------------
+     */
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
