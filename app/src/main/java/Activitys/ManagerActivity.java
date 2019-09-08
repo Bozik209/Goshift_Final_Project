@@ -1,5 +1,8 @@
 package Activitys;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -43,6 +46,11 @@ public class ManagerActivity extends AppCompatActivity implements
 
     private static final String TAG = "ManagerActivity";
     private TextView textView_helloUser;
+
+
+    private ClipboardManager myClipboard;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +98,7 @@ public class ManagerActivity extends AppCompatActivity implements
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.MA_fragemt_container,fragment).commit();
             }
+
             else if (id == R.id.MA_Logout_button) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(ManagerActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
@@ -143,7 +152,7 @@ public class ManagerActivity extends AppCompatActivity implements
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        textView_helloUser.setText(document.getId());
+                        textView_helloUser.setText(document.getString("group_name"));
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -176,4 +185,8 @@ public class ManagerActivity extends AppCompatActivity implements
 //            }
 //        });
     }
+
+
+
+
 }
