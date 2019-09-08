@@ -104,8 +104,9 @@ public class Em_Scheduling_Fragment extends Fragment {
      * Global Array
      */
     ArrayList<String> array_Week = new ArrayList<String>();
-    Map<String, ArrayList> Map_array_checkBox_id = new HashMap<String, ArrayList>();
+    Map<String, ArrayList> Map_array_checkBox_id = new HashMap<String, ArrayList>();  // MAP עם זה הפיירביס עובד
 
+    // ממלא את החודשים
     public void full_week(Map<String, ArrayList> Map_array_checkBox_id) {
         for (int i = 0; i <= 52; i++)
             Map_array_checkBox_id.put("" + i, null);
@@ -124,7 +125,7 @@ public class Em_Scheduling_Fragment extends Fragment {
     }
 
     private View sendButton(View returnView) {
-        final ViewGroup rootView = (ViewGroup) returnView.findViewById(R.id.fragment_em__scheduling_ID).getRootView();
+        final ViewGroup rootView = (ViewGroup) returnView.findViewById(R.id.fragment_em__scheduling_ID).getRootView();  // מקבל את כל VIEW שיש בפרימנט
         final int childViewCount = rootView.getChildCount();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final Calendar calender = Calendar.getInstance();
@@ -136,12 +137,14 @@ public class Em_Scheduling_Fragment extends Fragment {
 
         Log.d(TAG, "user.getUid(): "+user.getUid());
 
-        final DocumentReference docRef = db
-                .collection("Test").document(""+user.getUid())
-                .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc");
 
-        // TODO: How remember the choice
-        /** Remember the Checkbox choice  */
+        // מקבל את הניתוב
+        final DocumentReference docRef = db
+                .collection("User").document(""+user.getUid())
+                .collection("UserCompany").document("JjzlUSOpP0IsXGHNFerd");
+
+
+        // ברגע שמעברים חודש אז הוא טוען את כל הנתונים ושם את המשמרות לפי חודש
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -206,7 +209,7 @@ public class Em_Scheduling_Fragment extends Fragment {
         });
 
 
-        final ArrayList checked_getId = new ArrayList();
+        final ArrayList checked_getId = new ArrayList(); // יכיל את כל הcheckbox (המשמרות)
 
 
         /** Chack all the view in fragment if is chackbox and if is clicked */
@@ -216,13 +219,15 @@ public class Em_Scheduling_Fragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                getName(docRef);
+                // עובר על כל checkbox
                 checked_getId.clear();
                 for (int i = 0; i < childViewCount; i++) {
                     View workWithMe = rootView.getChildAt(i);
                     if (workWithMe instanceof CheckBox) {
                         CheckBox checked = (CheckBox) workWithMe;
+                        // בודק אם הוא בחר משמרת ומוסיף
                         if (checked.isChecked()) {
+                            // שלא יכניס אותה משמרת פעמיים
                             if (!checked_getId.contains(getResources().getResourceEntryName(checked.getId()))) {
                                 checked_getId.add(getResources().getResourceEntryName(checked.getId()));
 
@@ -239,8 +244,15 @@ public class Em_Scheduling_Fragment extends Fragment {
                 // מעדכן רק את השבוע הספציפי וככה הוא לא דורס את הכול
 //                db.collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
 //                        .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc")
-                db.collection("Test").document(""+user.getUid())
-                        .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc")
+//                DocumentReference userRef = db.document("company/users");
+
+                // הכנסה לפי שבוע שבחר ומכניס את המערך של במשמרות
+                // כאן צריך לשים לב לניתוב
+                // TODO :
+                // צריך לראות איך עושים את הניתוב שיתאים לכל משתמש
+
+                db.collection("User").document(""+user.getUid())
+                        .collection("UserCompany").document("JjzlUSOpP0IsXGHNFerd")
                         .update(spinner.getSelectedItem().toString(),new ArrayList(checked_getId)).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -291,23 +303,7 @@ public class Em_Scheduling_Fragment extends Fragment {
         return returnView;
     }
 
-    /**
-     * Get the name of user
-     **/
-    private void getName(DocumentReference docRef) {
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        String name = document.getString("name");
-                        //Map_array_checkBox_id.put("User name",name);
-                    }
-                }
-            }
-        });
-    }
+
 
 
     /**
@@ -319,15 +315,6 @@ public class Em_Scheduling_Fragment extends Fragment {
 
         //set the spinner in Fragment
         final Spinner spinner = returnView.findViewById(R.id.Week_spinner);
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            public void onItemSelected(AdapterView<?> parent, View view,
-//                                       int position, long id) {
-//                Log.d(TAG,"spinner.getSelectedItem() "+spinner.getSelectedItem());
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
 
         // Set all week in array_Week
         for (int i = 0; i <= 52; i++)
