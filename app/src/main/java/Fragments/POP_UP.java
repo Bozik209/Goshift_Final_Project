@@ -43,7 +43,7 @@ public class POP_UP extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.8),(int)(height*.6));
+        getWindow().setLayout((int)(width*.8),(int)(height*.5));
     }
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -53,22 +53,31 @@ public class POP_UP extends Activity {
 
         //FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        //FirebaseUser currentCompanyID = FirebaseAuth.getInstance().getCurrentUser();
 
-
-                //  מוציא את המידע
-        DocumentReference docRef =  db.collection("Company").document(""+currentFirebaseUser.getUid());
+        //  מוציא את המידע
+        DocumentReference docRef = db.collection("Company").document(""+currentFirebaseUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
+                if (task.isSuccessful())
+                {
                     DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        textView_POPUPtext.setText("שלום " + document.getString("name"));
-                    } else {
+                    if (document.exists())
+                    {
+
+                        //textView_POPUPtext.setText(document.getString("group_name"));
+                        //textView_POPUPtext.set;
+
+                        Log.d(TAG, "BBBBBBBBBBBBBBBBB");
+
+                    }
+                    else
+                        {
                         Log.d(TAG, "No such document");
                     }
-                } else {
+                }
+                else
+                    {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
             }

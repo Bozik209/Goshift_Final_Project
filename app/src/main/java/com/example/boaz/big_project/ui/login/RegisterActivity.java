@@ -1,8 +1,10 @@
 package com.example.boaz.big_project.ui.login;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
@@ -47,6 +49,7 @@ import java.util.Map;
 import Activitys.EmployeeActivity;
 import Activitys.MainActivity;
 import Activitys.ManagerActivity;
+import Fragments.MADialog;
 import Fragments.POP_UP;
 import Fragments.Register_EM_Fragment;
 import Fragments.Register_MA_Fragment;
@@ -146,26 +149,28 @@ public class RegisterActivity extends AppCompatActivity implements
 
         //keep an android user logged in
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // User is signed in
-            Toast.makeText(RegisterActivity.this, "login as "+user.getEmail(), Toast.LENGTH_SHORT).show();
-
-            if (IsManger){
-                Intent i = new Intent(RegisterActivity.this, ManagerActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
-            }
-            else {
-                Intent i = new Intent(RegisterActivity.this, EmployeeActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
-            }
-
-
-        } else {
-            // User is signed out
-            Log.d(BATTERY_SERVICE, "onAuthStateChanged:signed_out");
-        }
+//        if (user != null) {
+//            // User is signed in
+//            Toast.makeText(RegisterActivity.this, "login as "+user.getEmail(), Toast.LENGTH_SHORT).show();
+//
+//            if (IsManger){
+//
+//
+//                Intent i = new Intent(RegisterActivity.this, ManagerActivity.class);
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(i);
+//            }
+//            else {
+//                Intent i = new Intent(RegisterActivity.this, EmployeeActivity.class);
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(i);
+//            }
+//
+//
+//        } else {
+//            // User is signed out
+//            Log.d(BATTERY_SERVICE, "onAuthStateChanged:signed_out");
+//        }
     }
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
@@ -252,11 +257,12 @@ public class RegisterActivity extends AppCompatActivity implements
                                             Log.w(TAG, "Error writing document", e);
                                         }
                                     });
-                            db.collection("User").document(""+currentFirebaseUser.getUid())
-                                    .collection("UserCompany").add(userCompanyMAP);
+                            db.collection("User").document(""+currentFirebaseUser.getUid()).collection("UserCompany")
+                                    .add(userCompanyMAP);
 
                             db.collection("Company").document(""+currentFirebaseUser.getUid())
-                                    .set(userCompanyMAP).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    .set(userCompanyMAP).addOnSuccessListener(
+                                    new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Log.d(TAG, "DocumentSnapshot COMPANY successfully written!");
@@ -272,8 +278,6 @@ public class RegisterActivity extends AppCompatActivity implements
 
                             if (IsManger) {
 
-//                                Intent x = new Intent(getApplicationContext(), POP_UP.class);
-//                                startActivity(x);
 
                                 Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
                                 startActivity(i);
