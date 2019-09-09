@@ -20,9 +20,10 @@
         android:layout_marginTop="280dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_email"
+        android:gravity="center"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        android:textColorHint="#ffff"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,9 +38,10 @@
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
+        android:gravity="center"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        android:textColorHint="#ffff"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
@@ -57,7 +59,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rectangle4"
-        android:text="REGISTER"
+        android:text="הרשמה"
+        android:textSize="25dp"
         android:onClick ="onclickRegister"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,13 +81,14 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/rectangle4"
         android:onClick="clockLogin"
-        android:text="Login"
+        android:text="התחברות"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.662" />
 
     <ProgressBar
         android:id="@+id/loading"
