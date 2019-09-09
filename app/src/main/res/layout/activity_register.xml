@@ -8,7 +8,9 @@
     android:orientation="vertical"
     tools:context=".ui.login.RegisterActivity"
     android:background="@drawable/homebackgrond"
-    android:gravity="center">
+    android:gravity="center"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,6 +93,5 @@
         android:layout_height="60dp"
         android:text="הרשמה"
         android:onClick="Register_func"
-        android:layout_marginBottom="20dp"
         android:textSize="25dp"/>
 </LinearLayout>
