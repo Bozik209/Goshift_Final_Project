@@ -195,7 +195,15 @@ public class RegisterActivity extends AppCompatActivity implements
         final String password = passwordEditText.getText().toString();
         // FullName
         TextView nameEditText = (TextView) findViewById(R.id.Register_FullName);
-        final String name = nameEditText.getText().toString();
+        final String fullName = nameEditText.getText().toString();
+        // Phone
+        TextView phoneEditText = (TextView) findViewById(R.id.Register_UserPhone);
+        final String strUserphone = phoneEditText.getText().toString();
+        final int phone = Integer.parseInt(strUserphone);
+        // User ID
+        TextView UserIDEditText = (TextView) findViewById(R.id.Register_UserID);
+        final String strUserID = UserIDEditText.getText().toString();
+        final int userID = Integer.parseInt(strUserID);
 
         //check if is manger
         final boolean IsManger=((CheckBox) findViewById(R.id.checkBox_Ma)).isChecked();
@@ -227,21 +235,26 @@ public class RegisterActivity extends AppCompatActivity implements
 
                             Map<String, Object> userMAP = new HashMap<>();
                             Map<String, Object> userCompanyMAP = new HashMap<>();
-                            userMAP.put("name", name);
+                            userMAP.put("name", fullName);
                             userMAP.put("mail", userMail);
                             userMAP.put("password", password);
+                            userMAP.put("phone", phone);
+                            userMAP.put("RealUserID",userID);
                             userMAP.put("isMang", IsManger);
+                            userCompanyMAP.put("group_name", group);
 
-                            //check if is manger
-                            if (IsManger) {
 
-                               // userCompanyMAP.put("ID_group", db.collection("Company").document(""+currentFirebaseUser.getUid()));
-                                userCompanyMAP.put("group_name", group);
+//                            //check if is manger
+//                            if (IsManger) {
+//
+//                               // userCompanyMAP.put("ID_group", db.collection("Company").document(""+currentFirebaseUser.getUid()));
+//                                userCompanyMAP.put("group_name", group);
+//
+//                            }
+//                            else{
+//                                userCompanyMAP.put("group_name", group);
+//                            }
 
-                            }
-                            else{
-                                userCompanyMAP.put("group_name", group);
-                            }
 
                             db.collection("User").document(""+currentFirebaseUser.getUid())
                                     .set(userMAP)
@@ -278,12 +291,8 @@ public class RegisterActivity extends AppCompatActivity implements
 
                             if (IsManger) {
 
-
                                 Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
                                 startActivity(i);
-
-
-
 
                             }
                             else {
@@ -294,10 +303,8 @@ public class RegisterActivity extends AppCompatActivity implements
 
                         }
                         else {
-
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getApplicationContext(), "מייל קיים במערכת", Toast.LENGTH_SHORT).show();
-
                             //Toast.makeText(RegisterActivity.this, "Authentication failed" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }

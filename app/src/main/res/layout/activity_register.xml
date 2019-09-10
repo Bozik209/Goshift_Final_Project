@@ -15,10 +15,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.8"
+        android:layout_weight="0.3"
         android:orientation="vertical"
         android:gravity="center">
-
 
         <EditText
             android:id="@+id/Register_FullName"
@@ -29,6 +28,31 @@
             android:hint="שם מלא"
             android:textColorHint="#ffff"
             android:inputType="textPersonName"
+            android:textSize="25dp"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/Register_UserID"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="תעודת זהות"
+            android:textColorHint="#ffff"
+            android:inputType="number"
+            android:textSize="25dp"
+            android:gravity="center"/>
+
+
+        <EditText
+            android:id="@+id/Register_UserPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="מספר נייד"
+            android:textColorHint="#ffff"
+            android:inputType="number"
             android:textSize="25dp"
             android:gravity="center"/>
 
