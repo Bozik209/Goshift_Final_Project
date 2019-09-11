@@ -98,7 +98,6 @@ public class ManagerActivity extends AppCompatActivity implements
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.MA_fragemt_container,fragment).commit();
             }
-
             else if (id == R.id.MA_Logout_button) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(ManagerActivity.this, "Log Out", Toast.LENGTH_SHORT).show();

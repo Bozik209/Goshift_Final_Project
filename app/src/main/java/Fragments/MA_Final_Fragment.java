@@ -3,12 +3,35 @@ package Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.boaz.big_project.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -62,12 +85,91 @@ public class MA_Final_Fragment extends Fragment {
         }
     }
 
+    /**
+     * -----------------------------\/\/\/-------------------------------onCreateView-------------------------------\/\/\/-----------------------------------------
+     */
+
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    static final ArrayList checked_getId = new ArrayList(); // יכיל את כל הcheckbox (המשמרות)
+    final CollectionReference docRef = db
+            .collection("User");
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ma__final_, container, false);
+        View v = inflater.inflate(R.layout.fragment_ma__final_, container, false);
+
+        spinner_test(v);
+
+        return v;
+        //return inflater.inflate(R.layout.fragment_ma__final_, container, false);
     }
+
+    private View spinner_test(final View v) {
+
+        docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+
+                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    // check if is Employee
+                    if (documentSnapshot.get("isMang").toString().equals("false")) {
+                        // Run again on DB
+                        db.collection("User")
+                                .document("" + documentSnapshot.getId())
+                                .collection("UserCompany").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    // Run on all week
+                                    for (int i = 0; i <= 52; i++) {
+                                        documentSnapshot.get("" + i);
+                                        // Save the week shift, if there are shifts
+                                        if (documentSnapshot.get("" + i) != null) {
+                                            checked_getId.add(documentSnapshot.get("" + i));
+                                        }
+                                    }
+                                }
+                                // Sand to Spinner
+                                Send2Spinner(checked_getId, v);
+                            }
+                        });
+                    }
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+
+        String[] values =
+                {"Time at Residence", "Under 6 months", "6-12 months", "1-2 years", "2-4 years", "4-8 years", "8-15 years", "Over 15 years",};
+//        Spinner spinner = (Spinner) v.findViewById(R.id.spinner_MA_test);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
+//        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+//        spinner.setAdapter(adapter);
+        Log.d(TAG, "2 checked_getId " + checked_getId);
+
+        return v;
+    }
+
+    public void Send2Spinner(ArrayList Checked_getId, View v) {
+        Spinner spinner = (Spinner) v.findViewById(R.id.spinner_MA_test);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, (List<String>) Checked_getId.get(0));
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
+    }
+
+
+    /**
+     * ----------------------------------^^^--------------------------onCreateView----------------------------------------^^^----------------------------------
+     */
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
