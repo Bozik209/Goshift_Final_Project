@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +93,8 @@ public class MA_Final_Fragment extends Fragment {
 
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static final ArrayList checked_getId = new ArrayList(); // יכיל את כל הcheckbox (המשמרות)
+    //static final ArrayList checked_getId = new ArrayList(); // יכיל את כל הcheckbox (המשמרות)
+    static final List<String> checked_getId = new ArrayList<String>();
     final CollectionReference docRef = db
             .collection("User");
 
@@ -125,13 +128,9 @@ public class MA_Final_Fragment extends Fragment {
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                     // Run on all week
-                                    for (int i = 0; i <= 52; i++) {
-                                        documentSnapshot.get("" + i);
-                                        // Save the week shift, if there are shifts
-                                        if (documentSnapshot.get("" + i) != null) {
-                                            checked_getId.add(documentSnapshot.get("" + i));
+                                    if (documentSnapshot.get("37") != null) {
+                                            checked_getId.add(documentSnapshot.get("37").toString());
                                         }
-                                    }
                                 }
                                 // Sand to Spinner
                                 Send2Spinner(checked_getId, v);
@@ -146,24 +145,21 @@ public class MA_Final_Fragment extends Fragment {
 
             }
         });
-
-
-        String[] values =
-                {"Time at Residence", "Under 6 months", "6-12 months", "1-2 years", "2-4 years", "4-8 years", "8-15 years", "Over 15 years",};
-//        Spinner spinner = (Spinner) v.findViewById(R.id.spinner_MA_test);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
-//        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-//        spinner.setAdapter(adapter);
-        Log.d(TAG, "2 checked_getId " + checked_getId);
-
         return v;
     }
 
-    public void Send2Spinner(ArrayList Checked_getId, View v) {
+    public void Send2Spinner(List<String> Checked_getId, View v) {
+        Log.d(TAG, "Send2Spinner: " + Checked_getId);
+        Log.d(TAG, "Send2Spinner2: " + Checked_getId.get(0));
+        Log.d(TAG, "Send2Spinner3: " + Checked_getId.size());
+        Log.d(TAG, "Send2Spinner4: " + Checked_getId.toArray());
+        Log.d(TAG, "Send2Spinner5: " + Checked_getId.toArray().length);
+        Log.d(TAG, "Send2Spinner6: " + Checked_getId.toArray().toString());
+
         Spinner spinner = (Spinner) v.findViewById(R.id.spinner_MA_test);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, (List<String>) Checked_getId.get(0));
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        spinner.setAdapter(adapter);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,  Checked_getId);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
     }
 
 

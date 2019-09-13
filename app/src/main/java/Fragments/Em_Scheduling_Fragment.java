@@ -135,14 +135,21 @@ public class Em_Scheduling_Fragment extends Fragment {
 //                .collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
 //                .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc");
 
-        Log.d(TAG, "user.getUid(): "+user.getUid());
+        Log.d(TAG, "user.getUid(): " + user.getUid());
 
 
         // מקבל את הניתוב
+//        final DocumentReference docRef = db
+//                .collection("User").document(""+user.getUid())
+//                .collection("UserCompany").document("JjzlUSOpP0IsXGHNFerd");
         final DocumentReference docRef = db
-                .collection("User").document(""+user.getUid())
-                .collection("UserCompany").document("JjzlUSOpP0IsXGHNFerd");
+                .collection("User").document("" + user.getUid())
+                .collection("UserCompany").document();
 
+        //DocumentReference userRef =db.document("/User/EOsPbHiRGZTG3Pd2jVyyNVFQSGZ2/UserCompany/");
+
+        Log.d(TAG, "docRef: " + docRef.getPath());
+        //Log.d(TAG, "userRef: "+ userRef.getPath());
 
         // ברגע שמעברים חודש אז הוא טוען את כל הנתונים ושם את המשמרות לפי חודש
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -251,9 +258,9 @@ public class Em_Scheduling_Fragment extends Fragment {
                 // TODO :
                 // צריך לראות איך עושים את הניתוב שיתאים לכל משתמש
 
-                db.collection("User").document(""+user.getUid())
-                        .collection("UserCompany").document("JjzlUSOpP0IsXGHNFerd")
-                        .update(spinner.getSelectedItem().toString(),new ArrayList(checked_getId)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("User").document("" + user.getUid())
+                        .collection("UserCompany").document()
+                        .update(spinner.getSelectedItem().toString(), new ArrayList(checked_getId)).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + user.getUid());
@@ -302,8 +309,6 @@ public class Em_Scheduling_Fragment extends Fragment {
         });
         return returnView;
     }
-
-
 
 
     /**

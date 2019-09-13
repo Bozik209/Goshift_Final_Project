@@ -43,6 +43,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -243,7 +245,8 @@ public class RegisterActivity extends AppCompatActivity implements
                             userMAP.put("isMang", IsManger);
                             userCompanyMAP.put("group_name", group);
 
-
+                            for (int i=1;i<=52;i++)
+                                userCompanyMAP.put(String.valueOf(i),null);
 //                            //check if is manger
 //                            if (IsManger) {
 //
