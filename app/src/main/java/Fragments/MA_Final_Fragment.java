@@ -118,13 +118,13 @@ public class MA_Final_Fragment extends Fragment {
             @Override
             public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
 
-                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                for (final DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     // check if is Employee
                     if (documentSnapshot.get("isMang").toString().equals("false")) {
                         // Run again on DB
 
                         db.collection("User").document("" + documentSnapshot.getId())
-                                .collection("UserCompany").document("בועז-המלך").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                .collection("UserCompany").document("Shifts_week").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
@@ -132,8 +132,10 @@ public class MA_Final_Fragment extends Fragment {
                                     Log.d(TAG, "document.getData => " + document.getData());
                                     Log.d(TAG, "document.getData => " + document.get("38"));
                                     if (document.get("38") != null) {
-                                            checked_getId.add(document.get("38").toString());
-                                        }
+                                        checked_getId.add(document.get("38").toString());
+                                        Log.d(TAG, "documentSnapshot "+documentSnapshot.get("name"));
+
+                                    }
                                 } else {
                                     Log.w(TAG, "Error getting documents.", task.getException());
                                 }

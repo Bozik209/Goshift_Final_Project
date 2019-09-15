@@ -278,7 +278,7 @@ public class RegisterActivity extends AppCompatActivity implements
                             //כדי להגדיר את הID של הDOCUMENT צריך לשנות את "בועז-המלך"
                             db.collection("User").document(""+currentFirebaseUser.getUid())
                                     .collection("UserCompany")
-                                    .document("בועז-המלך").set(userCompanyMAP);
+                                    .document("Shifts_week").set(userCompanyMAP);
 
                             db.collection("Company").document(""+currentFirebaseUser.getUid())
                                     .set(userCompanyMAP).addOnSuccessListener(

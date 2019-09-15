@@ -258,7 +258,7 @@ public class Em_Scheduling_Fragment extends Fragment {
                 // TODO :-------------------------
                 // צריך לראות איך עושים את הניתוב שיתאים לכל משתמש
                 db.collection("User").document("" + user.getUid())
-                        .collection("UserCompany").document("בועז-המלך")
+                        .collection("UserCompany").document("Shifts_week")
                         .update(spinner.getSelectedItem().toString(), new ArrayList(checked_getId)).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
