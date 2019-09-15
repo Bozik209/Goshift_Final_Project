@@ -243,6 +243,7 @@ public class RegisterActivity extends AppCompatActivity implements
                             userMAP.put("phone", phone);
                             userMAP.put("RealUserID",userID);
                             userMAP.put("isMang", IsManger);
+                            userMAP.put("HourlyRate",29.12);
                             userCompanyMAP.put("group_name", group);
 
                             for (int i=1;i<=52;i++)
@@ -273,8 +274,9 @@ public class RegisterActivity extends AppCompatActivity implements
                                             Log.w(TAG, "Error writing document", e);
                                         }
                                     });
-                            db.collection("User").document(""+currentFirebaseUser.getUid()).collection("UserCompany")
-                                    .add(userCompanyMAP);
+
+                            //כדי להגדיר את הID של הDOCUMENT צריך לשנות את "בועז-המלך"
+                            db.collection("User").document(""+currentFirebaseUser.getUid()).collection("UserCompany").document("בועז-המלך").set(userCompanyMAP);
 
                             db.collection("Company").document(""+currentFirebaseUser.getUid())
                                     .set(userCompanyMAP).addOnSuccessListener(
