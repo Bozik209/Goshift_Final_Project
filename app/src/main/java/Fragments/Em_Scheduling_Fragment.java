@@ -255,11 +255,10 @@ public class Em_Scheduling_Fragment extends Fragment {
 
                 // הכנסה לפי שבוע שבחר ומכניס את המערך של במשמרות
                 // כאן צריך לשים לב לניתוב
-                // TODO :
+                // TODO :-------------------------
                 // צריך לראות איך עושים את הניתוב שיתאים לכל משתמש
-
                 db.collection("User").document("" + user.getUid())
-                        .collection("UserCompany").document()
+                        .collection("UserCompany").document("בועז-המלך")
                         .update(spinner.getSelectedItem().toString(), new ArrayList(checked_getId)).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

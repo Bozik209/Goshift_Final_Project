@@ -97,6 +97,9 @@ public class MA_Final_Fragment extends Fragment {
     static final List<String> checked_getId = new ArrayList<String>();
     final CollectionReference docRef = db
             .collection("User");
+    //final CollectionReference docRef1 = db.collection("/User/wK9K3p7mtrbwlTc2VbmkduKoxkm2/UserCompany/בועז-המלך");
+
+    //final DocumentReference userRefNEW = db.document("User/wK9K3p7mtrbwlTc2VbmkduKoxkm2/UserCompany/בועז-המלך");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -111,31 +114,49 @@ public class MA_Final_Fragment extends Fragment {
     }
 
     private View spinner_test(final View v) {
-
         docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+            public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
 
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     // check if is Employee
                     if (documentSnapshot.get("isMang").toString().equals("false")) {
                         // Run again on DB
-                        db.collection("User")
-                                .document("" + documentSnapshot.getId())
-                                .collection("UserCompany").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+
+                        db.collection("User").document("" + documentSnapshot.getId())
+                                .collection("UserCompany").document("בועז-המלך").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                    // Run on all week
-                                    if (documentSnapshot.get("37") != null) {
-                                            checked_getId.add(documentSnapshot.get("37").toString());
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Log.d(TAG, "document.getData => " + document.getData());
+                                    Log.d(TAG, "document.getData => " + document.get("38"));
+                                    if (document.get("38") != null) {
+                                            checked_getId.add(document.get("38").toString());
                                         }
+                                } else {
+                                    Log.w(TAG, "Error getting documents.", task.getException());
                                 }
-                                // Sand to Spinner
                                 Send2Spinner(checked_getId, v);
                             }
                         });
+
+//                        db.collection("User")
+//                                .document("" + documentSnapshot.getId())
+//                                .collection("UserCompany").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+//                                    Log.d(TAG, "documentSnapshot"+documentSnapshot);
+//                                    // Run on all week
+//                                    if (documentSnapshot.get("37") != null) {
+//                                            checked_getId.add(documentSnapshot.get("37").toString());
+//                                        }
+//                                }
+//                                // Sand to Spinner
+//                                Send2Spinner(checked_getId, v);
+//                            }
+//                        });
                     }
                 }
             }
@@ -145,19 +166,54 @@ public class MA_Final_Fragment extends Fragment {
 
             }
         });
+
+
+//        docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//            @Override
+//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+//
+//                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+//                    // check if is Employee
+//                    if (documentSnapshot.get("isMang").toString().equals("false")) {
+//                        // Run again on DB
+//                        db.collection("User")
+//                                .document("" + documentSnapshot.getId())
+//                                .collection("UserCompany").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+//                                    Log.d(TAG, "documentSnapshot"+documentSnapshot);
+//                                    // Run on all week
+//                                    if (documentSnapshot.get("37") != null) {
+//                                            checked_getId.add(documentSnapshot.get("37").toString());
+//                                        }
+//                                }
+//                                // Sand to Spinner
+//                                Send2Spinner(checked_getId, v);
+//                            }
+//                        });
+//                    }
+//                }
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//
+//            }
+//        });
         return v;
     }
 
     public void Send2Spinner(List<String> Checked_getId, View v) {
-        Log.d(TAG, "Send2Spinner: " + Checked_getId);
-        Log.d(TAG, "Send2Spinner2: " + Checked_getId.get(0));
-        Log.d(TAG, "Send2Spinner3: " + Checked_getId.size());
-        Log.d(TAG, "Send2Spinner4: " + Checked_getId.toArray());
-        Log.d(TAG, "Send2Spinner5: " + Checked_getId.toArray().length);
-        Log.d(TAG, "Send2Spinner6: " + Checked_getId.toArray().toString());
+//        Log.d(TAG, "Send2Spinner: " + Checked_getId);
+//        Log.d(TAG, "Send2Spinner3: " + Checked_getId.size());
+//        Log.d(TAG, "Send2Spinner4: " + Checked_getId.toArray());
+//        Log.d(TAG, "Send2Spinner5: " + Checked_getId.toArray().length);
+//        Log.d(TAG, "Send2Spinner6: " + Checked_getId.toArray().toString());
 
         Spinner spinner = (Spinner) v.findViewById(R.id.spinner_MA_test);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,  Checked_getId);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, Checked_getId);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
     }
