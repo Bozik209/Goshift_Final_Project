@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.login.RegisterActivity"
-    android:background="@drawable/homebackgrond"
+    android:background="@drawable/dark_blue_background"
     android:gravity="center"
     android:paddingTop="20dp"
     android:paddingBottom="20dp">

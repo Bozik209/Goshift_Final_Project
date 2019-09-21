@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="Fragments.Em_Scheduling_Fragment"
-    android:background="@drawable/homebackgrond">
-
+    android:background="@drawable/dark_blue_background"
+    >
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayoutCompat"
         android:layout_width="match_parent"

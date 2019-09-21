@@ -40,12 +40,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import Activitys.EmployeeActivity;
@@ -60,14 +66,19 @@ public class RegisterActivity extends AppCompatActivity implements
         Register_EM_Fragment.Register_EM_Fragment_InteractionListener ,
         Register_MA_Fragment.Register_MA_Fragment_InteractionListener {
 
+    private List<String> ListAllCompanies = new ArrayList();
     private FirebaseAuth mAuth;
     private LoginViewModel loginViewModel;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "RegisterActivity";
+
+
     final boolean IsManger=false;
+    int cntListCompant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        InsertAllCompayToList();
         super.onCreate(savedInstanceState);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -149,30 +160,8 @@ public class RegisterActivity extends AppCompatActivity implements
 
 
 
-        //keep an android user logged in
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user != null) {
-//            // User is signed in
-//            Toast.makeText(RegisterActivity.this, "login as "+user.getEmail(), Toast.LENGTH_SHORT).show();
-//
-//            if (IsManger){
-//
-//
-//                Intent i = new Intent(RegisterActivity.this, ManagerActivity.class);
-//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(i);
-//            }
-//            else {
-//                Intent i = new Intent(RegisterActivity.this, EmployeeActivity.class);
-//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(i);
-//            }
-//
-//
-//        } else {
-//            // User is signed out
-//            Log.d(BATTERY_SERVICE, "onAuthStateChanged:signed_out");
-//        }
+
+
     }
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
@@ -186,9 +175,32 @@ public class RegisterActivity extends AppCompatActivity implements
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 
+    public void InsertAllCompayToList(){
+
+        db.collection("Company")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ListAllCompanies.add(document.getId());
+
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+    }
+
+
     public void Register_func(View view) {
+
         // TODO: organize the code
-        String group_name_String=null;
+        String group_name_String = null;
         //Email
         TextView emailEditText = (TextView) findViewById(R.id.Register_Email);
         final String userMail = emailEditText.getText().toString();
@@ -206,23 +218,32 @@ public class RegisterActivity extends AppCompatActivity implements
         TextView UserIDEditText = (TextView) findViewById(R.id.Register_UserID);
         final String strUserID = UserIDEditText.getText().toString();
         final int userID = Integer.parseInt(strUserID);
-
         //check if is manger
-        final boolean IsManger=((CheckBox) findViewById(R.id.checkBox_Ma)).isChecked();
-
+        final boolean IsManger = ((CheckBox) findViewById(R.id.checkBox_Ma)).isChecked();
         if (IsManger) {
-
             TextView CompanyName = (TextView) findViewById(R.id.MA_CompanyName);
             group_name_String = CompanyName.getText().toString();
-        }
-
-        else  {
+        } else {
             //group name
             TextView group_name = (TextView) findViewById(R.id.EM_CopiedCompanyID);
             group_name_String = group_name.getText().toString();
         }
+        final String group = group_name_String;
 
-        final String group=group_name_String;
+        for (int cntListCompant = 0; cntListCompant <= ListAllCompanies.size(); cntListCompant++) {
+            if (ListAllCompanies.get(cntListCompant).equals(group)) {
+                break;
+            }
+            else{
+                if (cntListCompant+1 == ListAllCompanies.size())
+                {
+                    Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                    startActivity(i);
+                    Toast.makeText(this, "ארגון לא קיים!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
 
         mAuth.createUserWithEmailAndPassword(userMail, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -230,7 +251,7 @@ public class RegisterActivity extends AppCompatActivity implements
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(RegisterActivity.this, "Authentication success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "הרשמה בוצעה בהצלחה!!!", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
                             //FirebaseAuth currentFirebaseCompany = FirebaseAuth.getInstance();
@@ -280,23 +301,23 @@ public class RegisterActivity extends AppCompatActivity implements
                                     .collection("UserCompany")
                                     .document("Shifts_week").set(userCompanyMAP);
 
-                            db.collection("Company").document(""+currentFirebaseUser.getUid())
-                                    .set(userCompanyMAP).addOnSuccessListener(
-                                    new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot COMPANY successfully written!");
-                                }
-                            })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w(TAG, "Error writing document", e);
-                                        }
-                                    });
-
 
                             if (IsManger) {
+
+                                db.collection("Company").document(""+currentFirebaseUser.getUid())
+                                        .set(userCompanyMAP).addOnSuccessListener(
+                                        new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "DocumentSnapshot COMPANY successfully written!");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error writing document", e);
+                                            }
+                                        });
 
                                 Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
                                 startActivity(i);

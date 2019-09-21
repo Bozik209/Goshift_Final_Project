@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:id="@+id/MA_fragemt_container"
     tools:context="Activitys.ManagerActivity"
-    android:background="@drawable/homebackgrond">
-
+    android:background="@drawable/dark_blue_background"
+    >
     <!-- TODO: find how enter toolbar in all layout-->
 
     <LinearLayout

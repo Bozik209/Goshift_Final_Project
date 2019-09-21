@@ -5,7 +5,7 @@
     android:id="@+id/fragment_em__scheduling_ID"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/homebackgrond"
+    android:background="@drawable/dark_blue_background"
     tools:context="Fragments.Em_Scheduling_Fragment">
 
     <!--<android.support.constraint.ConstraintLayout-->
