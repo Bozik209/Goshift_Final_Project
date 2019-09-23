@@ -29,6 +29,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -93,13 +94,11 @@ public class MA_Final_Fragment extends Fragment {
 
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    //static final ArrayList checked_getId = new ArrayList(); // יכיל את כל הcheckbox (המשמרות)
     static final List<String> checked_getId = new ArrayList<String>();
     final CollectionReference docRef = db
             .collection("User");
-    //final CollectionReference docRef1 = db.collection("/User/wK9K3p7mtrbwlTc2VbmkduKoxkm2/UserCompany/בועז-המלך");
-
-    //final DocumentReference userRefNEW = db.document("User/wK9K3p7mtrbwlTc2VbmkduKoxkm2/UserCompany/בועז-המלך");
+    final Calendar calender = Calendar.getInstance(); // calender.get(Calendar.WEEK_OF_YEAR)
+    final String Current_Week = String.valueOf(calender.get(Calendar.WEEK_OF_YEAR));
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -114,6 +113,8 @@ public class MA_Final_Fragment extends Fragment {
     }
 
     private View spinner_test(final View v) {
+        final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
+
         docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
@@ -129,36 +130,21 @@ public class MA_Final_Fragment extends Fragment {
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot document = task.getResult();
-                                    Log.d(TAG, "document.getData => " + document.getData());
-                                    Log.d(TAG, "document.getData => " + document.get("38"));
-                                    if (document.get("38") != null) {
-                                        checked_getId.add(document.get("38").toString());
-                                        Log.d(TAG, "documentSnapshot "+documentSnapshot.get("name"));
+                                    Log.d(TAG, "1document.getData => " + document.getData());
+                                    Log.d(TAG, "2document.getData => " + document.get(Current_Week));
+                                    if (document.get(Current_Week) != null) {
+                                        checked_getId.add(document.get(Current_Week).toString());
+                                        Log.d(TAG, "documentSnapshot " + documentSnapshot.get("name"));
 
                                     }
                                 } else {
                                     Log.w(TAG, "Error getting documents.", task.getException());
                                 }
-                                Send2Spinner(checked_getId, v);
+                                Send2Spinner(checked_getId, v, rootView);
                             }
                         });
 
-//                        db.collection("User")
-//                                .document("" + documentSnapshot.getId())
-//                                .collection("UserCompany").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-//                                    Log.d(TAG, "documentSnapshot"+documentSnapshot);
-//                                    // Run on all week
-//                                    if (documentSnapshot.get("37") != null) {
-//                                            checked_getId.add(documentSnapshot.get("37").toString());
-//                                        }
-//                                }
-//                                // Sand to Spinner
-//                                Send2Spinner(checked_getId, v);
-//                            }
-//                        });
+
                     }
                 }
             }
@@ -170,54 +156,58 @@ public class MA_Final_Fragment extends Fragment {
         });
 
 
-//        docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//            @Override
-//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-//
-//                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-//                    // check if is Employee
-//                    if (documentSnapshot.get("isMang").toString().equals("false")) {
-//                        // Run again on DB
-//                        db.collection("User")
-//                                .document("" + documentSnapshot.getId())
-//                                .collection("UserCompany").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-//                                    Log.d(TAG, "documentSnapshot"+documentSnapshot);
-//                                    // Run on all week
-//                                    if (documentSnapshot.get("37") != null) {
-//                                            checked_getId.add(documentSnapshot.get("37").toString());
-//                                        }
-//                                }
-//                                // Sand to Spinner
-//                                Send2Spinner(checked_getId, v);
-//                            }
-//                        });
-//                    }
-//                }
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//
-//            }
-//        });
         return v;
     }
 
-    public void Send2Spinner(List<String> Checked_getId, View v) {
-//        Log.d(TAG, "Send2Spinner: " + Checked_getId);
-//        Log.d(TAG, "Send2Spinner3: " + Checked_getId.size());
-//        Log.d(TAG, "Send2Spinner4: " + Checked_getId.toArray());
-//        Log.d(TAG, "Send2Spinner5: " + Checked_getId.toArray().length);
-//        Log.d(TAG, "Send2Spinner6: " + Checked_getId.toArray().toString());
+    public void Send2Spinner(List<String> Checked_getId, View v, ViewGroup rootView) {
+        final int childViewCount = rootView.getChildCount();
 
-        Spinner spinner = (Spinner) v.findViewById(R.id.spinner_MA_test);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, Checked_getId);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
+        // give all ids
+        for (int i = 0; i < childViewCount; i++) {
+            View workWithMe = rootView.getChildAt(i);
+            // chack what is Spinner
+            if (workWithMe instanceof Spinner) {
+                Spinner spinnerCheack = (Spinner) workWithMe;
+                String IDname = getResources().getResourceEntryName(spinnerCheack.getId());
+                int IDnumber=spinnerCheack.getId();
+                // give all the shifts
+                for (String Shifts : Checked_getId) {
+                    // Check the shift vs the Spinner ID
+                    if(Shifts.contains(IDname))
+                    {
+                        //TODO: get the name and enter to spiner
+                        // Enter the name of Employees to the correct Spinner
+                        String[] items = new String[]{"gg","ff"};
+                        getName();
+                        //items[0] = IDname;
+                        Spinner spinner = (Spinner) v.findViewById(IDnumber);
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
+                        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner.setAdapter(dataAdapter);
+                    }
+
+                }
+            }
+        }
+
+
+
+    }
+
+    private void getName() {
+        db.collection("User").document("" + user.getUid())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.d(TAG, "documentSnapshot: "+documentSnapshot.get("name"));
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
     }
 
 
