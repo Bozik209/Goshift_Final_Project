@@ -56,6 +56,8 @@ public class MA_Final_Fragment extends Fragment {
     private String mParam2;
 
     private MA_Final_FIListener mListener;
+    //private ArrayList<String> NameArray;
+    private ArrayList<String> NameArray= new ArrayList<>();
 
     public MA_Final_Fragment() {
         // Required empty public constructor
@@ -94,7 +96,7 @@ public class MA_Final_Fragment extends Fragment {
 
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static final List<String> checked_getId = new ArrayList<String>();
+    final List<String> checked_getId = new ArrayList<String>();
     final CollectionReference docRef = db
             .collection("User");
     final Calendar calender = Calendar.getInstance(); // calender.get(Calendar.WEEK_OF_YEAR)
@@ -118,33 +120,72 @@ public class MA_Final_Fragment extends Fragment {
         docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
+                checked_getId.add(0,"");
+                checked_getId.add(1,"");
 
                 for (final DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     // check if is Employee
                     if (documentSnapshot.get("isMang").toString().equals("false")) {
                         // Run again on DB
+                        Log.d(TAG, "documentSnapshot.get(\"name\"): " + documentSnapshot.get("name"));
 
                         db.collection("User").document("" + documentSnapshot.getId())
                                 .collection("UserCompany").document("Shifts_week").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
+                                    checked_getId.add(0,"");
+                                    checked_getId.add(1,"");
                                     DocumentSnapshot document = task.getResult();
-                                    Log.d(TAG, "1document.getData => " + document.getData());
-                                    Log.d(TAG, "2document.getData => " + document.get(Current_Week));
                                     if (document.get(Current_Week) != null) {
-                                        checked_getId.add(document.get(Current_Week).toString());
-                                        Log.d(TAG, "documentSnapshot " + documentSnapshot.get("name"));
-
+                                        checked_getId.set(1,document.get(Current_Week).toString());
                                     }
                                 } else {
                                     Log.w(TAG, "Error getting documents.", task.getException());
                                 }
-                                Send2Spinner(checked_getId, v, rootView);
+                                checked_getId.set(0, documentSnapshot.get("name").toString());
+                                //Send2Spinner(checked_getId, v, rootView);
+
+
+                                Spinner spinner=null;
+                                final int childViewCount = rootView.getChildCount();
+                                // give all ids
+                                for (int i = 0; i < childViewCount; i++) {
+                                    View workWithMe = rootView.getChildAt(i);
+                                    // chack what is Spinner
+                                    if (workWithMe instanceof Spinner) {
+                                        Spinner spinnerCheack = (Spinner) workWithMe;
+                                        String IDname = getResources().getResourceEntryName(spinnerCheack.getId());
+                                        int IDnumber = spinnerCheack.getId();
+                                        // give all the shifts
+                                        for (String Shifts : checked_getId) {
+
+                                            // Check the shift vs the Spinner ID
+                                            if (Shifts.contains(IDname)) {
+                                                //TODO: get the name and enter to spiner
+                                                // Enter the name of Employees to the correct Spinner
+                                                //Log.d(TAG, "Checked_getId.get(0): | "+Checked_getId.get(0) +" |Checked_getId.get(1):| "+Checked_getId.get(1));
+
+                                                if (!NameArray.contains(checked_getId.get(0))) {
+                                                    NameArray.add(checked_getId.get(0));
+                                                }
+                                                Log.d(TAG, "NameArray: "+NameArray);
+                                                spinner = (Spinner) v.findViewById(IDnumber);
+
+                                                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,NameArray);
+                                                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                                                spinner.setAdapter(dataAdapter);
+                                            }
+
+                                        }
+
+                                    }
+                                }
+                                checked_getId.clear();
                             }
+
                         });
-
-
                     }
                 }
             }
@@ -161,6 +202,8 @@ public class MA_Final_Fragment extends Fragment {
 
     public void Send2Spinner(List<String> Checked_getId, View v, ViewGroup rootView) {
         final int childViewCount = rootView.getChildCount();
+        //final ArrayList<String> NameArray= new ArrayList<>();
+        Spinner spinner=null;
 
         // give all ids
         for (int i = 0; i < childViewCount; i++) {
@@ -169,48 +212,33 @@ public class MA_Final_Fragment extends Fragment {
             if (workWithMe instanceof Spinner) {
                 Spinner spinnerCheack = (Spinner) workWithMe;
                 String IDname = getResources().getResourceEntryName(spinnerCheack.getId());
-                int IDnumber=spinnerCheack.getId();
+                int IDnumber = spinnerCheack.getId();
                 // give all the shifts
                 for (String Shifts : Checked_getId) {
+
                     // Check the shift vs the Spinner ID
-                    if(Shifts.contains(IDname))
-                    {
+                    if (Shifts.contains(IDname)) {
                         //TODO: get the name and enter to spiner
                         // Enter the name of Employees to the correct Spinner
-                        String[] items = new String[]{"gg","ff"};
-                        getName();
-                        //items[0] = IDname;
-                        Spinner spinner = (Spinner) v.findViewById(IDnumber);
-                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
+                        //Log.d(TAG, "Checked_getId.get(0): | "+Checked_getId.get(0) +" |Checked_getId.get(1):| "+Checked_getId.get(1));
+
+                        if (!NameArray.contains(Checked_getId.get(0))) {
+                            NameArray.add(Checked_getId.get(0));
+                        }
+                        Log.d(TAG, "NameArray: "+NameArray);
+                        spinner = (Spinner) v.findViewById(IDnumber);
+
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,NameArray);
                         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
                         spinner.setAdapter(dataAdapter);
                     }
 
                 }
+
             }
         }
-
-
-
     }
-
-    private void getName() {
-        db.collection("User").document("" + user.getUid())
-                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d(TAG, "documentSnapshot: "+documentSnapshot.get("name"));
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-    }
-
-
     /**
      * ----------------------------------^^^--------------------------onCreateView----------------------------------------^^^----------------------------------
      */

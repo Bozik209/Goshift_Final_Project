@@ -16,9 +16,12 @@ import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +33,8 @@ import java.util.List;
 
 import Activitys.MainActivity;
 import Activitys.ManagerActivity;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -92,57 +97,35 @@ public class MA_EmpList_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        // --------------------------------------------------------------------------------------------------------------------------
-        View returnView = inflater.inflate(R.layout.fragment_ma__emp_list_, container, false);
-        //final TextView txtOne = (TextView) returnView.findViewById(R.id.Em_name_display_textview);
-        // --------------------------------------------------------------------------------------------------------------------------
-
-
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-
-//        DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-//                        txtOne.setText(""+document.getString("name"));
-//                    } else {
-//                        Log.d(TAG, "No such document");
-//                    }
-//                } else {
-//                    Log.d(TAG, "get failed with ", task.getException());
-//                }
-//            }
-//        });
-
-        // TODO: chack how enter all name to list
-        ListView myListView = (ListView) returnView.findViewById(R.id.List_view1);
-        ArrayList<String> myStringArray1 = new ArrayList<String>();
-
-
-        // רץ על כל הFIREBASE ובודק אותו
-        db.collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        final View returnView = inflater.inflate(R.layout.fragment_ma__emp_list_, container, false);
+        final ArrayList<String> Emp_name = new ArrayList<>();  // ArrayList of employee
+        final CollectionReference docRef = db.collection("User"); // db path
+        
+        docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<String> list = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.getBoolean("isMang"))
-                            continue;
-                            //txtOne.setText(""+document.getString("name"));
+            public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
 
+                for (final DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    // check if is Employee
+                    if (documentSnapshot.get("isMang").toString().equals("false")) {
+                        // Enter the name of employee to ArrayList
+                        Emp_name.add(documentSnapshot.get("name").toString());
                     }
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
+                // Display the name in the ListView
+                ListView lV = (ListView) returnView.findViewById(R.id.List_view1);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, Emp_name);
+                lV.setAdapter(adapter);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
             }
         });
 
         return returnView;
-
-
         //return inflater.inflate(R.layout.fragment_ma__emp_list_, container, false);
     }
 

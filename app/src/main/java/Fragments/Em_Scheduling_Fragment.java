@@ -131,25 +131,11 @@ public class Em_Scheduling_Fragment extends Fragment {
         final Calendar calender = Calendar.getInstance();
 
         final Spinner spinner = returnView.findViewById(R.id.Week_spinner);
-//        final DocumentReference docRef = db
-//                .collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
-//                .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc");
-
-        Log.d(TAG, "user.getUid(): " + user.getUid());
-
 
         // מקבל את הניתוב
-//        final DocumentReference docRef = db
-//                .collection("User").document(""+user.getUid())
-//                .collection("UserCompany").document("JjzlUSOpP0IsXGHNFerd");
         final DocumentReference docRef = db
                 .collection("User").document("" + user.getUid())
-                .collection("UserCompany").document();
-
-        //DocumentReference userRef =db.document("/User/EOsPbHiRGZTG3Pd2jVyyNVFQSGZ2/UserCompany/");
-
-        Log.d(TAG, "docRef: " + docRef.getPath());
-        //Log.d(TAG, "userRef: "+ userRef.getPath());
+                .collection("UserCompany").document("Shifts_week");
 
         // ברגע שמעברים חודש אז הוא טוען את כל הנתונים ושם את המשמרות לפי חודש
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
