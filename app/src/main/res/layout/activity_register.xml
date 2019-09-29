@@ -83,7 +83,7 @@
             android:gravity="center"/>
 
         <CheckBox
-            android:id="@+id/checkBox_Em"
+            android:id="@+id/Em"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -93,7 +93,7 @@
             android:textSize="25dp"/>
 
         <CheckBox
-            android:id="@+id/checkBox_Ma"
+            android:id="@+id/Ma"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

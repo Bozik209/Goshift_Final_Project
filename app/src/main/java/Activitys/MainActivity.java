@@ -155,9 +155,9 @@ public class MainActivity extends AppCompatActivity
 
     // Global array
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayList<String> array_checkBox_id  = new ArrayList<String>();
+    ArrayList<String> array_id  = new ArrayList<String>();
 
-    public void CheckBox_func(View view) {
+    public void func(View view) {
         //get "id" string
         int temp=view.getId();
         String IDname= getResources().getResourceEntryName(temp);
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity
         boolean checked=((CheckBox) view).isChecked();
         if (checked)
         {
-            array_checkBox_id.add(IDname);
+            array_id.add(IDname);
         }
     }
 
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
         //ואז לרוץ על כל המערך
         Spinner s = (Spinner) findViewById(R.id.spinner4);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_checkBox_id);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array_id);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s.setAdapter(adapter);
 
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
 
-        user.put("days", array_checkBox_id);
+        user.put("days", array_id);
 
 
         // date

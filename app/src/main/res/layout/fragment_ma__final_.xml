@@ -11,7 +11,7 @@
 
 
         <Spinner
-            android:id="@+id/checkBox_SuNi"
+            android:id="@+id/SuNi"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
@@ -20,25 +20,25 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginBottom="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_MoNi"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_SuEv"
+            app:layout_constraintBottom_toTopOf="@+id/MoNi"
+            app:layout_constraintEnd_toStartOf="@+id/SuEv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/checkBox_TuMo"
+            android:id="@+id/TuMo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="114dp"
             android:layout_marginRight="114dp"
             android:layout_marginBottom="13dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_WeMo"
+            app:layout_constraintBottom_toTopOf="@+id/WeMo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_TuEv"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_MoMo" />
+            app:layout_constraintStart_toEndOf="@+id/TuEv"
+            app:layout_constraintTop_toBottomOf="@+id/MoMo" />
 
         <Spinner
-            android:id="@+id/checkBox_TuNi"
+            android:id="@+id/TuNi"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
@@ -46,37 +46,37 @@
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_WeNi"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_TuEv"
+            app:layout_constraintBottom_toTopOf="@+id/WeNi"
+            app:layout_constraintEnd_toStartOf="@+id/TuEv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_MoNi" />
+            app:layout_constraintTop_toBottomOf="@+id/MoNi" />
 
         <Spinner
-            android:id="@+id/checkBox_WeEv"
+            android:id="@+id/WeEv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginBottom="17dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_ThEv"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_WeMo"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_WeNi"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_TuEv" />
+            app:layout_constraintBottom_toTopOf="@+id/ThEv"
+            app:layout_constraintEnd_toStartOf="@+id/WeMo"
+            app:layout_constraintStart_toEndOf="@+id/WeNi"
+            app:layout_constraintTop_toBottomOf="@+id/TuEv" />
 
         <Spinner
-            android:id="@+id/checkBox_ThEv"
+            android:id="@+id/ThEv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_FrEv"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_ThMo"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_ThNi"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_WeEv" />
+            app:layout_constraintBottom_toTopOf="@+id/FrEv"
+            app:layout_constraintEnd_toStartOf="@+id/ThMo"
+            app:layout_constraintStart_toEndOf="@+id/ThNi"
+            app:layout_constraintTop_toBottomOf="@+id/WeEv" />
 
         <Spinner
-            android:id="@+id/checkBox_ThNi"
+            android:id="@+id/ThNi"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
@@ -84,48 +84,48 @@
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="13dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_FrNi"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_ThEv"
+            app:layout_constraintBottom_toTopOf="@+id/FrNi"
+            app:layout_constraintEnd_toStartOf="@+id/ThEv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_WeNi" />
+            app:layout_constraintTop_toBottomOf="@+id/WeNi" />
 
         <Spinner
-            android:id="@+id/checkBox_FrEv"
+            android:id="@+id/FrEv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginBottom="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_SatEv"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_FrMo"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_FrNi"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_ThEv" />
+            app:layout_constraintBottom_toTopOf="@+id/SatEv"
+            app:layout_constraintEnd_toStartOf="@+id/FrMo"
+            app:layout_constraintStart_toEndOf="@+id/FrNi"
+            app:layout_constraintTop_toBottomOf="@+id/ThEv" />
 
         <Spinner
-            android:id="@+id/checkBox_SatMo"
+            android:id="@+id/SatMo"
             android:layout_width="0dp"
             android:layout_height="34dp"
             android:layout_marginEnd="114dp"
             android:layout_marginRight="114dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_SatEv"
+            app:layout_constraintStart_toEndOf="@+id/SatEv"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/checkBox_SuMo"
+            android:id="@+id/SuMo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="114dp"
             android:layout_marginRight="114dp"
             android:layout_marginBottom="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_MoMo"
+            app:layout_constraintBottom_toTopOf="@+id/MoMo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_SuEv"
+            app:layout_constraintStart_toEndOf="@+id/SuEv"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <Spinner
-            android:id="@+id/checkBox_MoNi"
+            android:id="@+id/MoNi"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
@@ -133,37 +133,37 @@
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="19dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_TuNi"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_MoEv"
+            app:layout_constraintBottom_toTopOf="@+id/TuNi"
+            app:layout_constraintEnd_toStartOf="@+id/MoEv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_SuNi" />
+            app:layout_constraintTop_toBottomOf="@+id/SuNi" />
 
         <Spinner
-            android:id="@+id/checkBox_TuEv"
+            android:id="@+id/TuEv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginBottom="13dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_WeEv"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_TuMo"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_TuNi"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_MoEv" />
+            app:layout_constraintBottom_toTopOf="@+id/WeEv"
+            app:layout_constraintEnd_toStartOf="@+id/TuMo"
+            app:layout_constraintStart_toEndOf="@+id/TuNi"
+            app:layout_constraintTop_toBottomOf="@+id/MoEv" />
 
         <Spinner
-            android:id="@+id/checkBox_WeMo"
+            android:id="@+id/WeMo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="114dp"
             android:layout_marginRight="114dp"
             android:layout_marginBottom="17dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_ThMo"
+            app:layout_constraintBottom_toTopOf="@+id/ThMo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_WeEv"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_TuMo" />
+            app:layout_constraintStart_toEndOf="@+id/WeEv"
+            app:layout_constraintTop_toBottomOf="@+id/TuMo" />
 
         <Spinner
-            android:id="@+id/checkBox_WeNi"
+            android:id="@+id/WeNi"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
@@ -171,25 +171,25 @@
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="17dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_ThNi"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_WeEv"
+            app:layout_constraintBottom_toTopOf="@+id/ThNi"
+            app:layout_constraintEnd_toStartOf="@+id/WeEv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_TuNi" />
+            app:layout_constraintTop_toBottomOf="@+id/TuNi" />
 
         <Spinner
-            android:id="@+id/checkBox_ThMo"
+            android:id="@+id/ThMo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="114dp"
             android:layout_marginRight="114dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_FrMo"
+            app:layout_constraintBottom_toTopOf="@+id/FrMo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_ThEv"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_WeMo" />
+            app:layout_constraintStart_toEndOf="@+id/ThEv"
+            app:layout_constraintTop_toBottomOf="@+id/WeMo" />
 
         <Spinner
-            android:id="@+id/checkBox_FrMo"
+            android:id="@+id/FrMo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="114dp"
@@ -197,11 +197,11 @@
             android:layout_marginBottom="451dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_FrEv"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_ThMo" />
+            app:layout_constraintStart_toEndOf="@+id/FrEv"
+            app:layout_constraintTop_toBottomOf="@+id/ThMo" />
 
         <Spinner
-            android:id="@+id/checkBox_FrNi"
+            android:id="@+id/FrNi"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
@@ -209,25 +209,25 @@
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="19dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_SatNi"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_FrEv"
+            app:layout_constraintBottom_toTopOf="@+id/SatNi"
+            app:layout_constraintEnd_toStartOf="@+id/FrEv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_ThNi" />
+            app:layout_constraintTop_toBottomOf="@+id/ThNi" />
 
         <Spinner
-            android:id="@+id/checkBox_SatEv"
+            android:id="@+id/SatEv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="21dp"
             android:layout_marginRight="21dp"
             android:layout_marginBottom="399dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_SatMo"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_SatNi"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_FrEv" />
+            app:layout_constraintEnd_toStartOf="@+id/SatMo"
+            app:layout_constraintStart_toEndOf="@+id/SatNi"
+            app:layout_constraintTop_toBottomOf="@+id/FrEv" />
 
         <Spinner
-            android:id="@+id/checkBox_SatNi"
+            android:id="@+id/SatNi"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -236,45 +236,45 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="405dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_SatEv"
+            app:layout_constraintEnd_toStartOf="@+id/SatEv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_FrNi" />
+            app:layout_constraintTop_toBottomOf="@+id/FrNi" />
 
         <Spinner
-            android:id="@+id/checkBox_SuEv"
+            android:id="@+id/SuEv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="21dp"
             android:layout_marginRight="21dp"
             android:layout_marginBottom="23dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_MoEv"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_SuMo"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_SuNi"
+            app:layout_constraintBottom_toTopOf="@+id/MoEv"
+            app:layout_constraintEnd_toStartOf="@+id/SuMo"
+            app:layout_constraintStart_toEndOf="@+id/SuNi"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <Spinner
-            android:id="@+id/checkBox_MoMo"
+            android:id="@+id/MoMo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="114dp"
             android:layout_marginRight="114dp"
             android:layout_marginBottom="19dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_TuMo"
+            app:layout_constraintBottom_toTopOf="@+id/TuMo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_MoEv"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_SuMo" />
+            app:layout_constraintStart_toEndOf="@+id/MoEv"
+            app:layout_constraintTop_toBottomOf="@+id/SuMo" />
 
         <Spinner
-            android:id="@+id/checkBox_MoEv"
+            android:id="@+id/MoEv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginBottom="19dp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_TuEv"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox_MoMo"
-            app:layout_constraintStart_toEndOf="@+id/checkBox_MoNi"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_SuEv" />
+            app:layout_constraintBottom_toTopOf="@+id/TuEv"
+            app:layout_constraintEnd_toStartOf="@+id/MoMo"
+            app:layout_constraintStart_toEndOf="@+id/MoNi"
+            app:layout_constraintTop_toBottomOf="@+id/SuEv" />
 
         <TextView
             android:id="@+id/textView5"
@@ -286,7 +286,7 @@
             android:layout_marginBottom="17dp"
             android:text="בוקר"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_SuMo"
+            app:layout_constraintBottom_toTopOf="@+id/SuMo"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -300,7 +300,7 @@
             android:layout_marginBottom="9dp"
             android:text="ערב"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox_SuEv"
+            app:layout_constraintBottom_toTopOf="@+id/SuEv"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="parent" />
 

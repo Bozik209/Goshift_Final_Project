@@ -104,12 +104,12 @@ public class Em_Scheduling_Fragment extends Fragment {
      * Global Array
      */
     ArrayList<String> array_Week = new ArrayList<String>();
-    Map<String, ArrayList> Map_array_checkBox_id = new HashMap<String, ArrayList>();  // MAP עם זה הפיירביס עובד
+    Map<String, ArrayList> Map_array_id = new HashMap<String, ArrayList>();  // MAP עם זה הפיירביס עובד
 
     // ממלא את החודשים
-    public void full_week(Map<String, ArrayList> Map_array_checkBox_id) {
+    public void full_week(Map<String, ArrayList> Map_array_id) {
         for (int i = 0; i <= 52; i++)
-            Map_array_checkBox_id.put("" + i, null);
+            Map_array_id.put("" + i, null);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class Em_Scheduling_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View returnView = inflater.inflate(R.layout.fragment_em__scheduling_, container, false);
-        full_week(Map_array_checkBox_id);
+        full_week(Map_array_id);
         week_func(returnView);
         sendButton(returnView);
         return returnView;
@@ -202,18 +202,18 @@ public class Em_Scheduling_Fragment extends Fragment {
         });
 
 
-        final ArrayList checked_getId = new ArrayList(); // יכיל את כל הcheckbox (המשמרות)
+        final ArrayList Array_Shifts = new ArrayList(); // יכיל את כל הcheckbox (המשמרות)
 
 
         /** Chack all the view in fragment if is chackbox and if is clicked */
-        //when you click on the button is enter all the ID checkbox that clicked to array_checkBox_id
+        //when you click on the button is enter all the ID checkbox that clicked to array_id
         Button button = (Button) returnView.findViewById(R.id.send_button);
         button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 // עובר על כל checkbox
-                checked_getId.clear();
+                Array_Shifts.clear();
                 for (int i = 0; i < childViewCount; i++) {
                     View workWithMe = rootView.getChildAt(i);
                     if (workWithMe instanceof CheckBox) {
@@ -221,8 +221,8 @@ public class Em_Scheduling_Fragment extends Fragment {
                         // בודק אם הוא בחר משמרת ומוסיף
                         if (checked.isChecked()) {
                             // שלא יכניס אותה משמרת פעמיים
-                            if (!checked_getId.contains(getResources().getResourceEntryName(checked.getId()))) {
-                                checked_getId.add(getResources().getResourceEntryName(checked.getId()));
+                            if (!Array_Shifts.contains(getResources().getResourceEntryName(checked.getId()))) {
+                                Array_Shifts.add(getResources().getResourceEntryName(checked.getId()));
 
                             }
                         }
@@ -230,7 +230,7 @@ public class Em_Scheduling_Fragment extends Fragment {
                 }
 
                 /** Enter to the select week the select shift  **/
-                Map_array_checkBox_id.put(spinner.getSelectedItem().toString(), new ArrayList(checked_getId));
+                Map_array_id.put(spinner.getSelectedItem().toString(), new ArrayList(Array_Shifts));
 
 
                 /** Enter data to path **/
@@ -245,7 +245,7 @@ public class Em_Scheduling_Fragment extends Fragment {
                 // צריך לראות איך עושים את הניתוב שיתאים לכל משתמש
                 db.collection("User").document("" + user.getUid())
                         .collection("UserCompany").document("Shifts_week")
-                        .update(spinner.getSelectedItem().toString(), new ArrayList(checked_getId)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        .update(spinner.getSelectedItem().toString(), new ArrayList(Array_Shifts)).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + user.getUid());
@@ -261,7 +261,7 @@ public class Em_Scheduling_Fragment extends Fragment {
                 // מעדכן רק את השבוע הספציפי אבל דורס גם את הכול
 //                db.collection("User").document("1hexykJT5uTYoZZILjFmPBfjhKE3")
 //                        .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc")
-//                        .set(Map_array_checkBox_id).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        .set(Map_array_id).addOnSuccessListener(new OnSuccessListener<Void>() {
 //                    @Override
 //                    public void onSuccess(Void aVoid) {
 //                        Log.d(TAG, "DocumentSnapshot added with ID: " + user.getUid());
@@ -288,8 +288,8 @@ public class Em_Scheduling_Fragment extends Fragment {
                         checked.setChecked(false);
                     }
                 }
-                //Map_array_checkBox_id.clear();
-                checked_getId.clear();
+                //Map_array_id.clear();
+                Array_Shifts.clear();
             }
         });
         return returnView;

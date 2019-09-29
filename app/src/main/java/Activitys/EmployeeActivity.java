@@ -95,7 +95,7 @@ public class EmployeeActivity extends AppCompatActivity implements
         }
 
     }
-    public void CheckBox_func(View v)
+    public void func(View v)
     {
 
     }

@@ -100,7 +100,7 @@ public class MA_EmpList_Fragment extends Fragment {
         final View returnView = inflater.inflate(R.layout.fragment_ma__emp_list_, container, false);
         final ArrayList<String> Emp_name = new ArrayList<>();  // ArrayList of employee
         final CollectionReference docRef = db.collection("User"); // db path
-        
+
         docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {

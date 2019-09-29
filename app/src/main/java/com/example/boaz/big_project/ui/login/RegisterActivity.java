@@ -219,7 +219,7 @@ public class RegisterActivity extends AppCompatActivity implements
         final String strUserID = UserIDEditText.getText().toString();
         final int userID = Integer.parseInt(strUserID);
         //check if is manger
-        final boolean IsManger = ((CheckBox) findViewById(R.id.checkBox_Ma)).isChecked();
+        final boolean IsManger = ((CheckBox) findViewById(R.id.Ma)).isChecked();
         if (IsManger) {
             TextView CompanyName = (TextView) findViewById(R.id.MA_CompanyName);
             group_name_String = CompanyName.getText().toString();
@@ -404,8 +404,8 @@ public class RegisterActivity extends AppCompatActivity implements
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.Fragment_container);
 
-        final CheckBox Manager_checkBox = (CheckBox) findViewById(R.id.checkBox_Ma);
-        final CheckBox Employess_checkBox = (CheckBox) findViewById(R.id.checkBox_Em);
+        final CheckBox Manager_checkBox = (CheckBox) findViewById(R.id.Ma);
+        final CheckBox Employess_checkBox = (CheckBox) findViewById(R.id.Em);
 
         //Manager_checkBox.setOnCheckedChangeListener();
         Manager_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

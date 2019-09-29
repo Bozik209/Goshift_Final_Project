@@ -28,7 +28,10 @@ android:layout_height="match_parent"
             <ListView
                 android:id="@+id/List_view1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:divider="#252424"
+                android:dividerHeight="1dp"
+                android:listSelector="#3E61DA"/>
 
             <!--<TextView-->
                 <!--android:id="@+id/Em_name_display_textview"-->

@@ -41,199 +41,199 @@
         app:layout_constraintStart_toEndOf="@+id/Clear_button" />
 
     <CheckBox
-        android:id="@+id/checkBox_SuNi"
+        android:id="@+id/SuNi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_MoNi"
+        app:layout_constraintBaseline_toBaselineOf="@+id/MoNi"
         app:layout_constraintEnd_toStartOf="@+id/ID_Title_Night" />
 
     <CheckBox
-        android:id="@+id/checkBox_SuEv"
+        android:id="@+id/SuEv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_TitleLeft"
-        app:layout_constraintTop_toTopOf="@+id/checkBox_MoEv" />
+        app:layout_constraintTop_toTopOf="@+id/MoEv" />
 
     <CheckBox
-        android:id="@+id/checkBox_SuMo"
+        android:id="@+id/SuMo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_TitleLeft"
-        app:layout_constraintTop_toTopOf="@+id/checkBox_MoMo" />
+        app:layout_constraintTop_toTopOf="@+id/MoMo" />
 
     <CheckBox
-        android:id="@+id/checkBox_MoNi"
+        android:id="@+id/MoNi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox_SuNi"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox_MoEv" />
+        app:layout_constraintEnd_toStartOf="@+id/SuNi"
+        app:layout_constraintTop_toBottomOf="@+id/MoEv" />
 
     <CheckBox
-        android:id="@+id/checkBox_MoEv"
+        android:id="@+id/MoEv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_TuEv"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_TuEv" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/TuEv"
+        app:layout_constraintStart_toEndOf="@+id/TuEv" />
 
     <CheckBox
-        android:id="@+id/checkBox_MoMo"
+        android:id="@+id/MoMo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_TuMo"
+        app:layout_constraintBaseline_toBaselineOf="@+id/TuMo"
         app:layout_constraintEnd_toEndOf="@+id/ID_Day_Mon2" />
 
     <!--=====================Sunday======================-->
 
     <CheckBox
-        android:id="@+id/checkBox_TuNi"
+        android:id="@+id/TuNi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginLeft="9dp"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_WeNi"
-        app:layout_constraintTop_toTopOf="@+id/checkBox_MoNi" />
+        app:layout_constraintStart_toEndOf="@+id/WeNi"
+        app:layout_constraintTop_toTopOf="@+id/MoNi" />
 
     <CheckBox
-        android:id="@+id/checkBox_TuEv"
+        android:id="@+id/TuEv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_WeEv"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_WeEv" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/WeEv"
+        app:layout_constraintStart_toEndOf="@+id/WeEv" />
 
     <CheckBox
-        android:id="@+id/checkBox_TuMo"
+        android:id="@+id/TuMo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_WeMo"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_WeMo" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/WeMo"
+        app:layout_constraintStart_toEndOf="@+id/WeMo" />
 
     <CheckBox
-        android:id="@+id/checkBox_WeNi"
+        android:id="@+id/WeNi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginLeft="14dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_TuNi"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_ThNi" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/TuNi"
+        app:layout_constraintStart_toEndOf="@+id/ThNi" />
 
     <!--====================Monday======================-->
 
     <CheckBox
-        android:id="@+id/checkBox_WeEv"
+        android:id="@+id/WeEv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_ThEv"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_ThEv" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/ThEv"
+        app:layout_constraintStart_toEndOf="@+id/ThEv" />
 
     <CheckBox
-        android:id="@+id/checkBox_WeMo"
+        android:id="@+id/WeMo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_ThMo"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ThMo"
         app:layout_constraintEnd_toEndOf="@+id/ID_Day_Wed4" />
 
     <CheckBox
-        android:id="@+id/checkBox_ThNi"
+        android:id="@+id/ThNi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_WeNi"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_FrNi" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/WeNi"
+        app:layout_constraintStart_toEndOf="@+id/FrNi" />
 
     <CheckBox
-        android:id="@+id/checkBox_ThEv"
+        android:id="@+id/ThEv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_FrEv"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_FrEv" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/FrEv"
+        app:layout_constraintStart_toEndOf="@+id/FrEv" />
 
     <!--====================Tuesday====================-->
 
     <CheckBox
-        android:id="@+id/checkBox_ThMo"
+        android:id="@+id/ThMo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_FrMo"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_FrMo" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/FrMo"
+        app:layout_constraintStart_toEndOf="@+id/FrMo" />
 
     <CheckBox
-        android:id="@+id/checkBox_FrNi"
+        android:id="@+id/FrNi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_SatNi"
-        app:layout_constraintTop_toTopOf="@+id/checkBox_ThNi" />
+        app:layout_constraintStart_toEndOf="@+id/SatNi"
+        app:layout_constraintTop_toTopOf="@+id/ThNi" />
 
     <CheckBox
-        android:id="@+id/checkBox_FrEv"
+        android:id="@+id/FrEv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="27dp"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_SatEv"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox_FrMo" />
+        app:layout_constraintStart_toEndOf="@+id/SatEv"
+        app:layout_constraintTop_toBottomOf="@+id/FrMo" />
 
     <CheckBox
-        android:id="@+id/checkBox_FrMo"
+        android:id="@+id/FrMo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="17dp"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_SatMo"
+        app:layout_constraintStart_toEndOf="@+id/SatMo"
         app:layout_constraintTop_toBottomOf="@+id/ID_Day_Fri6" />
 
     <!--==================Wednesday======================-->
 
     <CheckBox
-        android:id="@+id/checkBox_SatNi"
+        android:id="@+id/SatNi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
         android:layout_marginLeft="23dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_FrNi"
+        app:layout_constraintBaseline_toBaselineOf="@+id/FrNi"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
-        android:id="@+id/checkBox_SatEv"
+        android:id="@+id/SatEv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
         android:layout_marginLeft="23dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_FrEv"
+        app:layout_constraintBaseline_toBaselineOf="@+id/FrEv"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
-        android:id="@+id/checkBox_SatMo"
+        android:id="@+id/SatMo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginLeft="21dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_FrMo"
+        app:layout_constraintBaseline_toBaselineOf="@+id/FrMo"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
@@ -274,8 +274,8 @@
         android:textSize="20dp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/checkBox_SuMo"
-        app:layout_constraintTop_toTopOf="@+id/checkBox_SuMo" />
+        app:layout_constraintStart_toEndOf="@+id/SuMo"
+        app:layout_constraintTop_toTopOf="@+id/SuMo" />
 
     <TextView
         android:id="@+id/ID_Title_Evening"
@@ -288,7 +288,7 @@
         android:textSize="20dp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/checkBox_SuEv"
+        app:layout_constraintBottom_toBottomOf="@+id/SuEv"
         app:layout_constraintStart_toStartOf="@+id/guideline_TitleLeft" />
 
     <TextView
@@ -302,7 +302,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:text="@string/Title_Night"
-        app:layout_constraintBottom_toBottomOf="@+id/checkBox_SuNi"
+        app:layout_constraintBottom_toBottomOf="@+id/SuNi"
         app:layout_constraintStart_toStartOf="@+id/guideline_TitleLeft" />
 
     <!--=====================Friday=====================-->
@@ -318,8 +318,8 @@
         android:textSize="12dp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox_SuMo"
-        app:layout_constraintStart_toStartOf="@+id/checkBox_SuMo" />
+        app:layout_constraintBottom_toTopOf="@+id/SuMo"
+        app:layout_constraintStart_toStartOf="@+id/SuMo" />
 
     <TextView
         android:id="@+id/ID_Day_Mon2"
@@ -345,7 +345,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/ID_Day_Wed4"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox_MoMo" />
+        app:layout_constraintEnd_toStartOf="@+id/MoMo" />
 
     <TextView
         android:id="@+id/ID_Day_Wed4"
@@ -385,7 +385,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/ID_Day_Thu5"
-        app:layout_constraintStart_toStartOf="@+id/checkBox_FrMo" />
+        app:layout_constraintStart_toStartOf="@+id/FrMo" />
 
     <TextView
         android:id="@+id/ID_Day_Sat7"
