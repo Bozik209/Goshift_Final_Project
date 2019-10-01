@@ -1,30 +1,42 @@
 package Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.boaz.big_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -100,112 +112,33 @@ public class MA_Final_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_ma__final_, container, false);
+        ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
+//        fiilTextview(rootView);
+        List_fiil(v);
         spinner_test(v);
         return v;
         //return inflater.inflate(R.layout.fragment_ma__final_, container, false);
     }
 
+
+
     private View spinner_test(final View v) {
 
         final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
-        final int childViewCount = rootView.getChildCount();
         //final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item);
-
-        for (int i = 0; i < childViewCount; i++) {
-            View workWithMe = rootView.getChildAt(i);
-            // chack what is Spinner
-            if (workWithMe instanceof Spinner) {
-                Spinner spinnerCheack = (Spinner) workWithMe;
-                final String IDname = getResources().getResourceEntryName(spinnerCheack.getId());
-
-                int IDnumber = spinnerCheack.getId();
-
-
-                Log.d(TAG, "spinner_test: IDname" + IDname);
-
-
-                spinnerCheack.findViewById(IDnumber);
-
-                //NameArray=getNameArry(IDname,spinnerCheack);
-
-
-                docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
-                        for (final DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            // check if is Employee
-                            if (documentSnapshot.get("isMang").toString().equals("false")) {
-                                // Run again on DB
-                                Log.d(TAG, "documentSnapshot.get(\"name\").toString() "+documentSnapshot.get("name").toString());
-
-                                db.collection("User").document("" + documentSnapshot.getId())
-                                        .collection("UserCompany").document("Shifts_week").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.d(TAG, "documentSnapshot.get(\"name\").toString() "+documentSnapshot.get("name").toString());
-                                            Array_Shifts.add(0, "");
-                                            Array_Shifts.add(1, "");
-                                            DocumentSnapshot document = task.getResult();
-                                            if (document.get(Current_Week) != null) {
-                                                Array_Shifts.set(0, documentSnapshot.get("name").toString());   //name
-                                                Array_Shifts.set(1, document.get(Current_Week).toString());    //shifts
-
-//                                                Log.d(TAG, ""+Array_Shifts.get(1)+".contains("+IDname+"): " +Array_Shifts.get(1).contains(IDname));
-//                                                if (Array_Shifts.get(1).contains(IDname)) {
-//                                                    if (!NameArray.contains(documentSnapshot.get("name").toString()))
-//                                                        NameArray.add(documentSnapshot.get("name").toString());
-//
-//                                                }
-
-
-
-                                                Log.d(TAG, "1 NameArray: " + NameArray);
-
-                                            }
-                                        } else {
-                                            Log.w(TAG, "Error getting documents.", task.getException());
-                                        }
-                                    }
-
-                                });
-
-                            }
-                        }
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-
-
-
-
-                Log.d(TAG, "2 NameArray: " + NameArray);
-
-                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, NameArray);
-                spinnerCheack.setAdapter(dataAdapter);
-                NameArray.clear();
-                Array_Shifts.clear();
-            }
-        }
-
-
-        return v;
-    }
-
-    private ArrayList<String> getNameArry(final String IDname,final Spinner spinnerCheack) {
         // DB get info
         docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
+                Array_Shifts.add(0, "");
+                Array_Shifts.add(1, "");
+
                 for (final DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     // check if is Employee
                     if (documentSnapshot.get("isMang").toString().equals("false")) {
                         // Run again on DB
+                        Log.d(TAG, "documentSnapshot.get(\"name\"): " + documentSnapshot.get("name"));
+                        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item);
 
                         db.collection("User").document("" + documentSnapshot.getId())
                                 .collection("UserCompany").document("Shifts_week").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -216,54 +149,84 @@ public class MA_Final_Fragment extends Fragment {
                                     Array_Shifts.add(1, "");
                                     DocumentSnapshot document = task.getResult();
                                     if (document.get(Current_Week) != null) {
-                                        Array_Shifts.set(0, documentSnapshot.get("name").toString());  //name
-                                        Array_Shifts.set(1, document.get(Current_Week).toString());    //shifts
+                                        Array_Shifts.set(1, document.get(Current_Week).toString());
+                                        Array_Shifts.set(0, documentSnapshot.get("name").toString());
 
-                                        Log.d(TAG, ""+Array_Shifts.get(1)+".contains("+IDname+"): " +Array_Shifts.get(1).contains(IDname));
-                                        if (Array_Shifts.get(1).contains(IDname)) {
-                                            if (!NameArray.contains(documentSnapshot.get("name").toString()))
-                                                NameArray.add(documentSnapshot.get("name").toString());
+                                        Log.d(TAG, "document.get(Current_Week).toString(): " + document.get(Current_Week).toString());
+
+                                        ArrayList b = (ArrayList) document.get(Current_Week);
+
+                                        for (Object e : b) {
+                                            int id = chackID(rootView, e.toString());
+
+
+                                            Log.d(TAG, "onComplete: documentSnapshot.get(\"name\").toString() " + documentSnapshot.get("name").toString());
+                                            String name = documentSnapshot.get("name").toString();
+                                            TextView textView = (TextView) v.findViewById(id);
+                                            Log.d(TAG, "textView: " + textView);
+                                            textView.setText(name);
+
+//                                            if (name!=null)
+//                                            {
+//                                                Log.d(TAG, "name: "+name);
+//                                                textView.setText(name);
+//                                            }
+
 
                                         }
-
-
-                                        Log.d(TAG, "1 NameArray: " + NameArray);
-
                                     }
                                 } else {
                                     Log.w(TAG, "Error getting documents.", task.getException());
                                 }
+                                Array_Shifts.set(0, documentSnapshot.get("name").toString());
+                                NameArray.clear();
+
+                                Array_Shifts.clear();
                             }
 
                         });
 
                     }
                 }
-                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, NameArray);
-                spinnerCheack.setAdapter(dataAdapter);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
             }
         });
-        return NameArray;
+        return v;
     }
+
+//    private void fiilTextview(ViewGroup rootView) {
+//        final int childViewCount = rootView.getChildCount();
+//        //Spinner spinnerCheack = (Spinner) v.findViewById();
+//        // give all ids
+//        for (int i = 0; i < childViewCount; i++) {
+//            View workWithMe = rootView.getChildAt(i);
+//            // chack what is Spinner
+//            if (workWithMe instanceof TextView) {
+//                TextView textViewCheack = (TextView) workWithMe;
+//                textViewCheack.setText("לא נבחר");
+//            }
+//        }
+//    }
 
     public int chackID(ViewGroup rootView, String name) {
         final int childViewCount = rootView.getChildCount();
         //Spinner spinnerCheack = (Spinner) v.findViewById();
 
+
         // give all ids
         for (int i = 0; i < childViewCount; i++) {
             View workWithMe = rootView.getChildAt(i);
             // chack what is Spinner
-            if (workWithMe instanceof Spinner) {
-                Spinner spinnerCheack = (Spinner) workWithMe;
-                String IDname = getResources().getResourceEntryName(spinnerCheack.getId());
+            if (workWithMe instanceof TextView) {
+                TextView textViewCheack = (TextView) workWithMe;
+//                textViewCheack.setText("לא נבחר");
 
-                int IDnumber = spinnerCheack.getId();
+                String IDname = getResources().getResourceEntryName(textViewCheack.getId());
+
+                int IDnumber = textViewCheack.getId();
 
                 if (name.equals(IDname)) {
                     Log.d(TAG, "chackID  " + "IDname: " + IDname + " name: " + name);
@@ -275,6 +238,37 @@ public class MA_Final_Fragment extends Fragment {
         return 0;
     }
 
+
+    private void List_fiil(final View returnView) {
+        //final View returnView = inflater.inflate(R.layout.fragment_ma__emp_list_, container, false);
+
+        final ArrayList<String> Emp_name = new ArrayList<>();  // ArrayList of employee
+        final CollectionReference docRef = db.collection("User"); // db path
+
+        docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
+
+                for (final DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    // check if is Employee
+                    if (documentSnapshot.get("isMang").toString().equals("false")) {
+                        // Enter the name of employee to ArrayList
+                        Emp_name.add(documentSnapshot.get("name").toString());
+                    }
+                }
+                // Display the name in the ListView
+                ListView lV = (ListView) returnView.findViewById(R.id.ListViewFinal);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, Emp_name);
+                lV.setAdapter(adapter);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
     /**
      * ----------------------------------^^^--------------------------onCreateView----------------------------------------^^^----------------------------------
      */
