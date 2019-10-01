@@ -47,7 +47,7 @@ public class ManagerActivity extends AppCompatActivity implements
     private static final String TAG = "ManagerActivity";
     private TextView textView_helloUser;
 
-
+    private String CopiedID;
     private ClipboardManager myClipboard;
 
 
@@ -97,6 +97,15 @@ public class ManagerActivity extends AppCompatActivity implements
                 fragment = new MA_EmpList_Fragment();
                 FragmentTransaction transaction = manager.beginTransaction().addToBackStack(null);
                 transaction.add(R.id.MA_fragemt_container,fragment).commit();
+            }
+            else if (id == R.id.MA_CopyID_button){
+
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("EditText", ""+CopiedID);
+                clipboard.setPrimaryClip(clip);
+
+                Toast.makeText(this, "העתקת ID בוצעה בהצלחה!", Toast.LENGTH_SHORT).show();
+                
             }
             else if (id == R.id.MA_Logout_button) {
                 FirebaseAuth.getInstance().signOut();
@@ -167,7 +176,7 @@ public class ManagerActivity extends AppCompatActivity implements
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
         //  מוציא את המידע
-        DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
+        final DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -175,6 +184,7 @@ public class ManagerActivity extends AppCompatActivity implements
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         textView_helloUser.setText("שלום " + document.getString("name"));
+                        CopiedID = docRef.getId();
                     } else {
                         Log.d(TAG, "No such document");
                     }

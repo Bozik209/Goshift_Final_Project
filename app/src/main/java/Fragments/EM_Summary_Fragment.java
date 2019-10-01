@@ -3,12 +3,22 @@ package Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.boaz.big_project.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 /**
@@ -20,6 +30,17 @@ import com.example.boaz.big_project.R;
  * create an instance of this fragment.
  */
 public class EM_Summary_Fragment extends Fragment {
+
+    private static final String TAG = "EmployeeActivity";
+
+    private TextView textView_UserHourlyRate;
+    private TextView textView_UserSalary;
+    private  TextView textView_CountWorkHours;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+    DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
+    private int hourlyrate;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,7 +87,15 @@ public class EM_Summary_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_em__summary_, container, false);
+        View v = inflater.inflate(R.layout.fragment_em__summary_, container, false);
+
+        textView_UserHourlyRate = (TextView) v.findViewById(R.id.EM_HourlyRate);
+        getHourlyRate();
+        textView_CountWorkHours=(TextView) v.findViewById(R.id.EM_countWorkHours);
+        textView_UserSalary = (TextView) v.findViewById(R.id.EM_salary);
+
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -107,4 +136,29 @@ public class EM_Summary_Fragment extends Fragment {
         // TODO: Update argument type and name
         void EM_Summary_FIListener(Uri uri);
     }
+
+
+    public void getHourlyRate() {
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        hourlyrate = document.getLong("HourlyRate").intValue();
+
+
+                        textView_UserHourlyRate.setText(""+hourlyrate);
+
+                        int intCnt=Integer.parseInt(textView_CountWorkHours.getText().toString());
+                        int intSalary= hourlyrate*intCnt;
+                        textView_UserSalary.setText(""+intSalary);
+
+                    }
+                }
+            }
+        });
+    }
+
 }

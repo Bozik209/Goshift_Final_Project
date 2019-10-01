@@ -97,7 +97,6 @@ public class MA_Summary_Fragment extends Fragment {
         getHourlyRate();
         textView_CountWorkHours=(TextView) v.findViewById(R.id.MA_countWorkHours);
         textView_UserSalary = (TextView) v.findViewById(R.id.MA_salary);
-        //getSalary();
 
 
         return v;
@@ -143,26 +142,17 @@ public class MA_Summary_Fragment extends Fragment {
     }
 
     public void getHourlyRate() {
-        Log.d(TAG, "AAAAAAAAAAAAAAAAAAAAAAA");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d(TAG, "BBBBBBBBBBBBBBBBBBBBBB");
-
-//                        String str_hourlyrate= document.getString("HourlyRate");
-//
-//                        Log.d(TAG, "CCCCCCCCCCCCCCCCCCCCCC"+ str_hourlyrate);
-
 
                         hourlyrate = document.getLong("HourlyRate").intValue();
 
-                        Log.d(TAG, "DDDDDDDDDDDDDDDDDDDDDD"+ hourlyrate);
 
                         textView_UserHourlyRate.setText(""+hourlyrate);
-                        Log.d(TAG, "EEEEEEEEEEEE");
 
                         int intCnt=Integer.parseInt(textView_CountWorkHours.getText().toString());
                         int intSalary= hourlyrate*intCnt;
@@ -172,14 +162,6 @@ public class MA_Summary_Fragment extends Fragment {
                 }
             }
         });
-    }
-
-    public void getSalary(){
-        Log.d(TAG, "FFFFFFFFFF "+ hourlyrate);
-
-        int intCnt=Integer.parseInt(textView_CountWorkHours.getText().toString());
-        int intSalary= hourlyrate*intCnt;
-        textView_UserSalary.setText(""+intSalary);
     }
 
 }
