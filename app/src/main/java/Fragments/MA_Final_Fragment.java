@@ -11,7 +11,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,6 +36,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -116,8 +119,111 @@ public class MA_Final_Fragment extends Fragment {
 //        fiilTextview(rootView);
         List_fiil(v);
         spinner_test(v);
+        organizer_shift(v);
+        Send_data(v);
         return v;
         //return inflater.inflate(R.layout.fragment_ma__final_, container, false);
+    }
+
+    private void Send_data(View v) {
+        final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
+        final int childViewCount = rootView.getChildCount();
+
+
+        // Create a new user with a first and last name
+        final Map<String, Object> Final_shifts = new HashMap<>();
+
+        Button button = v.findViewById(R.id.button_Send);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < childViewCount; i++) {
+                    View workWithMe = rootView.getChildAt(i);
+                    // chack what is Spinner
+                    if (workWithMe instanceof TextView) {
+                        TextView textViewCheack = (TextView) workWithMe;
+                        final String IDname = getResources().getResourceEntryName(textViewCheack.getId());
+                        int IDnumber = textViewCheack.getId();
+//                        Log.d(TAG, ""+IDname+".startsWith(\"text\",0): "+IDname.startsWith("text",0));
+                        if (!IDname.startsWith("text",0))
+                        {
+                            Log.d(TAG, "2IDname " + IDname);
+
+                            Log.d(TAG, "2textViewCheack.getText() " + textViewCheack.getText());
+                            Final_shifts.put(IDname,textViewCheack.getText());
+                        }
+
+
+                    }
+                }
+
+                //Set the data in DB
+                db.collection("Test").document("Final_shifts")
+                        .set(Final_shifts)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error writing document", e);
+                            }
+                        });
+
+            }
+        });
+
+
+
+
+
+    }
+
+    private void organizer_shift(View v) {
+
+        final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
+        final int childViewCount = rootView.getChildCount();
+        final ListView listView = v.findViewById(R.id.ListViewFinal);
+
+        for (int i = 0; i < childViewCount; i++) {
+            View workWithMe = rootView.getChildAt(i);
+            // chack what is Spinner
+            if (workWithMe instanceof TextView) {
+                TextView textViewCheack = (TextView) workWithMe;
+                final String IDname = getResources().getResourceEntryName(textViewCheack.getId());
+                int IDnumber = textViewCheack.getId();
+
+
+                final TextView clickTextView = (TextView) v.findViewById(IDnumber);
+                clickTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        Log.d(TAG, "clickTextView.getText: " + clickTextView.getText());
+//                        Log.d(TAG, "clickTextView.getText IDname: " + IDname);
+
+//                        clickTextView.setText(SelectfromList(v));
+
+
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                                Log.d(TAG, "listView.getItemAtPosition: " + listView.getItemAtPosition(position));
+                                clickTextView.setText(listView.getItemAtPosition(position).toString());
+
+                            }
+                        });
+
+
+                    }
+
+                });
+
+            }
+        }
     }
 
 
@@ -125,60 +231,41 @@ public class MA_Final_Fragment extends Fragment {
     private View spinner_test(final View v) {
 
         final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
-        //final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item);
+
         // DB get info
         docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
-                Array_Shifts.add(0, "");
-                Array_Shifts.add(1, "");
 
                 for (final DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     // check if is Employee
                     if (documentSnapshot.get("isMang").toString().equals("false")) {
                         // Run again on DB
-                        Log.d(TAG, "documentSnapshot.get(\"name\"): " + documentSnapshot.get("name"));
-                        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item);
+//                        Log.d(TAG, "documentSnapshot.get(\"name\"): " + documentSnapshot.get("name"));
 
                         db.collection("User").document("" + documentSnapshot.getId())
                                 .collection("UserCompany").document("Shifts_week").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
-                                    Array_Shifts.add(0, "");
-                                    Array_Shifts.add(1, "");
+
                                     DocumentSnapshot document = task.getResult();
                                     if (document.get(Current_Week) != null) {
-                                        Array_Shifts.set(1, document.get(Current_Week).toString());
-                                        Array_Shifts.set(0, documentSnapshot.get("name").toString());
 
-                                        Log.d(TAG, "document.get(Current_Week).toString(): " + document.get(Current_Week).toString());
+                                        ArrayList Shifts_Arry = (ArrayList) document.get(Current_Week);
 
-                                        ArrayList b = (ArrayList) document.get(Current_Week);
-
-                                        for (Object e : b) {
+                                        // Insert the Emp name in the TextView
+                                        for (Object e : Shifts_Arry) {
                                             int id = chackID(rootView, e.toString());
-
-
-                                            Log.d(TAG, "onComplete: documentSnapshot.get(\"name\").toString() " + documentSnapshot.get("name").toString());
                                             String name = documentSnapshot.get("name").toString();
                                             TextView textView = (TextView) v.findViewById(id);
-                                            Log.d(TAG, "textView: " + textView);
                                             textView.setText(name);
-
-//                                            if (name!=null)
-//                                            {
-//                                                Log.d(TAG, "name: "+name);
-//                                                textView.setText(name);
-//                                            }
-
 
                                         }
                                     }
                                 } else {
                                     Log.w(TAG, "Error getting documents.", task.getException());
                                 }
-                                Array_Shifts.set(0, documentSnapshot.get("name").toString());
                                 NameArray.clear();
 
                                 Array_Shifts.clear();
@@ -197,25 +284,10 @@ public class MA_Final_Fragment extends Fragment {
         return v;
     }
 
-//    private void fiilTextview(ViewGroup rootView) {
-//        final int childViewCount = rootView.getChildCount();
-//        //Spinner spinnerCheack = (Spinner) v.findViewById();
-//        // give all ids
-//        for (int i = 0; i < childViewCount; i++) {
-//            View workWithMe = rootView.getChildAt(i);
-//            // chack what is Spinner
-//            if (workWithMe instanceof TextView) {
-//                TextView textViewCheack = (TextView) workWithMe;
-//                textViewCheack.setText("לא נבחר");
-//            }
-//        }
-//    }
 
     public int chackID(ViewGroup rootView, String name) {
         final int childViewCount = rootView.getChildCount();
         //Spinner spinnerCheack = (Spinner) v.findViewById();
-
-
         // give all ids
         for (int i = 0; i < childViewCount; i++) {
             View workWithMe = rootView.getChildAt(i);
@@ -229,7 +301,7 @@ public class MA_Final_Fragment extends Fragment {
                 int IDnumber = textViewCheack.getId();
 
                 if (name.equals(IDname)) {
-                    Log.d(TAG, "chackID  " + "IDname: " + IDname + " name: " + name);
+//                    Log.d(TAG, "chackID  " + "IDname: " + IDname + " name: " + name);
                     return IDnumber;
                 }
 
@@ -238,9 +310,8 @@ public class MA_Final_Fragment extends Fragment {
         return 0;
     }
 
-
+    // Fiil the ListView in all Emp & MA name
     private void List_fiil(final View returnView) {
-        //final View returnView = inflater.inflate(R.layout.fragment_ma__emp_list_, container, false);
 
         final ArrayList<String> Emp_name = new ArrayList<>();  // ArrayList of employee
         final CollectionReference docRef = db.collection("User"); // db path
@@ -258,7 +329,7 @@ public class MA_Final_Fragment extends Fragment {
                 }
                 // Display the name in the ListView
                 ListView lV = (ListView) returnView.findViewById(R.id.ListViewFinal);
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, Emp_name);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Emp_name);
                 lV.setAdapter(adapter);
 
             }
@@ -269,6 +340,7 @@ public class MA_Final_Fragment extends Fragment {
             }
         });
     }
+
     /**
      * ----------------------------------^^^--------------------------onCreateView----------------------------------------^^^----------------------------------
      */

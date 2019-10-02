@@ -3,12 +3,25 @@ package Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.example.boaz.big_project.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -62,11 +75,67 @@ public class EM_Final_Fragment extends Fragment {
         }
     }
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View v=inflater.inflate(R.layout.fragment_em__final_, container, false);
+        //Fiil_Shift(v);
+
+
+
+        final TextView textview = (TextView) v.findViewById(R.id.SuMo);
+        Log.d(TAG, "1textview.getText(): "+textview.getText());
+        textview.setText("test");
+        Log.d(TAG, "2textview.getText(): "+textview.getText());
+
+
         return inflater.inflate(R.layout.fragment_em__final_, container, false);
+    }
+
+    private void Fiil_Shift(final View v) {
+        final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_em_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
+        final int childViewCount = rootView.getChildCount();
+
+
+        db.collection("Test").document("Final_shifts")
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.d(TAG, "documentSnapshot "+documentSnapshot);
+                Log.d(TAG, "documentSnapshot "+documentSnapshot.getData().size());
+
+
+
+                for (int i = 0; i < childViewCount; i++) {
+                    View workWithMe = rootView.getChildAt(i);
+                    // chack what is Spinner
+                    if (workWithMe instanceof TextView) {
+                        TextView textViewCheack = (TextView) workWithMe;
+                        String IDname = getResources().getResourceEntryName(textViewCheack.getId());
+                        int IDnumber = textViewCheack.getId();
+                        Log.d(TAG, "documentSnapshot.get("+IDname+") "+documentSnapshot.get(IDname));
+//                        Log.d(TAG, "documentSnapshot.get("+IDname+").equals(null) "+documentSnapshot.get(IDname).equals(null));
+
+                        if (!IDname.startsWith("text",0))
+                        {
+                            Log.d(TAG, "2IDname " + IDname);
+                            Log.d(TAG, "2textViewCheack.getText() " + textViewCheack.getText());
+//                            textViewCheack.setText(documentSnapshot.get(IDname).toString());
+                            TextView textView = (TextView) v.findViewById(IDnumber);
+                            Log.d(TAG, "4textView: "+textView);
+                            textView.setText("Ffff");
+
+                        }
+                    }
+                }
+
+
+            }
+        });
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
