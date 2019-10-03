@@ -40,6 +40,7 @@ public class EM_Summary_Fragment extends Fragment {
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
     DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
     private int hourlyrate;
+    private int cntHours;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -147,9 +148,12 @@ public class EM_Summary_Fragment extends Fragment {
                     if (document.exists()) {
 
                         hourlyrate = document.getLong("HourlyRate").intValue();
-
-
+                        
                         textView_UserHourlyRate.setText(""+hourlyrate);
+
+                        cntHours = document.getLong("countWorkHours").intValue();
+
+                        textView_CountWorkHours.setText(""+cntHours);
 
                         int intCnt=Integer.parseInt(textView_CountWorkHours.getText().toString());
                         int intSalary= hourlyrate*intCnt;
