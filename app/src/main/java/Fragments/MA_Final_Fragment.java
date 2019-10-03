@@ -104,6 +104,7 @@ public class MA_Final_Fragment extends Fragment {
 
 
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     final CollectionReference docRef = db
             .collection("User");
@@ -159,7 +160,7 @@ public class MA_Final_Fragment extends Fragment {
                 }
 
                 //Set the data in DB
-                db.collection("Test").document("Final_shifts")
+                db.collection("Company").document(""+user.getUid())
                         .set(Final_shifts)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

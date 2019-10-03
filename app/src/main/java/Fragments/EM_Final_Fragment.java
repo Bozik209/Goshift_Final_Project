@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -84,7 +86,7 @@ public class EM_Final_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_em__final_, container, false);
+        View v = inflater.inflate(R.layout.fragment_em__final_, container, false);
         Fiil_Shift(v);
 
         return v;
@@ -94,43 +96,91 @@ public class EM_Final_Fragment extends Fragment {
     private void Fiil_Shift(final View v) {
         final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_em_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
         final int childViewCount = rootView.getChildCount();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        db.collection("Company").document(""+user.getUid())
+//        db.collection("Test").document("Final_shifts")
 
 
-        db.collection("Test").document("Final_shifts")
-                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        db.collection("User").document("" + user.getUid())
+                .collection("UserCompany")
+                .document("Shifts_week").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d(TAG, "documentSnapshot "+documentSnapshot);
-                Log.d(TAG, "documentSnapshot "+documentSnapshot.getData().size());
+                String idMA=documentSnapshot.get("group_name").toString();
 
+                db.collection("Company").document(""+idMA)
+                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.getData().size() > 0) {
+                            for (int i = 0; i < childViewCount; i++) {
+                                View workWithMe = rootView.getChildAt(i);
+                                // chack what is Spinner
+                                if (workWithMe instanceof TextView) {
+                                    TextView textViewCheack = (TextView) workWithMe;
+                                    String IDname = getResources().getResourceEntryName(textViewCheack.getId());
+                                    int IDnumber = textViewCheack.getId();
+                                    //                        Log.d(TAG, "documentSnapshot.get("+IDname+") "+documentSnapshot.get(IDname));
+                                    //                        Log.d(TAG, "documentSnapshot.get("+IDname+").equals(null) "+documentSnapshot.get(IDname).equals(null));
 
+                                    if (!IDname.startsWith("text", 0)) {
+                                        //                            Log.d(TAG, "2IDname " + IDname);
+                                        //                            Log.d(TAG, "2textViewCheack.getText() " + textViewCheack.getText());
 
-                for (int i = 0; i < childViewCount; i++) {
-                    View workWithMe = rootView.getChildAt(i);
-                    // chack what is Spinner
-                    if (workWithMe instanceof TextView) {
-                        TextView textViewCheack = (TextView) workWithMe;
-                        String IDname = getResources().getResourceEntryName(textViewCheack.getId());
-                        int IDnumber = textViewCheack.getId();
-                        Log.d(TAG, "documentSnapshot.get("+IDname+") "+documentSnapshot.get(IDname));
-//                        Log.d(TAG, "documentSnapshot.get("+IDname+").equals(null) "+documentSnapshot.get(IDname).equals(null));
+                                        textViewCheack.setText(documentSnapshot.get(IDname).toString());
 
-                        if (!IDname.startsWith("text",0))
-                        {
-                            Log.d(TAG, "2IDname " + IDname);
-                            Log.d(TAG, "2textViewCheack.getText() " + textViewCheack.getText());
-                            textViewCheack.setText(documentSnapshot.get(IDname).toString());
-
-
+                                    }
+                                }
+                            }
                         }
                     }
-                }
-
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "אין עדיין סידור עבודה", Toast.LENGTH_LONG).show();
+                    }
+                });
 
             }
         });
 
+        Log.d(TAG, "Fiil_Shift: ");
+//        db.collection("Company").document("tes")
+//                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                if (documentSnapshot.getData().size() > 0) {
+//                    for (int i = 0; i < childViewCount; i++) {
+//                        View workWithMe = rootView.getChildAt(i);
+//                        // chack what is Spinner
+//                        if (workWithMe instanceof TextView) {
+//                            TextView textViewCheack = (TextView) workWithMe;
+//                            String IDname = getResources().getResourceEntryName(textViewCheack.getId());
+//                            int IDnumber = textViewCheack.getId();
+//                            //                        Log.d(TAG, "documentSnapshot.get("+IDname+") "+documentSnapshot.get(IDname));
+//                            //                        Log.d(TAG, "documentSnapshot.get("+IDname+").equals(null) "+documentSnapshot.get(IDname).equals(null));
+//
+//                            if (!IDname.startsWith("text", 0)) {
+//                                //                            Log.d(TAG, "2IDname " + IDname);
+//                                //                            Log.d(TAG, "2textViewCheack.getText() " + textViewCheack.getText());
+//
+//                                textViewCheack.setText(documentSnapshot.get(IDname).toString());
+//
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getActivity(), "אין עדיין סידור עבודה", Toast.LENGTH_LONG).show();
+//            }
+//        });
+
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
