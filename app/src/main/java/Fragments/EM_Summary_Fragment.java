@@ -114,7 +114,7 @@ public class EM_Summary_Fragment extends Fragment {
         getHourFromDB(v);
 
         intSalary = hourlyrate * cnt_of_Shift;
-        textView_UserSalary.setText("" + intSalary +"₪");
+        textView_UserSalary.setText( intSalary +"₪");
         Log.d(TAG, "intSalary: "+intSalary);
 
         return v;
