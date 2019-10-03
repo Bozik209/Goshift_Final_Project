@@ -114,7 +114,7 @@ public class EM_Summary_Fragment extends Fragment {
         getHourFromDB(v);
 
         intSalary = hourlyrate * cnt_of_Shift;
-        textView_UserSalary.setText("" + intSalary);
+        textView_UserSalary.setText("" + intSalary +"₪");
         Log.d(TAG, "intSalary: "+intSalary);
 
         return v;
@@ -169,9 +169,19 @@ public class EM_Summary_Fragment extends Fragment {
                                 ArrayList Work_Shifts_Arry = (ArrayList) documentSnapshot.get(spinner.getSelectedItem().toString());
 
 
-                                Log.d(TAG, "Shifts_Arry.size: "+Work_Shifts_Arry.size());
+//                                Log.d(TAG, "Shifts_Arry.size: "+Work_Shifts_Arry.size());
+                                Log.d(TAG, "Shifts_Arry: "+Work_Shifts_Arry);
+                                Log.d(TAG, "Shifts_Arry.!=null: "+(Work_Shifts_Arry!=null));
 
-                                cnt_of_Shift=Work_Shifts_Arry.size()*8;
+                                if (Work_Shifts_Arry!=null) {
+                                    cnt_of_Shift=Work_Shifts_Arry.size()*8;
+                                }
+                                else{
+                                    cnt_of_Shift=0;
+                                    intSalary=0;
+                                    cnt_of_Shift=0;
+                                }
+
                                 textView_CountWorkHours.setText(""+cnt_of_Shift);
 
                                 intSalary = hourlyrate * cnt_of_Shift;
