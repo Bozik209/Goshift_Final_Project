@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -130,7 +131,6 @@ public class MA_Final_Fragment extends Fragment {
         final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
         final int childViewCount = rootView.getChildCount();
 
-
         // Create a new user with a first and last name
         final Map<String, Object> Final_shifts = new HashMap<>();
 
@@ -184,11 +184,11 @@ public class MA_Final_Fragment extends Fragment {
 
     }
 
-    private void organizer_shift(View v) {
+    private void organizer_shift(View view) {
 
-        final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
+        final ViewGroup rootView = (ViewGroup) view.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
         final int childViewCount = rootView.getChildCount();
-        final ListView listView = v.findViewById(R.id.ListViewFinal);
+        final ListView listView = view.findViewById(R.id.ListViewFinal);
 
         for (int i = 0; i < childViewCount; i++) {
             View workWithMe = rootView.getChildAt(i);
@@ -199,7 +199,7 @@ public class MA_Final_Fragment extends Fragment {
                 int IDnumber = textViewCheack.getId();
 
 
-                final TextView clickTextView = (TextView) v.findViewById(IDnumber);
+                final TextView clickTextView = (TextView) view.findViewById(IDnumber);
                 clickTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -208,7 +208,7 @@ public class MA_Final_Fragment extends Fragment {
 
 //                        clickTextView.setText(SelectfromList(v));
 
-
+                        Toast.makeText(getActivity(),"בחר עובד",Toast.LENGTH_LONG).show();
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

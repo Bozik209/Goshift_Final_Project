@@ -241,10 +241,7 @@ public class Em_Scheduling_Fragment extends Fragment {
 //                        .collection("UserCompany").document("36f05C7PhdGMXZL0cEbc")
 //                DocumentReference userRef = db.document("company/users");
 
-                // הכנסה לפי שבוע שבחר ומכניס את המערך של במשמרות
-                // כאן צריך לשים לב לניתוב
-                // TODO :-------------------------
-                // צריך לראות איך עושים את הניתוב שיתאים לכל משתמש
+
                 db.collection("User").document("" + user.getUid())
                         .collection("UserCompany").document("Shifts_week")
                         .update(spinner.getSelectedItem().toString(), new ArrayList(Array_Shifts)).addOnSuccessListener(new OnSuccessListener<Void>() {
