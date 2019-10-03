@@ -107,7 +107,7 @@ public class EM_Final_Fragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String idMA=documentSnapshot.get("group_name").toString();
-                
+
 
                 db.collection("Company").document(""+idMA)
                         .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
