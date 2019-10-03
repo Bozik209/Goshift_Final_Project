@@ -82,7 +82,7 @@ public class EM_Final_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_em__final_, container, false);
-        //Fiil_Shift(v);
+        Fiil_Shift(v);
 
 
 

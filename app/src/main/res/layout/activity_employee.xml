@@ -3,48 +3,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/EM_fragemt_container"
     tools:context="Activitys.EmployeeActivity"
-    android:background="@drawable/dark_blue_background">
+    android:background="@drawable/homebackgrond">
 
     <!-- TODO: find how enter toolbar in all layout-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="4.0"
+
+            >
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"
+                android:background="@drawable/workbackground"
+                android:layout_weight="1.0"
+                android:layout_marginBottom="20dp"
+                />
 
             <TextView
                 android:id="@+id/hello_User"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
                 android:gravity="center"
-                android:textSize="30dp" />
-        </LinearLayout>
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            tools:context="Activitys.EmployeeActivity">
 
-            <!--<Spinner-->
-                <!--android:id="@+id/EM_spinner"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:visibility="visible"-->
-                <!--android:background="@drawable/rounded_spinner"-->
-                <!--tools:context="Activitys.EmployeeActivity" />-->
-        </LinearLayout>
+            <!--            <com.beardedhen.androidbootstrap.AwesomeTextView-->
+<!--                android:id="@+id/hello_User"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_alignParentLeft="true"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_marginStart="161dp"-->
+<!--                android:layout_marginLeft="161dp"-->
+<!--                android:layout_marginBottom="72dp"-->
+<!--                android:gravity="center"-->
+<!--                android:textSize="30dp"-->
+<!--                app:bootstrapBrand="primary"-->
+<!--                app:bootstrapText="שלום"-->
+<!--                app:fontAwesomeIcon="fa_angle_down"-->
+<!--                app:materialIcon="md_3d_rotation" />-->
+
+
+
+
+        </RelativeLayout >
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="5"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/hello_User"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:textSize="30dp" />-->
+<!--        </LinearLayout>-->
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,6 +102,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:weightSum="4.0"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -64,36 +110,50 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:weightSum="4.0"
                     android:orientation="vertical">
 
-                    <Button
+                    <com.beardedhen.androidbootstrap.BootstrapLabel
                         android:id="@+id/EM_Final_button"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="350dp"
+                        android:layout_height="70dp"
                         android:background="@drawable/rounded_button"
+                        android:clickable="true"
+                        android:longClickable="true"
                         android:onClick="Fragment_move"
-                        android:text="לוז \n סופי "
+                        android:shadowColor="@color/black"
+                        android:text="לוז  סופי"
                         android:textSize="30dp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:bootstrapBrand="secondary"
+                        app:bootstrapHeading="h3"
+                        app:roundedCorners="true"
+                        android:layout_weight="1.0"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="2dp"/>
 
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <Button
+                    <com.beardedhen.androidbootstrap.BootstrapLabel
                         android:id="@+id/EM_Summary_button"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="350dp"
+                        android:layout_height="70dp"
                         android:background="@drawable/rounded_button"
+                        android:clickable="true"
+                        android:longClickable="true"
                         android:onClick="Fragment_move"
+                        android:shadowColor="@color/black"
                         android:text="סיכום"
                         android:textSize="30dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:bootstrapBrand="secondary"
+                        app:bootstrapHeading="h3"
+                        app:roundedCorners="true"
+                        android:layout_weight="1.0"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="2dp"
+                        />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -102,6 +162,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:weightSum="4.0"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -109,35 +170,49 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:weightSum="4.0"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/EM_Logout_button"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:background="@drawable/rounded_button"
-                        android:onClick="Fragment_move"
-                        android:text="התנתקות"
-                        android:textSize="30dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <Button
+                    <com.beardedhen.androidbootstrap.BootstrapLabel
                         android:id="@+id/EM_Scheduling_button"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="350dp"
+                        android:layout_height="70dp"
                         android:background="@drawable/rounded_button"
+
+
+                        android:clickable="true"
                         android:onClick="Fragment_move"
+                        android:longClickable="true"
+                        android:shadowColor="@color/black"
                         android:text="שיבוץ"
                         android:textSize="30dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:bootstrapBrand="secondary"
+                        app:bootstrapHeading="h3"
+                        app:roundedCorners="true"
+                        android:layout_weight="1.0"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="2dp"/>
+
+                    <com.beardedhen.androidbootstrap.BootstrapLabel
+                        android:id="@+id/EM_Logout_button"
+                        android:layout_width="350dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/rounded_button"
+                        android:layout_weight="1.0"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="2dp"
+                        android:clickable="true"
+                        android:longClickable="true"
+                        android:onClick="Fragment_move"
+                        android:shadowColor="@color/black"
+                        android:text="התנתקות"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        app:bootstrapBrand="secondary"
+                        app:bootstrapHeading="h3"
+                        app:roundedCorners="true" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -147,7 +222,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="5"
+            android:layout_weight="6.5"
             android:orientation="vertical"/>
 
     </LinearLayout>

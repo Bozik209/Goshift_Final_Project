@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.example.boaz.big_project.R;
 import com.example.boaz.big_project.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,6 +50,7 @@ public class EmployeeActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee);
+        TypefaceProvider.registerDefaultIconSets();
 
 
         textView_helloUser = findViewById(R.id.hello_User);
