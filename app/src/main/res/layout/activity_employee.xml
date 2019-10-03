@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/EM_fragemt_container"
     tools:context="Activitys.EmployeeActivity"
-    android:background="@drawable/dark_blue_background">
+    android:background="@color/white">
 
     <!-- TODO: find how enter toolbar in all layout-->
 
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
                 android:layout_centerInParent="true"
-                android:background="@drawable/workbackground"
+                android:background="@drawable/work_background"
                 android:layout_weight="1.0"
                 android:layout_marginBottom="20dp"
                 />
@@ -126,7 +126,7 @@
                         android:textSize="30dp"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        app:bootstrapBrand="secondary"
+                        app:bootstrapBrand="primary"
                         app:bootstrapHeading="h3"
                         app:roundedCorners="true"
                         android:layout_weight="1.0"
@@ -146,7 +146,7 @@
                         android:text="סיכום"
                         android:textSize="30dp"
                         android:textStyle="bold"
-                        app:bootstrapBrand="secondary"
+                        app:bootstrapBrand="primary"
                         app:bootstrapHeading="h3"
                         app:roundedCorners="true"
                         android:layout_weight="1.0"
@@ -187,7 +187,7 @@
                         android:text="שיבוץ"
                         android:textSize="30dp"
                         android:textStyle="bold"
-                        app:bootstrapBrand="secondary"
+                        app:bootstrapBrand="primary"
                         app:bootstrapHeading="h3"
                         app:roundedCorners="true"
                         android:layout_weight="1.0"
@@ -209,7 +209,7 @@
                         android:text="התנתקות"
                         android:textSize="30dp"
                         android:textStyle="bold"
-                        app:bootstrapBrand="secondary"
+                        app:bootstrapBrand="primary"
                         app:bootstrapHeading="h3"
                         app:roundedCorners="true" />
 

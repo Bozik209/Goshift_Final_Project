@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.nfc.Tag;
@@ -207,6 +208,7 @@ public class Em_Scheduling_Fragment extends Fragment {
 
         /** Chack all the view in fragment if is chackbox and if is clicked */
         //when you click on the button is enter all the ID checkbox that clicked to array_id
+
         Button button = (Button) returnView.findViewById(R.id.send_button);
         button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -275,6 +277,7 @@ public class Em_Scheduling_Fragment extends Fragment {
 //                        });
             }
         });
+
 
         /** Button the clear all selected checkbox **/
         Button Clear_button = (Button) returnView.findViewById(R.id.Clear_button);
