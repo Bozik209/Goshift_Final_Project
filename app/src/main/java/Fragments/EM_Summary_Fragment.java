@@ -148,7 +148,7 @@ public class EM_Summary_Fragment extends Fragment {
                     if (document.exists()) {
 
                         hourlyrate = document.getLong("HourlyRate").intValue();
-                        
+
                         textView_UserHourlyRate.setText(""+hourlyrate);
 
                         cntHours = document.getLong("countWorkHours").intValue();

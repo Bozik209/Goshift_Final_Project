@@ -5,16 +5,9 @@
     android:id="@+id/fragment_em__scheduling_ID"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/homebackgrond"
+    android:background="@color/backgroundcolor"
     tools:context="Fragments.Em_Scheduling_Fragment">
 
-    <!--<android.support.constraint.ConstraintLayout-->
-    <!--android:id="@+id/linearLayoutCompat"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-    <!--tools:context="Fragments.Em_Scheduling_Fragment"-->
-    <!--tools:showIn="@layout/app_bar_main">-->
 
     <Button
         android:id="@+id/Clear_button"
