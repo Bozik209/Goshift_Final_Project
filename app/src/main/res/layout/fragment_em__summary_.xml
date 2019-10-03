@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dark_blue_background"
+    android:background="@color/backgroundcolor"
     tools:context="Fragments.Em_Scheduling_Fragment"
     android:paddingTop="20dp"
     android:paddingBottom="20dp">
@@ -32,10 +32,9 @@
             <TextView
                 android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.6"
+                android:layout_height="70dp"
                 android:text="מספר שעות"
-                android:textColor="@color/black"
+                android:textColor="@color/textTitle"
                 android:textStyle="bold"
                 android:textSize="50dp"
                 />
@@ -43,12 +42,10 @@
             <TextView
                 android:id="@+id/EM_countWorkHours"
                 android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button"
                 android:gravity="center"
-                android:text="100"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="50dp"/>
         </LinearLayout>
@@ -63,10 +60,9 @@
             <TextView
                 android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.6"
+                android:layout_height="70dp"
                 android:text="תעריף לשעה"
-                android:textColor="@color/black"
+                android:textColor="@color/textTitle"
                 android:textStyle="bold"
                 android:textSize="50dp"
                 />
@@ -74,11 +70,10 @@
             <TextView
                 android:id="@+id/EM_HourlyRate"
                 android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button"
                 android:gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="50dp"/>
         </LinearLayout>
@@ -90,13 +85,13 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            
             <TextView
                 android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.6"
+                android:layout_height="70dp"
                 android:text="שכר"
-                android:textColor="@color/black"
+                android:textColor="@color/textTitle"
                 android:textStyle="bold"
                 android:textSize="50dp"
                 />
@@ -104,11 +99,10 @@
             <TextView
                 android:id="@+id/EM_salary"
                 android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button"
                 android:gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="50dp"/>
         </LinearLayout>

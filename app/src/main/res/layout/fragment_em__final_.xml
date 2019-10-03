@@ -5,7 +5,7 @@
     android:id="@+id/fragment_em_final"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dark_blue_background">
+    android:background="@color/backgroundcolor">
 
 
     <TextView
@@ -26,15 +26,15 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="9dp"
+        android:layout_marginBottom="10dp"
         android:text="לילה"
         android:textColor="@color/textTitle"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4" />
 
     <TextView
         android:id="@+id/textView8"
@@ -82,22 +82,6 @@
         app:layout_constraintTop_toTopOf="@+id/SuMo" />
 
     <TextView
-        android:id="@+id/WeNi"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:gravity="center"
-        android:textColor="@color/texty"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/WeEv"
-        app:layout_constraintEnd_toStartOf="@+id/WeEv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/WeEv" />
-
-    <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -113,22 +97,6 @@
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
     <TextView
-        android:id="@+id/WeMo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:textColor="@color/texty"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/ThMo"
-        app:layout_constraintEnd_toStartOf="@+id/textView11"
-        app:layout_constraintStart_toEndOf="@+id/WeEv"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
-
-    <TextView
         android:id="@+id/WeEv"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -141,6 +109,38 @@
         app:layout_constraintEnd_toStartOf="@+id/WeMo"
         app:layout_constraintStart_toEndOf="@+id/WeNi"
         app:layout_constraintTop_toTopOf="@+id/WeMo" />
+
+    <TextView
+        android:id="@+id/WeMo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="13dp"
+        android:gravity="center"
+        android:textColor="@color/texty"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        app:layout_constraintEnd_toStartOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/WeEv"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <TextView
+        android:id="@+id/WeNi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center"
+        android:textColor="@color/texty"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/WeEv"
+        app:layout_constraintEnd_toStartOf="@+id/WeEv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/WeEv" />
 
     <TextView
         android:id="@+id/SatNi"
@@ -320,6 +320,20 @@
         app:layout_constraintTop_toTopOf="@+id/textView12" />
 
     <TextView
+        android:id="@+id/TuEv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:gravity="center"
+        android:textColor="@color/texty"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/TuMo"
+        app:layout_constraintEnd_toStartOf="@+id/TuMo"
+        app:layout_constraintStart_toEndOf="@+id/TuNi"
+        app:layout_constraintTop_toTopOf="@+id/TuMo" />
+
+    <TextView
         android:id="@+id/TuNi"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -336,34 +350,18 @@
         app:layout_constraintTop_toTopOf="@+id/TuEv" />
 
     <TextView
-        android:id="@+id/TuEv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
-        android:gravity="center"
-        android:textColor="@color/texty"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/TuMo"
-        app:layout_constraintEnd_toStartOf="@+id/TuMo"
-        app:layout_constraintStart_toEndOf="@+id/TuNi"
-        app:layout_constraintTop_toTopOf="@+id/TuMo" />
-
-    <TextView
         android:id="@+id/TuMo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="145dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="145dp"
         android:gravity="center"
         android:textColor="@color/texty"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
         app:layout_constraintEnd_toStartOf="@+id/textView10"
         app:layout_constraintStart_toEndOf="@+id/TuEv"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/textView10" />
 
     <TextView
         android:id="@+id/textView10"

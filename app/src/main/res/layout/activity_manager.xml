@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +8,7 @@
     android:id="@+id/MA_fragemt_container"
     tools:context="Activitys.ManagerActivity"
     android:background="#ffff">
+
     <!-- TODO: find how enter toolbar in all layout-->
 
     <LinearLayout
@@ -38,21 +40,14 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="96dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginRight="6dp"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="30dp"
+                android:textSize="40dp"
                 android:textStyle="bold" />
 
-
-            <!--            <TextView-->
-<!--                android:id="@+id/MA_hello_User"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center"-->
-<!--                android:textSize="30dp" />-->
         </RelativeLayout >
 
 
@@ -113,7 +108,7 @@
                         android:longClickable="true"
                         android:onClick="Fragment_move"
                         android:shadowColor="@color/black"
-                        android:text="סיכום"
+                        android:text="סיכום שכר"
                         android:textSize="30dp"
                         android:textStyle="bold"
                         app:bootstrapBrand="primary"
