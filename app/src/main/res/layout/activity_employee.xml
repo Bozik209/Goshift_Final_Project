@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/EM_fragemt_container"
     tools:context="Activitys.EmployeeActivity"
-    android:background="@drawable/homebackgrond">
+    android:background="@drawable/dark_blue_background">
 
     <!-- TODO: find how enter toolbar in all layout-->
 

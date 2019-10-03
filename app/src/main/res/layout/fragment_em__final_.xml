@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_em_final"
-    android:background="@drawable/dark_blue_background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/dark_blue_background">
 
 
     <TextView
         android:id="@+id/SuNi"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="34dp"
+
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         android:layout_marginBottom="15dp"
-        android:focusable="false"
         android:clickable="false"
-
+        android:focusable="false"
         app:layout_constraintBottom_toTopOf="@+id/MoNi"
         app:layout_constraintEnd_toStartOf="@+id/SuEv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/TuMo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintBottom_toTopOf="@+id/WeMo"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
         app:layout_constraintStart_toEndOf="@+id/TuEv"
-        app:layout_constraintTop_toBottomOf="@+id/MoMo" />
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <TextView
         android:id="@+id/TuNi"
@@ -47,23 +47,23 @@
         android:layout_marginLeft="4dp"
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintBottom_toTopOf="@+id/WeNi"
+        app:layout_constraintBottom_toBottomOf="@+id/TuEv"
         app:layout_constraintEnd_toStartOf="@+id/TuEv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MoNi" />
+        app:layout_constraintTop_toTopOf="@+id/TuEv" />
 
     <TextView
         android:id="@+id/WeEv"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="116dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginBottom="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/ThEv"
+        android:layout_marginBottom="116dp"
+        app:layout_constraintBottom_toTopOf="@+id/SatEv"
         app:layout_constraintEnd_toStartOf="@+id/WeMo"
         app:layout_constraintStart_toEndOf="@+id/WeNi"
-        app:layout_constraintTop_toBottomOf="@+id/TuEv" />
+        app:layout_constraintTop_toBottomOf="@+id/SuMo" />
 
     <TextView
         android:id="@+id/ThEv"
@@ -71,11 +71,10 @@
         android:layout_height="0dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/FrEv"
+        app:layout_constraintBottom_toBottomOf="@+id/ThMo"
         app:layout_constraintEnd_toStartOf="@+id/ThMo"
         app:layout_constraintStart_toEndOf="@+id/ThNi"
-        app:layout_constraintTop_toBottomOf="@+id/WeEv" />
+        app:layout_constraintTop_toTopOf="@+id/ThMo" />
 
     <TextView
         android:id="@+id/ThNi"
@@ -85,48 +84,49 @@
         android:layout_marginLeft="4dp"
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintBottom_toTopOf="@+id/FrNi"
+        app:layout_constraintBottom_toBottomOf="@+id/ThEv"
         app:layout_constraintEnd_toStartOf="@+id/ThEv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/WeNi" />
+        app:layout_constraintTop_toTopOf="@+id/ThEv" />
 
     <TextView
         android:id="@+id/FrEv"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="49dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginBottom="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/SatEv"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/SatEv"
         app:layout_constraintEnd_toStartOf="@+id/FrMo"
         app:layout_constraintStart_toEndOf="@+id/FrNi"
-        app:layout_constraintTop_toBottomOf="@+id/ThEv" />
+        app:layout_constraintTop_toTopOf="@+id/ThEv" />
 
     <TextView
         android:id="@+id/SatMo"
         android:layout_width="0dp"
         android:layout_height="34dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView14"
         app:layout_constraintStart_toEndOf="@+id/SatEv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/SuMo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="15dp"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintBottom_toTopOf="@+id/MoMo"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
         app:layout_constraintStart_toEndOf="@+id/SuEv"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/MoNi"
@@ -136,33 +136,34 @@
         android:layout_marginLeft="4dp"
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/TuNi"
+        app:layout_constraintBottom_toBottomOf="@+id/MoEv"
         app:layout_constraintEnd_toStartOf="@+id/MoEv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SuNi" />
+        app:layout_constraintTop_toTopOf="@+id/MoEv" />
 
     <TextView
         android:id="@+id/TuEv"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintBottom_toTopOf="@+id/WeEv"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
         app:layout_constraintEnd_toStartOf="@+id/TuMo"
         app:layout_constraintStart_toEndOf="@+id/TuNi"
-        app:layout_constraintTop_toBottomOf="@+id/MoEv" />
+        app:layout_constraintTop_toBottomOf="@+id/MoMo" />
 
     <TextView
         android:id="@+id/WeMo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:layout_marginBottom="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/ThMo"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="34dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        app:layout_constraintEnd_toStartOf="@+id/textView11"
         app:layout_constraintStart_toEndOf="@+id/WeEv"
         app:layout_constraintTop_toBottomOf="@+id/TuMo" />
 
@@ -174,46 +175,48 @@
         android:layout_marginLeft="4dp"
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/ThNi"
+        app:layout_constraintBottom_toBottomOf="@+id/WeEv"
         app:layout_constraintEnd_toStartOf="@+id/WeEv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TuNi" />
+        app:layout_constraintTop_toTopOf="@+id/WeEv" />
 
     <TextView
         android:id="@+id/ThMo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/FrMo"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="34dp"
+        android:layout_marginTop="99dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="99dp"
+        app:layout_constraintBottom_toBottomOf="@+id/SatMo"
+        app:layout_constraintEnd_toStartOf="@+id/textView12"
         app:layout_constraintStart_toEndOf="@+id/ThEv"
-        app:layout_constraintTop_toBottomOf="@+id/WeMo" />
+        app:layout_constraintTop_toTopOf="@+id/TuMo" />
 
     <TextView
         android:id="@+id/FrMo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:layout_marginBottom="451dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="34dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintBottom_toTopOf="@+id/SatMo"
+        app:layout_constraintEnd_toStartOf="@+id/textView13"
         app:layout_constraintStart_toEndOf="@+id/FrEv"
-        app:layout_constraintTop_toBottomOf="@+id/ThMo" />
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <TextView
         android:id="@+id/FrNi"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="34dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/SatNi"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toStartOf="@+id/FrEv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ThNi" />
@@ -221,92 +224,87 @@
     <TextView
         android:id="@+id/SatEv"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
-        android:layout_marginBottom="399dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/SatMo"
         app:layout_constraintStart_toEndOf="@+id/SatNi"
-        app:layout_constraintTop_toBottomOf="@+id/FrEv" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/SatNi"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="405dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/SatEv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FrNi" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/SuEv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
-        android:layout_marginBottom="23dp"
-        app:layout_constraintBottom_toTopOf="@+id/MoEv"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        app:layout_constraintBottom_toBottomOf="@+id/SuNi"
         app:layout_constraintEnd_toStartOf="@+id/SuMo"
         app:layout_constraintStart_toEndOf="@+id/SuNi"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toTopOf="@+id/SuNi" />
 
     <TextView
         android:id="@+id/MoMo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:layout_marginBottom="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/TuMo"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="34dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:layout_marginBottom="66dp"
+        app:layout_constraintBottom_toTopOf="@+id/WeMo"
+        app:layout_constraintEnd_toStartOf="@+id/textView9"
         app:layout_constraintStart_toEndOf="@+id/MoEv"
-        app:layout_constraintTop_toBottomOf="@+id/SuMo" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/MoEv"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="66dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginBottom="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/TuEv"
+        android:layout_marginBottom="66dp"
+        app:layout_constraintBottom_toTopOf="@+id/WeEv"
         app:layout_constraintEnd_toStartOf="@+id/MoMo"
         app:layout_constraintStart_toEndOf="@+id/MoNi"
-        app:layout_constraintTop_toBottomOf="@+id/SuEv" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="71dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginRight="26dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginBottom="10dp"
         android:text="בוקר"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/SuMo"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="@+id/SuMo" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="71dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginRight="26dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="10dp"
         android:text="ערב"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/SuEv"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="@+id/SuEv" />
 
     <TextView
         android:id="@+id/textView7"
@@ -325,72 +323,91 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:text="ראשון"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/SuMo"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:text="שני"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/MoMo"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginBottom="15dp"
         android:text="שלישי"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TuMo" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
         android:text="רביעי"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/WeMo"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
         android:text="חמישי"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ThMo"
+        app:layout_constraintTop_toTopOf="@+id/guideline9" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
         android:text="שישי"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/FrMo"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
         android:text="שבת"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintStart_toEndOf="@+id/SatMo"
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline4"
@@ -420,9 +437,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.11820331"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintGuide_percent="0.11820331" />
 
 
     <android.support.constraint.Guideline
@@ -430,9 +445,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.17730497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintGuide_percent="0.17730497" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline7"
@@ -453,9 +466,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.35460994"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintGuide_percent="0.35460994" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline10"
@@ -469,9 +480,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.47281325"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintGuide_percent="0.47281325" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline12"
@@ -482,4 +491,3 @@
 
 
 </android.support.constraint.ConstraintLayout>
-

@@ -9,17 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.example.boaz.big_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -33,6 +31,12 @@ import static android.support.constraint.Constraints.TAG;
  * create an instance of this fragment.
  */
 public class EM_Final_Fragment extends Fragment {
+
+    private TextView textView_SuMo;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    DocumentReference docRef = db.collection("Test").document("Final_shifts");
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -75,7 +79,6 @@ public class EM_Final_Fragment extends Fragment {
         }
     }
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,16 +87,9 @@ public class EM_Final_Fragment extends Fragment {
         View v=inflater.inflate(R.layout.fragment_em__final_, container, false);
         Fiil_Shift(v);
 
-
-
-        final TextView textview = (TextView) v.findViewById(R.id.SuMo);
-        Log.d(TAG, "1textview.getText(): "+textview.getText());
-        textview.setText("test");
-        Log.d(TAG, "2textview.getText(): "+textview.getText());
-
-
-        return inflater.inflate(R.layout.fragment_em__final_, container, false);
+        return v;
     }
+
 
     private void Fiil_Shift(final View v) {
         final ViewGroup rootView = (ViewGroup) v.findViewById(R.id.fragment_em_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
@@ -123,10 +119,8 @@ public class EM_Final_Fragment extends Fragment {
                         {
                             Log.d(TAG, "2IDname " + IDname);
                             Log.d(TAG, "2textViewCheack.getText() " + textViewCheack.getText());
-//                            textViewCheack.setText(documentSnapshot.get(IDname).toString());
-                            TextView textView = (TextView) v.findViewById(IDnumber);
-                            Log.d(TAG, "4textView: "+textView);
-                            textView.setText("Ffff");
+                            textViewCheack.setText(documentSnapshot.get(IDname).toString());
+
 
                         }
                     }

@@ -16,5 +16,8 @@
     <color name="white">#ffffff</color>
     <color name="gray">#CECECE</color>
 
+    <color name="textTitle">#CECECE</color>
+    <color name="texty">#CECECE</color>
+
 
 </resources>
