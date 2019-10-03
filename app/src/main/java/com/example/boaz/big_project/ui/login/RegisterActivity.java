@@ -265,6 +265,7 @@ public class RegisterActivity extends AppCompatActivity implements
                             userMAP.put("RealUserID",userID);
                             userMAP.put("isMang", IsManger);
                             userMAP.put("HourlyRate",29.12);
+                            userMAP.put("countWorkHours",0);
                             userCompanyMAP.put("group_name", group);
 
                             for (int i=1;i<=52;i++)
