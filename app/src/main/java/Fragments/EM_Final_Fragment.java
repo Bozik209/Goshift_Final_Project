@@ -128,7 +128,16 @@ public class EM_Final_Fragment extends Fragment {
                                         //                            Log.d(TAG, "2IDname " + IDname);
                                         //                            Log.d(TAG, "2textViewCheack.getText() " + textViewCheack.getText());
 
-                                        textViewCheack.setText(documentSnapshot.get(IDname).toString());
+
+                                        Log.d(TAG, "documentSnapshot.get(IDname) "+documentSnapshot);
+                                        Log.d(TAG, "documentSnapshot.get(IDname) "+documentSnapshot.get(IDname));
+
+
+                                        // Chack if the shifts is filed
+                                        if (documentSnapshot.get(IDname) != null && documentSnapshot.get(IDname).equals(documentSnapshot.get(IDname).toString())) {
+                                             textViewCheack.setText(documentSnapshot.get(IDname).toString());
+                                        }
+
 
                                     }
                                 }
