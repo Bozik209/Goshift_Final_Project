@@ -111,6 +111,7 @@ public class MA_Final_Fragment extends Fragment {
             .collection("User");
     final Calendar calender = Calendar.getInstance(); // calender.get(Calendar.WEEK_OF_YEAR)
     final String Current_Week = String.valueOf(calender.get(Calendar.WEEK_OF_YEAR));
+    final ArrayList<String> Emp_name = new ArrayList<>();  // ArrayList of employee
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -149,9 +150,6 @@ public class MA_Final_Fragment extends Fragment {
 //                        Log.d(TAG, ""+IDname+".startsWith(\"text\",0): "+IDname.startsWith("text",0));
                         if (!IDname.startsWith("text",0))
                         {
-                            Log.d(TAG, "2IDname " + IDname);
-
-                            Log.d(TAG, "2textViewCheack.getText() " + textViewCheack.getText());
                             Final_shifts.put(IDname,textViewCheack.getText());
                         }
 
@@ -184,7 +182,13 @@ public class MA_Final_Fragment extends Fragment {
 
     }
 
-    private void organizer_shift(View view) {
+    private void organizer_shift(final View view) {
+
+        final ArrayList<String> Emp_name_by_Shiff = new ArrayList<>();  // ArrayList of employee
+        final CollectionReference docRef = db.collection("User"); // db path
+
+
+
 
         final ViewGroup rootView = (ViewGroup) view.findViewById(R.id.fragment_ma_final).getRootView();  // מקבל את כל VIEW שיש בפרימנט
         final int childViewCount = rootView.getChildCount();
@@ -203,12 +207,158 @@ public class MA_Final_Fragment extends Fragment {
                 clickTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Log.d(TAG, "clickTextView.getText: " + clickTextView.getText());
-//                        Log.d(TAG, "clickTextView.getText IDname: " + IDname);
-
-//                        clickTextView.setText(SelectfromList(v));
-
                         Toast.makeText(getActivity(),"בחר עובד",Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "IDname: "+IDname);
+//                        Emp_name_by_Shiff.clear();
+
+                        docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
+                                for (final DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    // check if is Employee
+                                    if (documentSnapshot.get("isMang").toString().equals("false")) {
+                                        // Run again on DB
+                                        db.collection("User").document("" + documentSnapshot.getId())
+                                                .collection("UserCompany").document("Shifts_week").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                DocumentSnapshot document = task.getResult();
+
+                                                if (document.get(Current_Week) != null) {
+
+                                                    ArrayList Shifts_Arry = (ArrayList) document.get(Current_Week);
+                                                    if (Shifts_Arry.contains(IDname))
+                                                    {
+                                                        Emp_name_by_Shiff.add(documentSnapshot.get("name").toString());
+                                                    }
+//                                                    ListView lV = (ListView) view.findViewById(R.id.ListViewFinal);
+//                                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Emp_name){
+//                                                        @Override
+//                                                        public View getView(int position, View convertView, ViewGroup parent){
+//                                                            // Get the Item from ListView
+//                                                            Log.d(TAG, "--------------------------------------------------------------------");
+//                                                            Log.d(TAG, "Emp_name "+Emp_name);
+//                                                            Log.d(TAG, "Emp_name_by_Shiff "+Emp_name_by_Shiff);
+//                                                            Log.d(TAG, "Emp_name_by_Shiff "+Emp_name_by_Shiff.size());
+//
+//                                                            Log.d(TAG, "Emp_name.contains(Emp_name_by_Shiff) "+Emp_name.contains(Emp_name_by_Shiff));
+//
+//                                                            for (String e: Emp_name_by_Shiff)
+//                                                            {
+//                                                                Log.d(TAG, "foreche "+e);
+//                                                                Log.d(TAG, "Emp_name.contains("+e+") "+Emp_name.contains(e));
+//
+//                                                                if (Emp_name.contains(e))
+//                                                                {
+//                                                                    View view = super.getView(position, convertView, parent);
+//
+//                                                                    // Initialize a TextView for ListView each Item
+//                                                                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
+//
+//                                                                    // Set the text color of TextView (ListView Item)
+//                                                                    tv.setTextColor(getResources().getColor(R.color.green));
+//
+//                                                                }
+//                                                            }
+//                                                            View view = super.getView(position, convertView, parent);
+//
+//                                                            // Initialize a TextView for ListView each Item
+//                                                            TextView tv = (TextView) view.findViewById(android.R.id.text1);
+//
+////                                                            // Set the text color of TextView (ListView Item)
+////                                                            tv.setTextColor(getResources().getColor(R.color.green));
+//
+//                                                            // Generate ListView Item using TextView
+//                                                            return view;
+//                                                        }
+//                                                    };
+//                                                    lV.setAdapter(adapter);
+
+                                                };
+
+                                            }
+                                        });
+
+                                    }
+                                }
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
+
+//                        final ArrayList<String> Emp_name = new ArrayList<>();  // ArrayList of employee
+//                        final CollectionReference docRef = db.collection("User"); // db path
+//
+//                        docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onSuccess(final QuerySnapshot queryDocumentSnapshots) {
+//
+//                                for (final DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+//                                    // check if is Employee
+//                                    if (documentSnapshot.get("isMang").toString().equals("false")) {
+//                                        // Enter the name of employee to ArrayList
+//                                        Emp_name_byShiff.add(documentSnapshot.get("name").toString());
+//                                    }
+//                                }
+//                                // Display the name in the ListView
+//                                ListView lV = (ListView) view.findViewById(R.id.ListViewFinal);
+//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Emp_name);
+//                                lV.setAdapter(adapter);
+//
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//
+//                            }
+//                        });
+
+                        ListView lV = (ListView) view.findViewById(R.id.ListViewFinal);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Emp_name){
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent){
+                                // Get the Item from ListView
+                                Log.d(TAG, "--------------------------------------------------------------------");
+                                Log.d(TAG, "Emp_name "+Emp_name);
+                                Log.d(TAG, "Emp_name_by_Shiff "+Emp_name_by_Shiff);
+
+                                Log.d(TAG, "Emp_name.contains(Emp_name_by_Shiff) "+Emp_name.contains(Emp_name_by_Shiff));
+
+                                for (String e: Emp_name_by_Shiff)
+                                {
+                                    Log.d(TAG, "foreche "+e);
+                                    Log.d(TAG, "Emp_name.contains("+e+") "+Emp_name.contains(e));
+
+                                    if (Emp_name.contains(e))
+                                    {
+                                        View view = super.getView(position, convertView, parent);
+
+                                        // Initialize a TextView for ListView each Item
+                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+                                        // Set the text color of TextView (ListView Item)
+                                        tv.setTextColor(getResources().getColor(R.color.green));
+
+                                    }
+                                }
+                                View view = super.getView(position, convertView, parent);
+
+                                // Initialize a TextView for ListView each Item
+                                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+//                                                            // Set the text color of TextView (ListView Item)
+//                                                            tv.setTextColor(getResources().getColor(R.color.green));
+
+                                // Generate ListView Item using TextView
+                                return view;
+                            }
+                        };
+                        lV.setAdapter(adapter);
+
+
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -314,7 +464,7 @@ public class MA_Final_Fragment extends Fragment {
     // Fiil the ListView in all Emp & MA name
     private void List_fiil(final View returnView) {
 
-        final ArrayList<String> Emp_name = new ArrayList<>();  // ArrayList of employee
+//        final ArrayList<String> Emp_name = new ArrayList<>();  // ArrayList of employee
         final CollectionReference docRef = db.collection("User"); // db path
 
         docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
