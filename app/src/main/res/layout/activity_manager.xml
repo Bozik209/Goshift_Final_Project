@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/MA_fragemt_container"
     tools:context="Activitys.ManagerActivity"
-    android:background="#ffff">
+    android:background="@color/backgroundcolor">
 
     <!-- TODO: find how enter toolbar in all layout-->
 
@@ -16,249 +15,114 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="5.5"
-            android:layout_marginBottom="20dp"
+            android:layout_weight="6"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/work_background"
+            >
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitEnd"
-                android:layout_centerInParent="true"
-                android:background="@drawable/work_background"
-                />
 
             <TextView
                 android:id="@+id/MA_hello_User"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginRight="6dp"
-                android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="40dp"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:layout_marginTop="60dp"
+                android:textSize="40dp"  />
 
-        </RelativeLayout >
+        </LinearLayout >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+            <Button
+                android:id="@+id/MA_Final_button"
+                android:text="לוז  סופי"
+                android:layout_width="350dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_button"
+                android:onClick="Fragment_move"
+                android:textSize="30dp"
+                android:textColor="@color/textyW"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <com.beardedhen.androidbootstrap.BootstrapLabel
-                        android:id="@+id/MA_Final_button"
-                        android:layout_width="350dp"
-                        android:layout_height="70dp"
-                        android:clickable="true"
-                        android:longClickable="true"
-                        android:onClick="Fragment_move"
-                        android:shadowColor="@color/black"
-                        android:text="לוז  סופי"
-                        android:textSize="30dp"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapHeading="h3"
-                        app:roundedCorners="true"
-                        android:layout_weight="1.0"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="2dp"
-                        />
+            <Button
+                android:id="@+id/MA_Scheduling_button"
+                android:text="שיבוץ משמרות"
+                android:layout_width="350dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_button"
+                android:onClick="Fragment_move"
+                android:textSize="30dp"
+                android:textColor="@color/textyW"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"/>
 
-                </LinearLayout>
+            <Button
+                android:id="@+id/MA_Summary_button"
+                android:text="סיכום שכר"
+                android:layout_width="350dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_button"
+                android:onClick="Fragment_move"
+                android:textSize="30dp"
+                android:textColor="@color/textyW"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+            <Button
+                android:id="@+id/MA_EmpList_button"
+                android:text="רשימת עובדים"
+                android:layout_width="350dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_button"
+                android:onClick="Fragment_move"
+                android:textSize="30dp"
+                android:textColor="@color/textyW"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"/>
 
-                    <com.beardedhen.androidbootstrap.BootstrapLabel
-                        android:id="@+id/MA_Summary_button"
-                        android:layout_width="350dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/rounded_button"
-                        android:clickable="true"
-                        android:longClickable="true"
-                        android:onClick="Fragment_move"
-                        android:shadowColor="@color/black"
-                        android:text="סיכום שכר"
-                        android:textSize="30dp"
-                        android:textStyle="bold"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapHeading="h3"
-                        app:roundedCorners="true"
-                        android:layout_weight="1.0"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="2dp"
-                        />
+            <Button
+                android:id="@+id/MA_CopyID_button"
+                android:text="העתקת ID"
+                android:layout_width="350dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_button"
+                android:onClick="Fragment_move"
+                android:textSize="30dp"
+                android:textColor="@color/textyW"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"/>
 
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <com.beardedhen.androidbootstrap.BootstrapLabel
-                        android:id="@+id/MA_Scheduling_button"
-                        android:layout_width="350dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/rounded_button"
-                        android:clickable="true"
-                        android:onClick="Fragment_move"
-                        android:longClickable="true"
-                        android:shadowColor="@color/black"
-                        android:text="שיבוץ"
-                        android:textSize="30dp"
-                        android:textStyle="bold"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapHeading="h3"
-                        app:roundedCorners="true"
-                        android:layout_weight="1.0"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="2dp"/>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <com.beardedhen.androidbootstrap.BootstrapLabel
-                        android:id="@+id/MA_EmpList_button"
-                        android:layout_width="350dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/rounded_button"
-                        android:layout_weight="1.0"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="2dp"
-                        android:clickable="true"
-                        android:longClickable="true"
-                        android:onClick="Fragment_move"
-                        android:shadowColor="@color/black"
-                        android:text="רשימת עובדים"
-                        android:textSize="30dp"
-                        android:textStyle="bold"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapHeading="h3"
-                        app:roundedCorners="true" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <com.beardedhen.androidbootstrap.BootstrapLabel
-                        android:id="@+id/MA_CopyID_button"
-                        android:layout_width="350dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/rounded_button"
-                        android:layout_weight="1.0"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="2dp"
-                        android:clickable="true"
-                        android:longClickable="true"
-                        android:onClick="Fragment_move"
-                        android:shadowColor="@color/black"
-                        android:text="העתקת ID"
-                        android:textSize="30dp"
-                        android:textStyle="bold"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapHeading="h3"
-                        app:roundedCorners="true" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <com.beardedhen.androidbootstrap.BootstrapLabel
-                        android:id="@+id/MA_Logout_button"
-                        android:layout_width="350dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/rounded_button"
-                        android:layout_weight="1.0"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="2dp"
-                        android:clickable="true"
-                        android:longClickable="true"
-                        android:onClick="Fragment_move"
-                        android:shadowColor="@color/black"
-                        android:text="התנתקות"
-                        android:textSize="30dp"
-                        android:textStyle="bold"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapHeading="h3"
-                        app:roundedCorners="true" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
+            <Button
+                android:id="@+id/MA_Logout_button"
+                android:text="התנתקות"
+                android:layout_width="350dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_button"
+                android:onClick="Fragment_move"
+                android:textSize="30dp"
+                android:textColor="@color/textyW"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"/>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="6.5"
-            android:orientation="vertical" />
 
     </LinearLayout>
 

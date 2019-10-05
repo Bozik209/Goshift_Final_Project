@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_MA__scheduling_ID"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/design_default_color_primary"
+    android:background="@color/backgroundcolor"
     tools:context="Fragments.MA_Scheduling_Fragment">
 
-    <!--<android.support.constraint.ConstraintLayout-->
-    <!--android:id="@+id/linearLayoutCompat"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-    <!--tools:context="Fragments.Em_Scheduling_Fragment"-->
-    <!--tools:showIn="@layout/app_bar_main">-->
 
     <Button
         android:id="@+id/Clear_button"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginBottom="32dp"
         android:text="ניקוי"
         android:textStyle="bold"
+        android:textSize="30dp"
+        android:background="@drawable/rounded_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/send_button"/>
 
     <Button
         android:id="@+id/send_button"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
+        android:textSize="30dp"
         android:textStyle="bold"
         android:text="שליחה"
+        android:background="@drawable/rounded_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Clear_button" />
@@ -239,11 +233,11 @@
 
     <Spinner
         android:id="@+id/Week_spinner"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_marginTop="39dp"
         android:layout_marginBottom="8dp"
-        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/guideline_TopDays"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -251,30 +245,16 @@
 
     <!--=====================Thursday=====================-->
 
-    <TextView
-        android:id="@+id/ID_Title_Day"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginRight="23dp"
-        android:text="@string/Title_Day"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_TitleRight"
-        app:layout_constraintTop_toTopOf="@+id/ID_Day_Sun1" />
 
     <TextView
         android:id="@+id/ID_Title_Morning"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:text="@string/Title_Morning"
+        android:textColor="@color/textTitle"
         android:textSize="20dp"
-        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/SuMo"
         app:layout_constraintTop_toTopOf="@+id/SuMo" />
@@ -288,7 +268,7 @@
         android:layout_marginBottom="5dp"
         android:text="@string/Title_Evening"
         android:textSize="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/textTitle"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/SuEv"
         app:layout_constraintStart_toStartOf="@+id/guideline_TitleLeft" />
@@ -301,7 +281,7 @@
         android:layout_marginLeft="18dp"
         android:layout_marginBottom="5dp"
         android:textSize="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/textTitle"
         android:textStyle="bold"
         android:text="@string/Title_Night"
         app:layout_constraintBottom_toBottomOf="@+id/SuNi"
@@ -317,8 +297,8 @@
         android:layout_marginLeft="2dp"
         android:layout_marginBottom="17dp"
         android:text="@string/Day_Sun1"
-        android:textSize="12dp"
-        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textColor="@color/textTitle"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/SuMo"
         app:layout_constraintStart_toStartOf="@+id/SuMo" />
@@ -330,8 +310,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:text="@string/Day_Mon2"
-        android:textSize="12dp"
-        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textColor="@color/textTitle"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/ID_Day_Sun1"
         app:layout_constraintEnd_toStartOf="@+id/ID_Day_Sun1" />
@@ -343,37 +323,37 @@
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
         android:text="@string/Day_Tue3"
-        android:textSize="12dp"
-        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textColor="@color/textTitle"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/ID_Day_Wed4"
         app:layout_constraintEnd_toStartOf="@+id/MoMo" />
+
+    <!--====================Saturday=========================-->
 
     <TextView
         android:id="@+id/ID_Day_Wed4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="@string/Day_Wed4"
-        android:textSize="12dp"
-        android:textColor="@color/white"
+        android:textColor="@color/textTitle"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/ID_Day_Thu5"
         app:layout_constraintStart_toEndOf="@+id/ID_Day_Thu5" />
-
-    <!--====================Saturday=========================-->
 
     <TextView
         android:id="@+id/ID_Day_Thu5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/Day_Thu5"
-        android:textSize="12dp"
-        android:textColor="@color/white"
+        android:textColor="@color/textTitle"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ID_Day_Fri6"
         app:layout_constraintTop_toTopOf="@+id/guideline_TopDays" />
@@ -383,8 +363,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/Day_Fri6"
-        android:textSize="12dp"
-        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textColor="@color/textTitle"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/ID_Day_Thu5"
         app:layout_constraintStart_toStartOf="@+id/FrMo" />
@@ -396,8 +376,8 @@
         android:layout_marginStart="23dp"
         android:layout_marginLeft="23dp"
         android:text="@string/Day_Sat7"
-        android:textSize="12dp"
-        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textColor="@color/textTitle"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/ID_Day_Fri6"
         app:layout_constraintStart_toStartOf="parent" />

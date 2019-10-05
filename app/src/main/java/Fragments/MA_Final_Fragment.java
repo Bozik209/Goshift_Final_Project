@@ -150,6 +150,7 @@ public class MA_Final_Fragment extends Fragment {
 //                        Log.d(TAG, ""+IDname+".startsWith(\"text\",0): "+IDname.startsWith("text",0));
                         if (!IDname.startsWith("text",0))
                         {
+                            Toast.makeText(getActivity(),"הזנת המשמרות בוצעה בהצלחה!",Toast.LENGTH_LONG).show();
                             Final_shifts.put(IDname,textViewCheack.getText());
                         }
 

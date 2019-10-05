@@ -130,7 +130,6 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // User is signed in
-            Toast.makeText(LoginActivity.this, "login as "+user.getEmail(), Toast.LENGTH_SHORT).show();
 
             // login if is manager
             DocumentReference docRef = db.collection("User").document(""+user.getUid());
@@ -142,13 +141,13 @@ public class LoginActivity extends AppCompatActivity {
                         if (document.exists()) {
                             if(document.getBoolean("isMang"))
                             {
-                                Toast.makeText(LoginActivity.this, "hello  "+document.getString("name"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "שלום "+document.getString("name"), Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(getApplicationContext(), ManagerActivity.class);
                                 startActivity(i);
                             }
                             else
                             {
-                                Toast.makeText(LoginActivity.this, "hello  "+document.getString("name"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "שלום "+document.getString("name"), Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(getApplicationContext(), EmployeeActivity.class);
                                 startActivity(i);
                             }

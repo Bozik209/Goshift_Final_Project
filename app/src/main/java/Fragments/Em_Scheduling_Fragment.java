@@ -225,6 +225,8 @@ public class Em_Scheduling_Fragment extends Fragment {
                             // שלא יכניס אותה משמרת פעמיים
                             if (!Array_Shifts.contains(getResources().getResourceEntryName(checked.getId()))) {
                                 Array_Shifts.add(getResources().getResourceEntryName(checked.getId()));
+                                Toast.makeText(getActivity(), "משמרות נשלחו לאישור", Toast.LENGTH_LONG).show();
+
 
                             }
                         }
@@ -289,6 +291,7 @@ public class Em_Scheduling_Fragment extends Fragment {
                     }
                 }
                 //Map_array_id.clear();
+                Toast.makeText(getActivity(), "אין משמרות!", Toast.LENGTH_LONG).show();
                 Array_Shifts.clear();
             }
         });

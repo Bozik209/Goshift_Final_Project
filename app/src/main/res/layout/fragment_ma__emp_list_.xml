@@ -3,7 +3,7 @@
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/backgroundcolor"
     tools:context="Fragments.Em_Scheduling_Fragment">
 
 
@@ -23,23 +23,16 @@ android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="שם עובד"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                android:textColor="@color/textTitle"/>
 
             <ListView
                 android:id="@+id/List_view1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="#252424"
+                android:divider="@color/textyG"
                 android:dividerHeight="1dp"
-                android:listSelector="#3E61DA"/>
-
-            <!--<TextView-->
-                <!--android:id="@+id/Em_name_display_textview"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="56dp"-->
-                <!--android:text=""-->
-                <!--android:textSize="36sp" />-->
-
+                android:listSelector="@color/button_color"/>
 
         </LinearLayout>
     </LinearLayout>

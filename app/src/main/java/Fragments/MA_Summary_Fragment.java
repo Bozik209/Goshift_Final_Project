@@ -6,19 +6,27 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.boaz.big_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 
 /**
@@ -40,7 +48,10 @@ public class MA_Summary_Fragment extends Fragment {
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
     DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
     private int hourlyrate;
-    private int cntHours=0;
+    private int cntHours;
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private int cnt_of_Shift=0;
+    private double intSalary;
 
 
 
@@ -91,13 +102,14 @@ public class MA_Summary_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_ma__summary_, container, false);
-
+        Fiil_week(v);
         textView_UserHourlyRate = (TextView) v.findViewById(R.id.MA_HourlyRate);
         getHourlyRate();
         textView_CountWorkHours=(TextView) v.findViewById(R.id.MA_countWorkHours);
         textView_UserSalary = (TextView) v.findViewById(R.id.MA_salary);
-
-
+        getHourFromDB(v);
+        intSalary = hourlyrate * cnt_of_Shift;
+        textView_UserSalary.setText(intSalary +"₪");
         return v;
     }
 
@@ -152,13 +164,7 @@ public class MA_Summary_Fragment extends Fragment {
 
                         textView_UserHourlyRate.setText(""+hourlyrate);
 
-
-                        try {
-                            cntHours = document.getLong("countWorkHours").intValue();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            cntHours=0;
-                        }
+                        cntHours = document.getLong("countWorkHours").intValue();
 
                         textView_CountWorkHours.setText(""+cntHours);
 
@@ -170,6 +176,86 @@ public class MA_Summary_Fragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void getHourFromDB(View returnView) {
+        final Calendar calender = Calendar.getInstance(); // calender.get(Calendar.WEEK_OF_YEAR)
+        final String Current_Week = String.valueOf(calender.get(Calendar.WEEK_OF_YEAR));
+        final Spinner spinner = returnView.findViewById(R.id.Week_spinner);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                db.collection("User").document("" + user.getUid())
+                        .collection("UserCompany").document("Shifts_week")
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                // The count of Shift the emp work
+                                Log.d(TAG, "spinner.getSelectedItem(): "+spinner.getSelectedItem());
+
+//                ArrayList Work_Shifts_Arry = (ArrayList) documentSnapshot.get(Current_Week);
+                                ArrayList Work_Shifts_Arry = (ArrayList) documentSnapshot.get(spinner.getSelectedItem().toString());
+
+
+//                                Log.d(TAG, "Shifts_Arry.size: "+Work_Shifts_Arry.size());
+                                Log.d(TAG, "Shifts_Arry: "+Work_Shifts_Arry);
+                                Log.d(TAG, "Shifts_Arry.!=null: "+(Work_Shifts_Arry!=null));
+
+                                if (Work_Shifts_Arry!=null) {
+                                    cnt_of_Shift=Work_Shifts_Arry.size()*8;
+                                }
+                                else{
+                                    cnt_of_Shift=0;
+                                    intSalary=0;
+                                    cnt_of_Shift=0;
+                                }
+
+                                textView_CountWorkHours.setText(""+cnt_of_Shift);
+
+                                intSalary = hourlyrate * cnt_of_Shift;
+                                textView_UserSalary.setText("" + intSalary);
+                                Log.d(TAG, "intSalary: "+intSalary +"₪");
+                            }
+                        });
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+    private View Fiil_week(View returnView) {
+        //get the current week
+        final Calendar calender = Calendar.getInstance();
+        ArrayList<String> array_Week = new ArrayList<String>();
+
+        //set the spinner in Fragment
+        final Spinner spinner = returnView.findViewById(R.id.Week_spinner);
+
+        // Set all week in array_Week
+        for (int i = 0; i <= 52; i++)
+            array_Week.add("" + i);
+
+        // Enter inside Spinner all week
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, array_Week);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setGravity(Gravity.CENTER);
+
+        // setSelection = Jump directly to a specific item in the adapter data
+        spinner.post(new Runnable() {
+            @Override
+            public void run() {
+                spinner.setSelection(calender.get(Calendar.WEEK_OF_YEAR));
+            }
+        });
+
+
+        return returnView;
     }
 
 }

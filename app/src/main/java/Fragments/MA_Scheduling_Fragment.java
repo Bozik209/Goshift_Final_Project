@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.boaz.big_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -213,6 +214,7 @@ public class MA_Scheduling_Fragment extends Fragment {
                             // שלא יכניס אותה משמרת פעמיים
                             if (!Array_Shifts.contains(getResources().getResourceEntryName(checked.getId()))) {
                                 Array_Shifts.add(getResources().getResourceEntryName(checked.getId()));
+                                Toast.makeText(getActivity(), "משמרות נשלחו לאישור", Toast.LENGTH_LONG).show();
 
                             }
                         }
@@ -280,6 +282,8 @@ public class MA_Scheduling_Fragment extends Fragment {
                 }
                 //Map_array_id.clear();
                 Array_Shifts.clear();
+                Toast.makeText(getActivity(), "אין משמרות!", Toast.LENGTH_LONG).show();
+
             }
         });
         return returnView;

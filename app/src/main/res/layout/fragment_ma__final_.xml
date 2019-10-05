@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_ma_final"
-    android:background="@drawable/dark_blue_background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundcolor">
+
+    <Button
+        android:id="@+id/button_Send"
+        android:background="@drawable/rounded_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="שליחה"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ListView
+        android:id="@+id/ListViewFinal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="14dp"
+        android:divider="#252424"
+        android:dividerHeight="1dp"
+        android:listSelector="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/button_Send"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
     <TextView
         android:id="@+id/textView5"
@@ -60,7 +90,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/SuEv"
         app:layout_constraintEnd_toStartOf="@+id/SuEv"
@@ -74,7 +104,7 @@
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/SuMo"
         app:layout_constraintEnd_toStartOf="@+id/SuMo"
@@ -90,7 +120,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/WeEv"
         app:layout_constraintEnd_toStartOf="@+id/WeEv"
@@ -115,18 +145,18 @@
     <TextView
         android:id="@+id/WeMo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="18dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="86dp"
         android:layout_marginEnd="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="86dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/ThMo"
+        app:layout_constraintBottom_toTopOf="@+id/FrMo"
         app:layout_constraintEnd_toStartOf="@+id/textView11"
         app:layout_constraintStart_toEndOf="@+id/WeEv"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <TextView
         android:id="@+id/WeEv"
@@ -135,7 +165,7 @@
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/WeMo"
         app:layout_constraintEnd_toStartOf="@+id/WeMo"
@@ -151,7 +181,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/SatEv"
         app:layout_constraintEnd_toStartOf="@+id/SatEv"
@@ -180,7 +210,7 @@
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/SatMo"
         app:layout_constraintEnd_toStartOf="@+id/SatMo"
@@ -194,7 +224,7 @@
         android:layout_marginEnd="43dp"
         android:layout_marginRight="43dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintEnd_toStartOf="@+id/textView14"
@@ -210,7 +240,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/FrEv"
         app:layout_constraintEnd_toStartOf="@+id/FrEv"
@@ -239,7 +269,7 @@
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/FrMo"
         app:layout_constraintEnd_toStartOf="@+id/FrMo"
@@ -253,7 +283,7 @@
         android:layout_marginEnd="43dp"
         android:layout_marginRight="43dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView13"
         app:layout_constraintEnd_toStartOf="@+id/textView13"
@@ -284,7 +314,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/ThEv"
         app:layout_constraintEnd_toStartOf="@+id/ThEv"
@@ -298,7 +328,7 @@
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/ThMo"
         app:layout_constraintEnd_toStartOf="@+id/ThMo"
@@ -312,7 +342,7 @@
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintEnd_toStartOf="@+id/textView12"
@@ -328,7 +358,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/TuEv"
         app:layout_constraintEnd_toStartOf="@+id/TuEv"
@@ -342,7 +372,7 @@
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/TuMo"
         app:layout_constraintEnd_toStartOf="@+id/TuMo"
@@ -353,17 +383,17 @@
         android:id="@+id/TuMo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="145dp"
+        android:layout_marginBottom="70dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintBottom_toBottomOf="@+id/WeMo"
         app:layout_constraintEnd_toStartOf="@+id/textView10"
         app:layout_constraintStart_toEndOf="@+id/TuEv"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/MoMo" />
 
     <TextView
         android:id="@+id/textView10"
@@ -389,7 +419,7 @@
         android:layout_marginRight="62dp"
         android:layout_marginBottom="14dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/textView9"
@@ -400,14 +430,17 @@
         android:id="@+id/MoEv"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
+        android:layout_marginBottom="14dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/MoMo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/MoMo"
-        app:layout_constraintStart_toEndOf="@+id/MoNi" />
+        app:layout_constraintStart_toEndOf="@+id/MoNi"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
     <TextView
         android:id="@+id/MoNi"
@@ -420,7 +453,7 @@
         android:layout_marginRight="25dp"
         android:layout_marginBottom="14dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/MoEv"
@@ -449,7 +482,7 @@
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         android:gravity="center"
-        android:textColor="@color/texty"
+        android:textColor="@color/textyG"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintEnd_toStartOf="@+id/textView8"
@@ -526,6 +559,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.09" />
 
+
     <android.support.constraint.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
@@ -540,36 +574,12 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.4890511" />
 
-
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7323601" />
-
-    <ListView
-        android:id="@+id/ListViewFinal"
-        android:layout_width="406dp"
-        android:layout_height="220dp"
-        android:divider="#252424"
-        android:dividerHeight="1dp"
-        android:listSelector="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/button_Send"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline12" />
-
-    <Button
-        android:id="@+id/button_Send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="שלח"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 
