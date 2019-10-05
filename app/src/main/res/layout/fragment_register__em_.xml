@@ -18,7 +18,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="הכנס ID הנשלח מהמנהל"
-            android:textColorHint="#ffff"
+            android:textColorHint="@color/textTitle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
