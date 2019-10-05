@@ -40,7 +40,7 @@ public class MA_Summary_Fragment extends Fragment {
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
     DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
     private int hourlyrate;
-    private int cntHours;
+    private int cntHours=0;
 
 
 
@@ -152,7 +152,13 @@ public class MA_Summary_Fragment extends Fragment {
 
                         textView_UserHourlyRate.setText(""+hourlyrate);
 
-                        cntHours = document.getLong("countWorkHours").intValue();
+
+                        try {
+                            cntHours = document.getLong("countWorkHours").intValue();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            cntHours=0;
+                        }
 
                         textView_CountWorkHours.setText(""+cntHours);
 
