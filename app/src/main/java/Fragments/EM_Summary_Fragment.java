@@ -53,7 +53,6 @@ public class EM_Summary_Fragment extends Fragment {
     private double hourlyrate;
     private double intSalary;
 
-    private int cntHours;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -140,7 +139,6 @@ public class EM_Summary_Fragment extends Fragment {
                         intSalary = hourlyrate * cnt_of_Shift;
                         textView_UserSalary.setText("" + intSalary);
                         Log.d(TAG, "intSalary: "+intSalary);
-
                     }
                 }
             }

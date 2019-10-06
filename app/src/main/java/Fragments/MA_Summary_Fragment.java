@@ -43,16 +43,14 @@ public class MA_Summary_Fragment extends Fragment {
 
     private TextView textView_UserHourlyRate;
     private TextView textView_UserSalary;
-    private  TextView textView_CountWorkHours;
+    private TextView textView_CountWorkHours;
+    private int cnt_of_Shift=0;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
     DocumentReference docRef = db.collection("User").document(""+currentFirebaseUser.getUid());
-    private int hourlyrate;
-    private int cntHours;
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private int cnt_of_Shift=0;
+    private double hourlyrate;
     private double intSalary;
-
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -106,11 +104,13 @@ public class MA_Summary_Fragment extends Fragment {
         Fiil_week(v);
         textView_UserHourlyRate = (TextView) v.findViewById(R.id.MA_HourlyRate);
         getHourlyRate();
-        textView_CountWorkHours=(TextView) v.findViewById(R.id.MA_countWorkHours);
+        textView_CountWorkHours = (TextView) v.findViewById(R.id.MA_countWorkHours);
         textView_UserSalary = (TextView) v.findViewById(R.id.MA_salary);
         getHourFromDB(v);
+
         intSalary = hourlyrate * cnt_of_Shift;
         textView_UserSalary.setText(intSalary +"₪");
+
         return v;
     }
 
@@ -161,18 +161,17 @@ public class MA_Summary_Fragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
 
-                        hourlyrate = document.getLong("HourlyRate").intValue();
+                        hourlyrate = document.getDouble("HourlyRate").doubleValue();
 
-                        textView_UserHourlyRate.setText(""+hourlyrate);
+                        textView_UserHourlyRate.setText("" + hourlyrate);
 
-                        cntHours = document.getLong("countWorkHours").intValue();
 
-                        textView_CountWorkHours.setText(""+cntHours);
+                        int intCnt = Integer.parseInt(textView_CountWorkHours.getText().toString());
 
-                        int intCnt=Integer.parseInt(textView_CountWorkHours.getText().toString());
-                        int intSalary= hourlyrate*intCnt;
-                        textView_UserSalary.setText(""+intSalary);
 
+                        intSalary = hourlyrate * cnt_of_Shift;
+                        textView_UserSalary.setText("" + intSalary);
+                        Log.d(TAG, "intSalary: "+intSalary);
                     }
                 }
             }
